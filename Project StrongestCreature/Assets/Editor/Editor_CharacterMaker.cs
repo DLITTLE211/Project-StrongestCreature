@@ -99,7 +99,7 @@ public class Editor_CharacterMaker : EditorWindow
     {
         GUILayout.BeginArea(_headerSectionRect);
         #region FillArea
-
+        GUILayout.Label("Character Creator");
         #endregion
         GUILayout.EndArea();
     }
@@ -108,6 +108,7 @@ public class Editor_CharacterMaker : EditorWindow
         GUILayout.BeginArea(_mainSectionRect);
         #region FillArea
 
+        GUILayout.Label("Character Name");
         #endregion
         GUILayout.EndArea();
     }
@@ -116,6 +117,7 @@ public class Editor_CharacterMaker : EditorWindow
         GUILayout.BeginArea(_completedBoolRect);
         #region FillArea
 
+        GUILayout.Label("Character Name Filled");
         #endregion
         GUILayout.EndArea();
     }
@@ -124,6 +126,7 @@ public class Editor_CharacterMaker : EditorWindow
         GUILayout.BeginArea(_createCharacterRect);
         #region FillArea
 
+        GUILayout.Label("Create new Character");
         #endregion
         GUILayout.EndArea();
     }
