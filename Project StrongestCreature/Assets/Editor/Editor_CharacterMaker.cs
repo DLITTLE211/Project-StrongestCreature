@@ -5,21 +5,25 @@ using UnityEditor;
 
 public class Editor_CharacterMaker : EditorWindow
 {
+    #region Visual Related code for Window
     Texture2D _headerSection, 
               _mainSection, 
               _completedBoolSection,
               _createCharacterButtonSection;
 
-    Color32 headerColor = new Color32((byte)150f,(byte)255f, (byte)45f, (byte)255f);
-    Color32 mainSectionColor = new Color32((byte)180f, (byte)18f, (byte)95f, (byte)255f);
-    Color32 boolSectionColor = new Color32((byte)145f, (byte)0f, (byte)50f, (byte)255f);
-    Color32 createCharacterColor = new Color32((byte)255f, (byte)255f, (byte)255f, (byte)255f);
+    Color32 headerColor = new Color32((byte)15f,(byte)15f, (byte)15f, (byte)255f);
+    Color32 mainSectionColor = new Color32((byte)25f, (byte)25f, (byte)25f, (byte)255f);
+    Color32 boolSectionColor = new Color32((byte)35f, (byte)35f, (byte)35f, (byte)255f);
+    Color32 createCharacterColor = new Color32((byte)20f, (byte)20f, (byte)20f, (byte)255f);
 
     Rect _headerSectionRect, 
          _mainSectionRect,
          _completedBoolRect,
          _createCharacterRect;
+    #endregion
 
+    Character_Profile _newProfile;
+    public Character_Profile CurrentProfile { get { return _newProfile; } }
 
     [MenuItem("Window/Roster/Characters/CreateNewCharacter")]
     static void CreateNewCharacter()
@@ -33,6 +37,7 @@ public class Editor_CharacterMaker : EditorWindow
     private void OnEnable()
     {
         InitTextures();
+        InitData();
     }
     void InitTextures() 
     {
@@ -55,6 +60,10 @@ public class Editor_CharacterMaker : EditorWindow
         _createCharacterButtonSection.SetPixel(0, 0, createCharacterColor);
         _createCharacterButtonSection.Apply();
     }
+    void InitData() 
+    {
+        _newProfile = (Character_Profile)ScriptableObject.CreateInstance(typeof(Character_Profile));
+    }
     private void OnGUI()
     {
         DrawLayouts();
@@ -76,14 +85,14 @@ public class Editor_CharacterMaker : EditorWindow
 
 
         _mainSectionRect.x = 0f;
-        _mainSectionRect.y = _headerSectionRect.height;
+        _mainSectionRect.y = _headerSectionRect.height + 2.5f;
         _mainSectionRect.width = Screen.width - (Screen.width /2.75f);
         _mainSectionRect.height = Screen.height - 135f;
         GUI.DrawTexture(_mainSectionRect, _mainSection);
 
 
         _completedBoolRect.x = 0f + _mainSectionRect.width;
-        _completedBoolRect.y = _headerSectionRect.height;
+        _completedBoolRect.y = _headerSectionRect.height + 2.5f;
         _completedBoolRect.width = Screen.width - _mainSectionRect.width;
         _completedBoolRect.height = Screen.height - 135f;
         GUI.DrawTexture(_completedBoolRect, _completedBoolSection);
@@ -106,9 +115,35 @@ public class Editor_CharacterMaker : EditorWindow
     void DrawMainCharacterSettings() 
     {
         GUILayout.BeginArea(_mainSectionRect);
-        #region FillArea
 
-        GUILayout.Label("Character Name");
+        #region FillArea
+        GUI.skin.label.fontSize = 20;
+        GUILayout.Label("Character Data");
+        GUILayout.Label("Character Identification Info");
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.CharacterName = (string)EditorGUILayout.TextField("Character Name: ", _newProfile.CharacterName);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.CharacterID = (int)EditorGUILayout.IntField("Character ID", _newProfile.CharacterID);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        var spriteRect = new Rect(position.x, position.y, 50, 50);
+        _newProfile.CharacterProfileImage = (Sprite)EditorGUILayout.ObjectField("Character Sprite",_newProfile.CharacterProfileImage,typeof(Texture2D),false);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.CharacterName = (string)EditorGUILayout.TextField(_newProfile.CharacterName);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.CharacterName = (string)EditorGUILayout.TextField(_newProfile.CharacterName);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.CharacterName = (string)EditorGUILayout.TextField(_newProfile.CharacterName);
+        EditorGUILayout.EndHorizontal();
         #endregion
         GUILayout.EndArea();
     }
@@ -116,8 +151,8 @@ public class Editor_CharacterMaker : EditorWindow
     {
         GUILayout.BeginArea(_completedBoolRect);
         #region FillArea
+        GUILayout.Label("Character Data Filled");
 
-        GUILayout.Label("Character Name Filled");
         #endregion
         GUILayout.EndArea();
     }
@@ -126,9 +161,25 @@ public class Editor_CharacterMaker : EditorWindow
         GUILayout.BeginArea(_createCharacterRect);
         #region FillArea
 
-        GUILayout.Label("Create new Character");
+        GUILayout.Label("Confirm Character");
+        if (GUILayout.Button("Create New Character", GUILayout.Width(155), GUILayout.Height(30)))
+        {
+            if (CheckIfFieldsFilled())
+            {
+
+            }
+            else 
+            {
+                Debug.LogError("Not All Fields have been filled. Fill in all new character data!");
+            }
+            
+        }
         #endregion
         GUILayout.EndArea();
+    }
+    bool CheckIfFieldsFilled() 
+    {
+        return false;
     }
     #endregion
 }

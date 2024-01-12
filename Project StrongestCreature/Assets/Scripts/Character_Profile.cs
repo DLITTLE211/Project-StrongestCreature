@@ -8,52 +8,52 @@ public class Character_Profile : ScriptableObject
 {
     #region Character Identification Info
     [Header("Character Indentity Information")]
-    [SerializeField] private string _CharacterName;
-    [SerializeField] private int _CharacterID;
-    [SerializeField] private Sprite _CharacterProfileImage;
+    public string CharacterName;
+    public int CharacterID;
+    public Sprite CharacterProfileImage;
     #endregion
 
     #region Character Sizing Info
     [Header("Character Sizing Information")]
-    [SerializeField] private int _Mass = 10;
-    [SerializeField] private float _Height = 60f;
-    [SerializeField] private float _Weight = 100f;
+    public int Mass = 10;
+    public float Height = 60f;
+    public float Weight = 100f;
     #endregion
 
     #region Character Movement Info
     [Header("Character Movement Information")]
-    [SerializeField] private float _MoveVelocity = 5f;
-    [SerializeField] private float _JumpForce = 100f;
-    [SerializeField] private float _InAirMoveForce = 25f;
+    public float MoveVelocity = 5f;
+    public float JumpForce = 100f;
+    public float InAirMoveForce = 25f;
     #endregion
 
     #region Character Health Info
     [Header("Character Health Information")]
-    [SerializeField, Range(100f, 250f)] private float _MaxHealth = 100f;
-    [SerializeField, Range(35f, 75f)] private float _MaxStunValue = 100f;
-    [SerializeField, Range(10f, 150f)] private float _DefenseValue = 100f;
-    [SerializeField,Range(1f,8f)] private float _HealthRegenRate = 5f;
+    [SerializeField, Range(100f, 250f)] public float MaxHealth = 100f;
+    [SerializeField, Range(35f, 75f)] public float MaxStunValue = 100f;
+    [SerializeField, Range(10f, 150f)] public float DefenseValue = 100f;
+    [SerializeField,Range(1f,8f)] public float HealthRegenRate = 5f;
     #endregion
 
     #region Character Animator Info
     [Header("Character Animator Information")]
-    [SerializeField] private Animator _Animator;
-    [SerializeField] private List<AnimationClip> _AllCharacterAnimations = new List<AnimationClip>();
-    [SerializeField] private List<AnimationLayerInfo> _LayerInfo = new List<AnimationLayerInfo>();
-    [SerializeField] private GameObject _CharacterModel;
+    public Animator Animator;
+    public List<AnimationClip> AllCharacterAnimations = new List<AnimationClip>();
+    public List<AnimationLayerInfo> LayerInfo = new List<AnimationLayerInfo>();
+    public GameObject CharacterModel;
     #endregion
 
     #region Character MoveList Info
     [Header("Character MoveList Information")]
-    [SerializeField] private GameObject _CharacterMoveListPrefab;
-    //[SerializeField] private MobilityOptions _CharacterMobility;
+    public GameObject CharacterMoveListPrefab;
+    //public MobilityOptions _CharacterMobility;
     #endregion
 
 
     #region Character Interaction Info
     [Header("Character Interaction Information")]
-    [SerializeField] private List<CharacterIntro> _BasicCharacterInteractions = new List<CharacterIntro>();
-    [SerializeField] private List<CharacterIntro> _SpecialCharacterInteractions = new List<CharacterIntro>();
+    public List<CharacterIntro> BasicCharacterInteractions = new List<CharacterIntro>();
+    public List<CharacterIntro> SpecialCharacterInteractions = new List<CharacterIntro>();
     #endregion
 }
 
