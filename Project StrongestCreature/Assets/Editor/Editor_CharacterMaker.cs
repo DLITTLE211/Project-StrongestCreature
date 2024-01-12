@@ -23,6 +23,7 @@ public class Editor_CharacterMaker : EditorWindow
          _createCharacterRect;
     #endregion
 
+    #region Boolean Criteria
     bool filledName = false;
     bool filledID = false;
     bool filledImage = false;
@@ -36,6 +37,9 @@ public class Editor_CharacterMaker : EditorWindow
     bool filledMaxStun = false;
     bool filledDefenseValue = false;
     bool filledRegenRate = false;
+    #endregion
+
+    string createdCharacterFilePath = "";
 
     Character_Profile _newProfile;
     public Character_Profile CurrentProfile { get { return _newProfile; } }
@@ -51,6 +55,8 @@ public class Editor_CharacterMaker : EditorWindow
 
     private void OnEnable()
     {
+        createdCharacterFilePath = $"{Application.dataPath}/CharacterList";
+        Debug.Log("Data Path: " + createdCharacterFilePath);
         InitTextures();
         InitData();
     }
@@ -134,8 +140,6 @@ public class Editor_CharacterMaker : EditorWindow
 
         #region Character Information
         GUI.skin.label.fontSize = 20;
-        GUI.skin.label.fontStyle = FontStyle.Bold;
-        GUI.skin.label.alignment = TextAnchor.MiddleCenter;
         GUILayout.Label("Character Data");
 
         #region Identification Info
@@ -260,8 +264,7 @@ public class Editor_CharacterMaker : EditorWindow
         {
             if (CheckIfFieldsFilled())
             {
-                Debug.Log("All Criteria Met. Creating New Character Data!");
-                Debug.Log($"{_newProfile.CharacterName}, has been Created!");
+                CreateCharacter();
             }
             else 
             {
@@ -318,6 +321,14 @@ public class Editor_CharacterMaker : EditorWindow
             return false;
         }
         return true;
+    }
+
+    void CreateCharacter() 
+    {
+        AssetDatabase.CreateFolder("Assets/CharacterList", $"{_newProfile.CharacterName}_CharacterFolder");
+
+        Debug.Log("All Criteria Met. Creating New Character Data!");
+        Debug.Log($"{_newProfile.CharacterName}, has been Created!");
     }
     #endregion
 }
