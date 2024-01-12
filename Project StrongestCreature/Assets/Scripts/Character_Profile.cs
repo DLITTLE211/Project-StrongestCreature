@@ -15,24 +15,28 @@ public class Character_Profile : ScriptableObject
 
     #region Character Sizing Info
     [Header("Character Sizing Information")]
-    public int Mass = 10;
-    public float Height = 60f;
-    public float Weight = 100f;
+    public int Mass;
+    public float Height;
+    public float Weight;
     #endregion
 
     #region Character Movement Info
     [Header("Character Movement Information")]
-    public float MoveVelocity = 5f;
-    public float JumpForce = 100f;
-    public float InAirMoveForce = 25f;
+    public float MoveVelocity;
+    public float JumpForce;
+    public float InAirMoveForce;
     #endregion
 
     #region Character Health Info
     [Header("Character Health Information")]
-    [SerializeField, Range(100f, 250f)] public float MaxHealth = 100f;
-    [SerializeField, Range(35f, 75f)] public float MaxStunValue = 100f;
-    [SerializeField, Range(10f, 150f)] public float DefenseValue = 100f;
-    [SerializeField,Range(1f,8f)] public float HealthRegenRate = 5f;
+    //Minimum 100f
+    [SerializeField, Range(0f, 250f)] public float MaxHealth;
+    //Minimum 30f
+    [SerializeField, Range(0f, 80f)] public float MaxStunValue;
+    //Minimum 25f
+    [SerializeField, Range(0f, 150f)] public float DefenseValue;
+    //Minimum 3f
+    [SerializeField,Range(0f,8f)] public float HealthRegenRate;
     #endregion
 
     #region Character Animator Info

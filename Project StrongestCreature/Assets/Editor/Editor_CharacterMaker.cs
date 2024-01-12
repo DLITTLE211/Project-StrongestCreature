@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEditor;
 
@@ -21,6 +22,20 @@ public class Editor_CharacterMaker : EditorWindow
          _completedBoolRect,
          _createCharacterRect;
     #endregion
+
+    bool filledName = false;
+    bool filledID = false;
+    bool filledImage = false;
+    bool filledMass = false;
+    bool filledHeight = false;
+    bool filledWeight = false;
+    bool filledMoveVelocity = false;
+    bool filledJumpForce = false;
+    bool filledInAirMoveForce = false;
+    bool filledMaxHealth = false;
+    bool filledMaxStun = false;
+    bool filledDefenseValue = false;
+    bool filledRegenRate = false;
 
     Character_Profile _newProfile;
     public Character_Profile CurrentProfile { get { return _newProfile; } }
@@ -66,6 +81,7 @@ public class Editor_CharacterMaker : EditorWindow
     }
     private void OnGUI()
     {
+        CheckAllBooleans();
         DrawLayouts();
         DrawHeader();
         DrawMainCharacterSettings();
@@ -116,49 +132,127 @@ public class Editor_CharacterMaker : EditorWindow
     {
         GUILayout.BeginArea(_mainSectionRect);
 
-        #region FillArea
+        #region Character Information
         GUI.skin.label.fontSize = 20;
+        GUI.skin.label.fontStyle = FontStyle.Bold;
+        GUI.skin.label.alignment = TextAnchor.MiddleCenter;
         GUILayout.Label("Character Data");
+
+        #region Identification Info
         GUILayout.Label("Character Identification Info");
         EditorGUILayout.BeginHorizontal();
-        _newProfile.CharacterName = (string)EditorGUILayout.TextField("Character Name: ", _newProfile.CharacterName);
+        _newProfile.CharacterName = 
+            (string)EditorGUILayout.TextField("Character Name:", _newProfile.CharacterName);
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
-        _newProfile.CharacterID = (int)EditorGUILayout.IntField("Character ID", _newProfile.CharacterID);
+        _newProfile.CharacterID = 
+            (int)EditorGUILayout.IntField("Character ID:", _newProfile.CharacterID);
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
-        var spriteRect = new Rect(position.x, position.y, 50, 50);
-        _newProfile.CharacterProfileImage = (Sprite)EditorGUILayout.ObjectField("Character Sprite",_newProfile.CharacterProfileImage,typeof(Texture2D),false);
-        EditorGUILayout.EndHorizontal();
-
-        EditorGUILayout.BeginHorizontal();
-        _newProfile.CharacterName = (string)EditorGUILayout.TextField(_newProfile.CharacterName);
-        EditorGUILayout.EndHorizontal();
-
-        EditorGUILayout.BeginHorizontal();
-        _newProfile.CharacterName = (string)EditorGUILayout.TextField(_newProfile.CharacterName);
-        EditorGUILayout.EndHorizontal();
-
-        EditorGUILayout.BeginHorizontal();
-        _newProfile.CharacterName = (string)EditorGUILayout.TextField(_newProfile.CharacterName);
+        _newProfile.CharacterProfileImage = 
+            (Sprite)EditorGUILayout.ObjectField("Character Sprite:",_newProfile.CharacterProfileImage,typeof(Sprite),false);
         EditorGUILayout.EndHorizontal();
         #endregion
+
+        GUILayout.Space(5);
+
+        #region Sizing Info
+        GUILayout.Label("Character Sizing Info");
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.Mass = (int)EditorGUILayout.IntField("Character Mass:",_newProfile.Mass);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.Height = (float)EditorGUILayout.FloatField("Character Height:", _newProfile.Height);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.Weight = (float)EditorGUILayout.FloatField("Character Weight:",_newProfile.Weight);
+        EditorGUILayout.EndHorizontal();
+        #endregion
+
+        GUILayout.Space(25);
+
+        #region Movement Info
+        GUILayout.Label("Character Movement Info");
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.MoveVelocity = (float)EditorGUILayout.FloatField("Move Speed:", _newProfile.MoveVelocity);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.JumpForce = (float)EditorGUILayout.FloatField("Jump Height:", _newProfile.JumpForce);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.InAirMoveForce = (float)EditorGUILayout.FloatField("Air Move Speed:", _newProfile.InAirMoveForce);
+        EditorGUILayout.EndHorizontal();
+        #endregion
+
+        GUILayout.Space(25);
+
+
+        #region Health/Defense Info
+        GUILayout.Label("Character Health/Defense Info");
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.MaxHealth = (float)EditorGUILayout.Slider("Max Health:", _newProfile.MaxHealth, 0f, 250f);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.MaxStunValue = (float)EditorGUILayout.Slider("Max Stun:", _newProfile.MaxStunValue, 0f, 80f);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.DefenseValue = (float)EditorGUILayout.Slider("Total Defense:", _newProfile.DefenseValue, 0f, 150f);
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.HealthRegenRate = (float)EditorGUILayout.Slider("Health Regeneration Rate:", _newProfile.HealthRegenRate, 0f, 8f);
+        EditorGUILayout.EndHorizontal();
+        #endregion
+
+        GUILayout.Space(25);
+
+        #endregion
+
+
         GUILayout.EndArea();
     }
     void DrawCompletedBool()
     {
         GUILayout.BeginArea(_completedBoolRect);
-        #region FillArea
-        GUILayout.Label("Character Data Filled");
 
+        #region FillArea
+        GUILayout.Label("Character Creation Checklist");
+        filledName = EditorGUILayout.Toggle("Name Filled", filledName);
+        filledID = EditorGUILayout.Toggle("ID Filled", filledID);
+        filledImage = EditorGUILayout.Toggle("Sprite Filled", filledImage);
+
+        GUILayout.Space(25);
+        filledMass = EditorGUILayout.Toggle("Mass Filled", filledMass);
+        filledHeight = EditorGUILayout.Toggle("Height Filled", filledHeight);
+        filledWeight = EditorGUILayout.Toggle("Weight Filled", filledWeight);
+
+        GUILayout.Space(25);
+        filledMoveVelocity = EditorGUILayout.Toggle("Move Speed Filled", filledMoveVelocity);
+        filledJumpForce = EditorGUILayout.Toggle("Jump Strength Filled", filledJumpForce);
+        filledInAirMoveForce = EditorGUILayout.Toggle("In Air Move Force Filled", filledInAirMoveForce);
+
+        GUILayout.Space(25);
+        filledMaxHealth = EditorGUILayout.Toggle("Health Filled", filledMaxHealth);
+        filledMaxStun = EditorGUILayout.Toggle("Stun Filled", filledMaxStun);
+        filledDefenseValue = EditorGUILayout.Toggle("Defense Filled", filledDefenseValue);
+        filledRegenRate = EditorGUILayout.Toggle("Regen-Rate Filled", filledRegenRate);
+        GUILayout.Space(25);
         #endregion
+
         GUILayout.EndArea();
     }
     void DrawCreateCharacter()
     {
         GUILayout.BeginArea(_createCharacterRect);
+
         #region FillArea
 
         GUILayout.Label("Confirm Character");
@@ -166,7 +260,8 @@ public class Editor_CharacterMaker : EditorWindow
         {
             if (CheckIfFieldsFilled())
             {
-
+                Debug.Log("All Criteria Met. Creating New Character Data!");
+                Debug.Log($"{_newProfile.CharacterName}, has been Created!");
             }
             else 
             {
@@ -175,11 +270,54 @@ public class Editor_CharacterMaker : EditorWindow
             
         }
         #endregion
+
         GUILayout.EndArea();
     }
-    bool CheckIfFieldsFilled() 
+    void CheckAllBooleans() 
     {
-        return false;
+        try
+        {
+            filledName = _newProfile.CharacterName.Length > 5 ? true: false;
+            filledID = _newProfile.CharacterID != 0 ? true : false;
+            filledImage = _newProfile.CharacterProfileImage != null ? true : false;
+            filledMass = _newProfile.Mass >= 50 ? true : false;
+            filledHeight = _newProfile.Height > 50f ? true : false;
+            filledWeight = _newProfile.Weight > 100f ? true : false;
+            filledMoveVelocity = _newProfile.MoveVelocity >= 100f ? true : false;
+            filledJumpForce = _newProfile.JumpForce >= 30f ? true : false;
+            filledInAirMoveForce = _newProfile.InAirMoveForce >= 3f ? true : false;
+            filledMaxHealth = _newProfile.MaxHealth >= 100f ? true : false;
+            filledMaxStun = _newProfile.MaxStunValue >= 30f ? true : false;
+            filledDefenseValue = _newProfile.DefenseValue >= 25f ? true : false;
+            filledRegenRate = _newProfile.HealthRegenRate >= 3 ? true : false;
+        }
+        catch (NullReferenceException)
+        {
+            filledName = false;
+            filledID = false;
+            filledImage = false;
+            filledMass = false;
+            filledHeight = false;
+            filledWeight = false;
+            filledMoveVelocity = false;
+            filledJumpForce = false;
+            filledInAirMoveForce = false;
+            filledMaxHealth = false;
+            filledMaxStun = false;
+            filledDefenseValue = false;
+            filledRegenRate = false;
+        }
+    }
+    bool CheckIfFieldsFilled()
+    {
+        bool FullCheckList = filledName && filledID && filledImage && filledMass && filledHeight
+            && filledWeight && filledMoveVelocity && filledJumpForce && filledInAirMoveForce && filledMaxHealth
+            && filledMaxStun && filledDefenseValue && filledRegenRate;
+        if (!FullCheckList) 
+        {
+            return false;
+        }
+        return true;
     }
     #endregion
 }
