@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.IO;
 using UnityEngine;
 using UnityEditor;
 
@@ -44,7 +45,7 @@ public class Editor_CharacterMaker : EditorWindow
     Character_Profile _newProfile;
     public Character_Profile CurrentProfile { get { return _newProfile; } }
 
-    [MenuItem("Window/Roster/Characters/CreateNewCharacter")]
+    [MenuItem("Window/Roster/Characters/Create New Character")]
     static void CreateNewCharacter()
     {
         Editor_CharacterMaker window = (Editor_CharacterMaker)GetWindow(typeof(Editor_CharacterMaker));
@@ -56,6 +57,8 @@ public class Editor_CharacterMaker : EditorWindow
     private void OnEnable()
     {
         createdCharacterFilePath = $"{Application.dataPath}/CharacterList";
+
+
         Debug.Log("Data Path: " + createdCharacterFilePath);
         InitTextures();
         InitData();
@@ -139,7 +142,6 @@ public class Editor_CharacterMaker : EditorWindow
         GUILayout.BeginArea(_mainSectionRect);
 
         #region Character Information
-        GUI.skin.label.fontSize = 20;
         GUILayout.Label("Character Data");
 
         #region Identification Info
@@ -220,7 +222,6 @@ public class Editor_CharacterMaker : EditorWindow
 
         #endregion
 
-
         GUILayout.EndArea();
     }
     void DrawCompletedBool()
@@ -284,8 +285,8 @@ public class Editor_CharacterMaker : EditorWindow
             filledID = _newProfile.CharacterID != 0 ? true : false;
             filledImage = _newProfile.CharacterProfileImage != null ? true : false;
             filledMass = _newProfile.Mass >= 50 ? true : false;
-            filledHeight = _newProfile.Height > 50f ? true : false;
-            filledWeight = _newProfile.Weight > 100f ? true : false;
+            filledHeight = _newProfile.Height > 45f ? true : false;
+            filledWeight = _newProfile.Weight >= 100f ? true : false;
             filledMoveVelocity = _newProfile.MoveVelocity >= 100f ? true : false;
             filledJumpForce = _newProfile.JumpForce >= 30f ? true : false;
             filledInAirMoveForce = _newProfile.InAirMoveForce >= 3f ? true : false;
@@ -325,10 +326,41 @@ public class Editor_CharacterMaker : EditorWindow
 
     void CreateCharacter() 
     {
-        AssetDatabase.CreateFolder("Assets/CharacterList", $"{_newProfile.CharacterName}_CharacterFolder");
-
-        Debug.Log("All Criteria Met. Creating New Character Data!");
-        Debug.Log($"{_newProfile.CharacterName}, has been Created!");
+        //Creates New Folder in Path of CharacterList
+        string newChararacterFolderPath = "Assets/CharacterList/";
+        Directory.CreateDirectory(newChararacterFolderPath + $"{_newProfile.CharacterName}_CharacterFolder");
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        string newCharacterPath = newChararacterFolderPath + $"{_newProfile.CharacterName}_CharacterFolder/";
+        string SO_RefOnePath = "Assets/CharacterList/Character_Resources/";
+        /*Inside Newly Created CharacterProfile:
+         * 1. Creates Scriptable object off of adjusted on in character creation window
+         */
+        try
+        {
+            string newSOPath = "";
+            SO_RefOnePath += $"{CurrentProfile.CharacterName}_Profile.asset";
+            AssetDatabase.CreateAsset(CurrentProfile, SO_RefOnePath);
+            newSOPath = AssetDatabase.GetAssetPath(CurrentProfile);
+            if (AssetDatabase.CopyAsset(newSOPath, newCharacterPath + $"{CurrentProfile.CharacterName}.asset"))
+            {
+                Debug.Log("Path Success");
+                Debug.Log("All Criteria Met. Creating New Character Data!");
+                Debug.Log($"{_newProfile.CharacterName}, has been Created!");
+                AssetDatabase.DeleteAsset(SO_RefOnePath);
+            }
+            else
+            {
+                Debug.Log("Path Failed");
+            }
+            AssetDatabase.SaveAssets(); 
+            AssetDatabase.Refresh();
+        }
+        catch (Exception)
+        {
+            Debug.LogError("Failed to Create new Character. Exiting...");
+            this.Close();
+        }
     }
     #endregion
 }
