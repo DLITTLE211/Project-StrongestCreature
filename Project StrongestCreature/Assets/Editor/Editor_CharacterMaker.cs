@@ -333,34 +333,68 @@ public class Editor_CharacterMaker : EditorWindow
         AssetDatabase.Refresh();
         string newCharacterPath = newChararacterFolderPath + $"{_newProfile.CharacterName}_CharacterFolder/";
         string SO_RefOnePath = "Assets/CharacterList/Character_Resources/";
+        string SO_RefTwoPath = "Assets/Prefabs/Mobility.asset";
+        string prefab_RefPath = "Assets/Prefabs/Foo.prefab";
+
         /*Inside Newly Created CharacterProfile:
          * 1. Creates Scriptable object off of adjusted on in character creation window
          */
+
         try
         {
+            #region Character_Profile Scriptable Object Creation
             string newSOPath = "";
             SO_RefOnePath += $"{CurrentProfile.CharacterName}_Profile.asset";
             AssetDatabase.CreateAsset(CurrentProfile, SO_RefOnePath);
             newSOPath = AssetDatabase.GetAssetPath(CurrentProfile);
-            if (AssetDatabase.CopyAsset(newSOPath, newCharacterPath + $"{CurrentProfile.CharacterName}.asset"))
+            if (AssetDatabase.CopyAsset(newSOPath, newCharacterPath + $"{CurrentProfile.CharacterName}_Profile.asset"))
             {
-                Debug.Log("Path Success");
-                Debug.Log("All Criteria Met. Creating New Character Data!");
-                Debug.Log($"{_newProfile.CharacterName}, has been Created!");
+                Debug.Log("Character Profile Path Success");
                 AssetDatabase.DeleteAsset(SO_RefOnePath);
             }
             else
             {
-                Debug.Log("Path Failed");
+                Debug.Log("Character Profile Path Failed");
             }
             AssetDatabase.SaveAssets(); 
             AssetDatabase.Refresh();
+            #endregion
+
+            #region Character MoveList Creation
+            if (AssetDatabase.CopyAsset(prefab_RefPath, newCharacterPath + $"{CurrentProfile.CharacterName}_MoveList.prefab"))
+            {
+                Debug.Log("Character Movelist Path Success");
+            }
+            else 
+            {
+                Debug.Log("Character Movelist Path Failed");
+            }
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            #endregion
+
+            #region Character Mobility Creation
+            if (AssetDatabase.CopyAsset(SO_RefTwoPath, newCharacterPath + $"{CurrentProfile.CharacterName}_MobilityOptions.asset"))
+            {
+                Debug.Log("Character Movelist Path Success");
+                Debug.Log("All Criteria Met. Creating New Character Data!");
+                Debug.Log($"{_newProfile.CharacterName}, has been Created!");
+            }
+            else
+            {
+                Debug.Log("Character Movelist Path Failed");
+            }
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            #endregion
+
         }
         catch (Exception)
         {
             Debug.LogError("Failed to Create new Character. Exiting...");
             this.Close();
         }
+
     }
     #endregion
 }
