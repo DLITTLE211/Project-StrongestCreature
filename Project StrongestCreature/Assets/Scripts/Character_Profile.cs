@@ -49,6 +49,7 @@ public class Character_Profile : ScriptableObject
 
     #region Character MoveList Info
     [Header("Character MoveList Information")]
+    public int moveListCount;
     public List<GameObject> CharacterMoveListPrefab;
     //public MobilityOptions _CharacterMobility;
     #endregion

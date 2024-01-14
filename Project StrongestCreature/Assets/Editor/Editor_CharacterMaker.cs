@@ -29,6 +29,7 @@ public class Editor_CharacterMaker : EditorWindow
     bool filledID = false;
     bool filledImage = false;
     bool filledMass = false;
+    bool filledMoveListCount = false;
     bool filledHeight = false;
     bool filledWeight = false;
     bool filledMoveVelocity = false;
@@ -194,6 +195,10 @@ public class Editor_CharacterMaker : EditorWindow
         EditorGUILayout.BeginHorizontal();
         _newProfile.InAirMoveForce = (float)EditorGUILayout.FloatField("Air Move Speed:", _newProfile.InAirMoveForce);
         EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        _newProfile.moveListCount = (int)EditorGUILayout.IntField("Total MoveList(s):", _newProfile.moveListCount);
+        EditorGUILayout.EndHorizontal();
         #endregion
 
         GUILayout.Space(25);
@@ -243,6 +248,7 @@ public class Editor_CharacterMaker : EditorWindow
         filledMoveVelocity = EditorGUILayout.Toggle("Move Speed Filled", filledMoveVelocity);
         filledJumpForce = EditorGUILayout.Toggle("Jump Strength Filled", filledJumpForce);
         filledInAirMoveForce = EditorGUILayout.Toggle("In Air Move Force Filled", filledInAirMoveForce);
+        filledMoveListCount = EditorGUILayout.Toggle("MoveList Count Filled", filledMoveListCount);
 
         GUILayout.Space(25);
         filledMaxHealth = EditorGUILayout.Toggle("Health Filled", filledMaxHealth);
@@ -294,6 +300,7 @@ public class Editor_CharacterMaker : EditorWindow
             filledMaxStun = _newProfile.MaxStunValue >= 30f ? true : false;
             filledDefenseValue = _newProfile.DefenseValue >= 25f ? true : false;
             filledRegenRate = _newProfile.HealthRegenRate >= 3 ? true : false;
+            filledMoveListCount = _newProfile.moveListCount > 0 ? true : false;
         }
         catch (NullReferenceException)
         {
@@ -310,13 +317,14 @@ public class Editor_CharacterMaker : EditorWindow
             filledMaxStun = false;
             filledDefenseValue = false;
             filledRegenRate = false;
+            filledMoveListCount = false;
         }
     }
     bool CheckIfFieldsFilled()
     {
         bool FullCheckList = filledName && filledID && filledImage && filledMass && filledHeight
             && filledWeight && filledMoveVelocity && filledJumpForce && filledInAirMoveForce && filledMaxHealth
-            && filledMaxStun && filledDefenseValue && filledRegenRate;
+            && filledMaxStun && filledDefenseValue && filledRegenRate && filledMoveListCount;
         if (!FullCheckList) 
         {
             return false;
@@ -361,16 +369,20 @@ public class Editor_CharacterMaker : EditorWindow
             #endregion
 
             #region Character MoveList Creation
-            if (AssetDatabase.CopyAsset(prefab_RefPath, newCharacterPath + $"{CurrentProfile.CharacterName}_MoveList.prefab"))
+
+            for (int i = 0; i < CurrentProfile.moveListCount; i++)
             {
-                Debug.Log("Character Movelist Path Success");
+                if (AssetDatabase.CopyAsset(prefab_RefPath, newCharacterPath + $"{CurrentProfile.CharacterName}_MoveList{i+1}.prefab"))
+                {
+                    Debug.Log("Character Movelist Path Success");
+                }
+                else
+                {
+                    Debug.Log("Character Movelist Path Failed");
+                }
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             }
-            else 
-            {
-                Debug.Log("Character Movelist Path Failed");
-            }
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
             #endregion
 
             #region Character Mobility Creation
@@ -379,6 +391,7 @@ public class Editor_CharacterMaker : EditorWindow
                 Debug.Log("Character Movelist Path Success");
                 Debug.Log("All Criteria Met. Creating New Character Data!");
                 Debug.Log($"{_newProfile.CharacterName}, has been Created!");
+                this.Close();
             }
             else
             {
