@@ -341,8 +341,8 @@ public class Editor_CharacterMaker : EditorWindow
         AssetDatabase.Refresh();
         string newCharacterPath = newChararacterFolderPath + $"{_newProfile.CharacterName}_CharacterFolder/";
         string SO_RefOnePath = "Assets/CharacterList/Character_Resources/";
-        string SO_RefTwoPath = "Assets/Prefabs/Mobility.asset";
-        string prefab_RefPath = "Assets/Prefabs/Foo.prefab";
+        string SO_RefTwoPath = "Assets/Prefabs/Template_MobilityOptions.asset";
+        string prefab_RefPath = "Assets/Prefabs/Template_Movelist.prefab";
 
         /*Inside Newly Created CharacterProfile:
          * 1. Creates Scriptable object off of adjusted on in character creation window
