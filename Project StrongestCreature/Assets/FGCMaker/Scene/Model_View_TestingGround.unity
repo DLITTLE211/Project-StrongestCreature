@@ -176,6 +176,30 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7834733329589398620, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7834733329589398620, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7834733329589398620, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -7834733329589398620, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -7834733329589398620, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: -7834733329589398620, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: -7834733329589398620, guid: 9e700efb04eeef842828b852913f629c, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -214,6 +238,10 @@ PrefabInstance:
     - target: {fileID: -147422576459982366, guid: 9e700efb04eeef842828b852913f629c, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -147422576459982366, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 464528081095039439, guid: 9e700efb04eeef842828b852913f629c, type: 3}
       propertyPath: m_LocalScale.x
