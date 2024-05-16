@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4455948, g: 0.49528092, b: 0.5741589, a: 1}
+  m_IndirectSpecularColor: {r: 0.43813592, g: 0.4861375, b: 0.5664152, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -176,9 +176,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7834733329589398620, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7834733329589398620, guid: 9e700efb04eeef842828b852913f629c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c280f540ed37c15449adb492c0e2f937, type: 2}
+    - target: {fileID: -7834733329589398620, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 63144cb6cb0a5fb46b0490163e02d698, type: 2}
+    - target: {fileID: -3722064921292946250, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1988287484141852848, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -1988287484141852848, guid: 9e700efb04eeef842828b852913f629c, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -195,6 +211,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9172150e84ed755408e79390f0472ced, type: 2}
+    - target: {fileID: -147422576459982366, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 464528081095039439, guid: 9e700efb04eeef842828b852913f629c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -210,6 +230,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9e700efb04eeef842828b852913f629c, type: 3}
       propertyPath: m_Name
       value: Model_Teen_Baki
+      objectReference: {fileID: 0}
+    - target: {fileID: 2230754017464988616, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3044177170599969571, guid: 9e700efb04eeef842828b852913f629c, type: 3}
       propertyPath: m_IsActive
@@ -227,6 +251,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0fe221bd9e486004facbc91ff4cc1ec6, type: 2}
+    - target: {fileID: 5695735803674598497, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5911144657728685357, guid: 9e700efb04eeef842828b852913f629c, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -238,7 +266,11 @@ PrefabInstance:
     - target: {fileID: 5911144657728685357, guid: 9e700efb04eeef842828b852913f629c, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 13b33197a56a55444b1875b6cc636651, type: 2}
+      objectReference: {fileID: 2100000, guid: 63144cb6cb0a5fb46b0490163e02d698, type: 2}
+    - target: {fileID: 6837356412465227358, guid: 9e700efb04eeef842828b852913f629c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6837356412465227358, guid: 9e700efb04eeef842828b852913f629c, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -358,14 +390,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203844586}
-  m_LocalRotation: {x: 0.73513037, y: 0.25398853, z: -0.5118808, w: 0.364762}
-  m_LocalPosition: {x: -0.24, y: 2.322, z: -2.746}
+  m_LocalRotation: {x: 0.61644703, y: 0.07254022, z: -0.05718608, w: 0.7819596}
+  m_LocalPosition: {x: -0.24, y: -6.8, z: -2.746}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 127.22, y: 69.7, z: 0}
+  m_LocalEulerAnglesHint: {x: 76.5, y: 10.6, z: 0}
 --- !u!1 &961739749
 GameObject:
   m_ObjectHideFlags: 0

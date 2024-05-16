@@ -41,15 +41,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brightness: 1
+    - _Brightness: -5.33
     - _Cutoff: 0.1
     - _Fresnel_Pow: 20
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RampOffset: 0.84
+    - _RampOffset: 0.084
     - _Smoothness: 0.001
     m_Colors:
-    - _Color: {r: 95.874504, g: 13.698284, b: 14.159179, a: 1}
+    - _Color: {r: 16.948378, g: 2.4215374, b: 2.503013, a: 1}
     - _Normal: {r: 0, g: 0, b: 0, a: 0}
     - _Tint: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
