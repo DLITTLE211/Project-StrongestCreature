@@ -7559,7 +7559,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 191
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -13732,13 +13732,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: HB_Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6089463144201759098, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7587222759460721569, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8038639612433075937, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_Name
       value: HitBox_R
       objectReference: {fileID: 0}
     - target: {fileID: 8038639612433075937, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038639612433075937, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459305293412710870, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23309,7 +23325,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 1.88
   m_Depth: -2
@@ -27304,13 +27320,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: HB_Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6089463144201759098, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7587222759460721569, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8038639612433075937, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_Name
       value: HitBox_L
       objectReference: {fileID: 0}
     - target: {fileID: 8038639612433075937, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038639612433075937, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459305293412710870, guid: af77e181ddbc4a64296e5826273fbe36, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
