@@ -6,6 +6,7 @@ using Rewired;
 [Serializable]
 public class Attack_BaseProperties
 {
+    [Header("_______ATTACK IDENTIFICATION INFO______")]
     public string _attackName;
     [SerializeField] protected Character_InputTimer_Attacks _cTimer;
     public Character_InputTimer_Attacks InputTimer 
@@ -15,7 +16,7 @@ public class Attack_BaseProperties
     }
     #region Attack Damage Numbers
     [Space(20)]
-    [Header("Attack Damage Numbers")]
+    [Header("_______DAMAGE NUMBERS______")]
     public float rawAttackDamage;
     public float counterHitDamageMult;
     [Range(1, 100)] public int hitstopValue;
@@ -23,15 +24,17 @@ public class Attack_BaseProperties
     [Range(15, 75)] public int _attackScaling;
     public HitLevel hitLevel;
     [SerializeField] public List<int> attackHashes;
+    [Space(20)]
     #endregion
 
+    [Header("_____REQUIREMENTS/RESTRICTIONS______")]
     [Range(0, 3)] public int _meterRequirement;
     [Range(0, 30)] public int _meterAwardedOnHit;
     public bool dashCancelable, JumpCancelable;
 
     #region MoveType Properties
     [Space(20)]
-    [Header("Move Variables and Cancel Information")]
+    [Header("_______ATTACK PROPERTY INFORMATION_______")]
     public AirAttackInfo _airInfo;
     public Attack_CancelInfo cancelProperty;
     public MoveType _moveType;
@@ -40,7 +43,7 @@ public class Attack_BaseProperties
 
     #region KnockBack/KnockDown Variables
     [Space(20)]
-    [Header("Knockdown Variables")]
+    [Header("______KNOCKDOWN INFORMATION______")]
     public Horizontal_KnockBack lateralKBP; // Lateral KnockBack Properties
     public Vertical_KnockBack verticalKBP; // Vertical KnockBack Properties
     public Attack_KnockDown KnockDown; // Vertical KnockBack Properties
@@ -106,13 +109,13 @@ public enum HitLevel
     Crumple,
     Spiral,
 }
+/*
+ * SKD = Soft KnockDown
+ * HKD = Hard KnockDown
+ */
 [Serializable]
 public enum Attack_KnockDown
 {
-    /*
-     * SKD = Soft KnockDown
-     * HKD = Hard KnockDown
-     */
     NONE,
     SKD,
     HKD
@@ -120,10 +123,6 @@ public enum Attack_KnockDown
 [Serializable]
 public enum AirAttackInfo
 {
-    /*
-     * SKD = Soft KnockDown
-     * HKD = Hard KnockDown
-     */
     GroundOnly,
     AirOk,
     AirOnly

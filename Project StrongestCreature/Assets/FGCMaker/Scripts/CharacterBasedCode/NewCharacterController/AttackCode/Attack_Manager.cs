@@ -191,6 +191,14 @@ public class Attack_Manager : MonoBehaviour
                 }
             }
         }
+        else if (lastState == Cancel_State.Super_Attack)
+        {
+            if (newAttack == Combo[Combo.Count-1])
+            {
+                return false;
+            }
+            return true;
+        }
         else
         {
             int newAttackHierarchy = (int)newAttack.cancelProperty.cancelFrom;
