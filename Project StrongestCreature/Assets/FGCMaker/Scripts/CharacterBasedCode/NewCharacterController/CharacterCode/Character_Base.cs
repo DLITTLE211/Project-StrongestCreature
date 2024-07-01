@@ -6,7 +6,7 @@ using Rewired;
 public class Character_Base : MonoBehaviour
 {
     #region Script References
-    [Header("Character Script References")]
+    [Header("________CHARACTER SCRIPT REFERENCES_________")]
     public Character_AttackDetection _cADetection;
     public Character_ComboDetection _cComboDetection;
     public Character_Animator _cAnimator;
@@ -31,7 +31,7 @@ public class Character_Base : MonoBehaviour
     #endregion
 
     #region Rewired Controls
-    [Header("Rewired Controls")]
+    [Header("__________REWIRED CONTROLS__________")]
     public int playerID;
     IList<InputAction> _actions;
     Dictionary<int, int> newActions;
@@ -42,7 +42,7 @@ public class Character_Base : MonoBehaviour
     #endregion
 
     #region General Input Variables
-    [Header("General Input Variables")]
+    [Header("________INPUT VARIABLES________")]
     public List<Character_ButtonInput> moveAxes;
     public List<Character_ButtonInput> attackButtons;
     [Space(20)]
@@ -50,7 +50,7 @@ public class Character_Base : MonoBehaviour
     #endregion
 
     #region Directional Input Detection
-    [Header("Directional Input Detection")]
+    [Header("______DIRECTIONAL INPUT DETECTION________")]
     public Character_MobilityAsset _extraMoveAsset;
     public List<Character_Mobility> _extraMoveControls;
     [SerializeField] public List<Character_Mobility> _removeList;
@@ -62,7 +62,7 @@ public class Character_Base : MonoBehaviour
     #endregion
 
     #region Character Combos
-    [Header("Button Input Detection")]
+    [Header("_______FACE BUTTON DETECTION_________")]
     //public NewComboList comboList3_0;
     public GameObject comboInstantiatedSpot;
     [SerializeField] private Character_MoveList sourceComboList3_0;
@@ -83,7 +83,7 @@ public class Character_Base : MonoBehaviour
     #endregion
 
     #region Character Force Variables
-    [Header("Force Controller Variables")]
+    [Header("________FORCE VARIABLES_________")]
     public Rigidbody myRb;
     [SerializeField] private float _jumpForce;
     public float JumpForce { get { return _jumpForce; } set { _jumpForce = value; } }
@@ -99,20 +99,20 @@ public class Character_Base : MonoBehaviour
     #endregion  
     
     #region Player SubState
-    [Header("Side Recognition")]
+    [Header("______PLAYER CONTROLLER SUBSTATES_______")]
     public Character_SubStates _subState;
     [Space(20)]
     #endregion
 
     #region Side Recognition
-    [Header("Side Recognition")]
+    [Header("______SIDE RECOGNITION________")]
     public Player_SideRecognition pSide; 
     [Space(20)]
     #endregion
 
 
     #region Opponent Reference
-    [Header("Side Recognition")]
+    [Header("______OPPONENT CHARACTER________")]
     public Character_Base opponentPlayer;
     [Space(20)]
     #endregion
@@ -301,7 +301,7 @@ public class Character_Base : MonoBehaviour
         return attackButtons[0];
     }
 }
-[System.Serializable]
+[Serializable]
 public class ButtonInput
 {
     public InputAction inputAction;
@@ -313,20 +313,13 @@ public class ButtonInput
     }
 }
 
-[System.Serializable]
+[Serializable]
 public class ButtonStateMachine
 {
     public enum InputState { pressed, held, released, directional };
     public InputState _state;
     public int directionalInput;
-    public void SetDI(int numInput)
-    {
-        directionalInput = numInput;
-    }
-    public InputState returnButtonState()
-    {
-        return this._state;
-    }
+
     public void OnPressed()
     {
         _state = InputState.pressed;

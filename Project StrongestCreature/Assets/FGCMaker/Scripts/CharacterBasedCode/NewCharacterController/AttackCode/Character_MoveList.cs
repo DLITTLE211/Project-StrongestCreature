@@ -10,10 +10,7 @@ public class Character_MoveList : MonoBehaviour
     [SerializeField] protected internal List<Attack_BasicSpecialMove> special_Simple;
     [SerializeField] protected internal List<Attack_NonSpecialAttack> simpleAttacks;
     [SerializeField] protected internal Path_Data currentPathData;
-    public void SetCombos() 
-    {
 
-    }
     public void UpdatePathData(Path_Data _pathData) 
     {
         currentPathData = _pathData;
@@ -39,7 +36,8 @@ public class Character_MoveList : MonoBehaviour
                             }
                             else { continue; }
                         }
-                        catch (ArgumentOutOfRangeException) { continue; }
+                        catch (ArgumentOutOfRangeException) 
+                        { continue; }
                     }
                     break;
                 case MoveType.BasicSpeical:
@@ -54,7 +52,8 @@ public class Character_MoveList : MonoBehaviour
                             //lastProperty = Special_Simple[i].property;
                             return;
                         }
-                        else { continue; }
+                        else 
+                        { continue; }
                     }
                     break;
 
@@ -112,11 +111,10 @@ public class Character_MoveList : MonoBehaviour
                                 return;
                             }
                             else
-                            {
-                                continue;
-                            }
+                            {continue;}
                         }
-                        catch (ArgumentOutOfRangeException) { continue; }
+                        catch (ArgumentOutOfRangeException) 
+                        { continue; }
                     }
                     break;
                 case MoveType.BasicSpeical:
@@ -129,7 +127,8 @@ public class Character_MoveList : MonoBehaviour
                             special_Simple[i].SendSuccessfulDamageInfo(target, blockedAttack);
                             return;
                         }
-                        else { continue; }
+                        else 
+                        { continue; }
                     }
                     break;
 

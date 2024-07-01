@@ -19,11 +19,8 @@ public class Character_ComboDetection : MonoBehaviour
         ResetComboList();
         PrimeMobility();
         PrimeSpecialMoves();
-
-
-
-       
     }
+
     void PrimeSpecialMoves()
     {
         for (int i = 0; i < _base.stanceAttackList.Count; i++)

@@ -335,7 +335,7 @@ MonoBehaviour:
   - SpecialAttackName: punch 5
     _attackInput:
       _correctInput:
-      - _correctSequence: 5D
+      - _correctSequence: 4D
         correctAttack: 0
         correctInput: 0
         moveInput: 0

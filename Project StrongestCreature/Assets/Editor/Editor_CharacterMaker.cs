@@ -335,12 +335,12 @@ public class Editor_CharacterMaker : EditorWindow
     void CreateCharacter() 
     {
         //Creates New Folder in Path of CharacterList
-        string newChararacterFolderPath = "Assets/CharacterList/";
+        string newChararacterFolderPath = "Assets/BAKI_STRONGEST_SHOWDOWN_ROSTER/CharacterList/";
         Directory.CreateDirectory(newChararacterFolderPath + $"{_newProfile.CharacterName}_CharacterFolder");
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         string newCharacterPath = newChararacterFolderPath + $"{_newProfile.CharacterName}_CharacterFolder/";
-        string SO_RefOnePath = "Assets/CharacterList/Character_Resources/";
+        string SO_RefOnePath = "Assets/BAKI_STRONGEST_SHOWDOWN_ROSTER/CharacterList/Character_Resources/";
         string SO_RefTwoPath = "Assets/Prefabs/Template_MobilityOptions.asset";
         string prefab_RefPath = "Assets/Prefabs/Template_Movelist.prefab";
 
