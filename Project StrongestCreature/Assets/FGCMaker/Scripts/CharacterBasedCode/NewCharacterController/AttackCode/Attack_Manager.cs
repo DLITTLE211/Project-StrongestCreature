@@ -228,7 +228,6 @@ public class Attack_Manager : MonoBehaviour
             _cAnimator.SetNextAttackStartVariables(attack);
         }
     }
-
     #region HitBox Management Code
     public void SetHitBoxStartState() 
     {

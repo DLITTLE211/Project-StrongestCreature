@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 [System.Serializable]
@@ -24,9 +25,19 @@ public class AttackHandler_Attack : AttackHandler_Base
     #endregion
 
     public FrameData _frameData;
-
     public HitCount _hitCount;
     private float bias;
+    private float frameCount;
+
+    List<RequiredCallback> requiredHitboxCallBacks;
+    List<CustomCallback> customHitboxCallBacks;
+
+    bool init;
+    bool startup;
+    bool active;
+    bool inactive;
+    bool lastFrame;
+
     public void SetAttackAnim(Character_Animator _playerAnim = null)
     {
         playerAnim = _playerAnim.myAnim;
@@ -44,7 +55,7 @@ public class AttackHandler_Attack : AttackHandler_Base
                 extendedHitBox.gameObject.SetActive(false);
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return;
         }
@@ -80,19 +91,21 @@ public class AttackHandler_Attack : AttackHandler_Base
     {
         return new Vector3(hu_placement.x - bias, hu_placement.y, hu_placement.z);
     }
+
     public override void OnInit(Character_Base curBase, Attack_BaseProperties newAttackProperties = null)
     {
-       
+        init = true;
         GetPlacementLocation(curBase);
         HitBox.PlaceHurtBox(extendedHitBox, ReturnHURTPosToVector3(), hu_orientation, hu_size.x, hu_size.y, hurtType);
         if (newAttackProperties != null)
         {
             HitBox.hitboxProperties = newAttackProperties;
         }
-        DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered startup");
+        DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered init");
     }
     public override void OnStartup(Character_Base curBase)
     {
+        startup = true;
         extendedHitBox.ActivateHurtbox(extendedHitBox);
         HitBox.PlaceHitBox(HitBox, ReturnHITPosToVector3(), hb_orientation, hb_size.x, hb_size.y, attackType);
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered startup");
@@ -103,21 +116,100 @@ public class AttackHandler_Attack : AttackHandler_Base
     }
     public override void OnActive(Character_Base curBase)
     {
+        active = true;
         HitBox.ActivateHitbox(HitBox, extendedHitBox,animName, _hitCount);
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered active");
     }
     public override void OnRecov(Character_Base curBase)
     {
+        inactive = true;
         HitBox.DestroyHitbox(HitBox, extendedHitBox);
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered recov");
     }
     public override void OnExit()
     {
+        lastFrame = true;
         if (HitBox.gameObject.activeInHierarchy) 
         {
             HitBox.DestroyHitbox(HitBox, extendedHitBox);
         }
         HitBox.hitboxProperties = null;
+    }
+
+    public void AddRequiredCallbacks(Character_Base curBase, Attack_BaseProperties newAttackProperties = null)
+    {
+        if (requiredHitboxCallBacks.Count > 0)
+        {
+            requiredHitboxCallBacks.Clear();
+        }
+        else
+        {
+            requiredHitboxCallBacks = new List<RequiredCallback>();
+        }
+
+        init = false;
+        startup = false;
+        active = false;
+        inactive = false;
+        lastFrame = false;
+
+        if (newAttackProperties != null)
+        {
+
+            requiredHitboxCallBacks.Add(new RequiredCallback(() => OnInit(curBase, newAttackProperties), _frameData.init, init));
+        }
+        else
+        {
+            requiredHitboxCallBacks.Add(new RequiredCallback(() => OnInit(curBase), _frameData.init, init));
+        }
+        requiredHitboxCallBacks.Add(new RequiredCallback(() => OnStartup(curBase), _frameData.startup, startup));
+        requiredHitboxCallBacks.Add(new RequiredCallback(() => OnActive(curBase), _frameData.active, active));
+        requiredHitboxCallBacks.Add(new RequiredCallback(() => OnRecov(curBase), _frameData.recovery, inactive));
+        requiredHitboxCallBacks.Add(new RequiredCallback(() => OnExit(), _frameData.lastFrame, lastFrame));
+    }
+    public void AddCustomCallbacks()
+    {
+        customHitboxCallBacks = new List<CustomCallback>();
+        for (int i = 0; i < _frameData._extraPoints.Count; i++) 
+        {
+            _frameData._extraPoints[i].hitFrameBool = false;
+            CustomCallback customCallback = new CustomCallback(_frameData._extraPoints[i].call, _frameData._extraPoints[i].hitFramePoints,_frameData._extraPoints[i].hitFrameBool);
+            customHitboxCallBacks.Add(customCallback);
+        }
+    }
+    public IEnumerator TickAnimFrameCount(Attack_BaseProperties lastAttack)
+    {
+        frameCount = 0;
+        float waitTime = 1f / 60f;
+        while (frameCount <= lastAttack.AttackAnims.animLength)
+        {
+            try
+            {
+                if (frameCount >= waitTime * requiredHitboxCallBacks[0].timeStamp && requiredHitboxCallBacks[0].funcBool == false && requiredHitboxCallBacks.Count > 0) 
+                {
+                    requiredHitboxCallBacks[0].func();
+                    requiredHitboxCallBacks.RemoveAt(0);
+                }
+                if (frameCount >= waitTime * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false && customHitboxCallBacks.Count > 0)
+                {
+                    Messenger.Broadcast<CustomCallback>(Events.CustomCallback, customHitboxCallBacks[0]);
+                    customHitboxCallBacks.RemoveAt(0);
+                }
+            }
+            catch (Exception)
+            {
+                frameCount = lastAttack.AttackAnims.animLength + 1f;
+                Debug.Log("Null Check");
+                Debug.Log($"Inactive frame: {lastAttack.AttackAnims._frameData.inactive}");
+                Debug.Log($"Last Attack null?: {lastAttack == null}");
+                Debug.Log($"Inactive bool state: {inactive}");
+                Debug.Break();
+            }
+            frameCount += 1f * waitTime;
+            yield return new WaitForSeconds(waitTime);
+        }
+        Messenger.Broadcast<int>(Events.AddNegativeFrames, lastAttack.AttackAnims._frameData.recovery);
+
     }
 }
 
@@ -153,7 +245,7 @@ public class FrameData
         {
             for (int i = 0; i < _extraPoints.Count; i++)
             {
-                _extraPoints[i].hitFrameBools = false;
+                _extraPoints[i].hitFrameBool = false;
             }
         }
     }
@@ -163,9 +255,35 @@ public class FrameData
         {
             for (int i = 0; i < _extraPoints.Count; i++)
             {
-                _extraPoints[i].hitFrameBools = false;
+                _extraPoints[i].hitFrameBool = false;
             }
         }
+    }
+}
+[Serializable]
+public class RequiredCallback 
+{
+    public Callback func;
+    public float timeStamp;
+    public bool funcBool;
+    public RequiredCallback(Callback _func, float _timeStamp, bool _funcBool) 
+    {
+        func = _func;
+        timeStamp = _timeStamp; 
+        funcBool = _funcBool;
+    }
+}
+[Serializable]
+public class CustomCallback
+{
+    public HitPointCall customCall;
+    public float timeStamp;
+    public bool funcBool;
+    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool)
+    {
+        customCall = _customCall;
+        timeStamp = _timeStamp;
+        funcBool = _funcBool;
     }
 }
 [Serializable]
@@ -173,7 +291,7 @@ public class ExtraFrameHitPoints
 {
     public int hitFramePoints;
     public HitPointCall call;
-    public bool hitFrameBools;
+    public bool hitFrameBool;
 }
 
 [Serializable]

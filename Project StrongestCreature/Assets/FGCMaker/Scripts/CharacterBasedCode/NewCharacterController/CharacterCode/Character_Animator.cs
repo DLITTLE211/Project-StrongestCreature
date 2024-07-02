@@ -48,7 +48,7 @@ public class Character_Animator : MonoBehaviour
     {
         inputWindowOpen = true;
         startPos = _model.localPosition;
-        Messenger.AddListener(Events.ClearLastInput, ClearLastActivatedInput);
+        Messenger.AddListener<int>(Events.AddNegativeFrames, CountUpNegativeFrames);
     }
     public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false)
     {
@@ -166,7 +166,6 @@ public class Character_Animator : MonoBehaviour
         }
         else
         {
-
             activatedInput = inputToActivate;
             _lastMovementState = lastMovementState.populated;
             StartMobiltyFrameCount(inputToActivate, anim, totalWaitTime);
@@ -194,10 +193,10 @@ public class Character_Animator : MonoBehaviour
             for (int i = 0; i < anim.frameData._extraPoints.Count; i++)
             {
                 ExtraFrameHitPoints newHitPoint = anim.frameData._extraPoints[i];
-                if (frameCount >= waitTime * newHitPoint.hitFramePoints && newHitPoint.hitFrameBools == false)
+                if (frameCount >= waitTime * newHitPoint.hitFramePoints && newHitPoint.hitFrameBool == false)
                 {
                     CheckCallState(newHitPoint, inputToActivate);
-                    newHitPoint.hitFrameBools = true;
+                    newHitPoint.hitFrameBool = true;
                 }
             }
             frameCount += waitTime;
@@ -217,7 +216,8 @@ public class Character_Animator : MonoBehaviour
         if (_attack != null)
         {
             lastAttack = _attack;
-            if (lastAttack.AttackAnims.HitBox != null) 
+            lastAttack.AttackAnims.AddRequiredCallbacks(_base,_attack);
+            if (lastAttack.AttackAnims.HitBox != null)
             {
                 lastAttack.AttackAnims.HitBox.hitboxProperties = _attack;
             }
@@ -282,22 +282,19 @@ public class Character_Animator : MonoBehaviour
     {
         canTick = true;
         SetLastAttack(nextattack);
-        if (nextattack.AttackAnims._frameData._extraPoints.Count > 0)
+        if (lastAttack.AttackAnims._frameData._extraPoints.Count > 0)
         {
-            for (int i = 0; i < lastAttack.AttackAnims._frameData._extraPoints.Count; i++)
-            {
-                lastAttack.AttackAnims._frameData._extraPoints[i].hitFrameBools = false;
-            }
+            lastAttack.AttackAnims.AddCustomCallbacks();
         }
-        StartFrameCount(nextattack);
+        StartFrameCount();
 
     }
-    public void StartFrameCount(Attack_BaseProperties nextattack)
+    public void StartFrameCount()
     {
-        StartCoroutine(TickAnimFrameCount());
+        StartCoroutine(lastAttack.AttackAnims.TickAnimFrameCount(lastAttack));
     }
 
-    IEnumerator TickAnimFrameCount()
+   /* IEnumerator TickAnimFrameCount()
     {
         float waitTime = 1f / 60f;
         SetStartValues();
@@ -359,7 +356,7 @@ public class Character_Animator : MonoBehaviour
         }
       
         CountUpNegativeFrames(lastAttack.AttackAnims._frameData.recovery);
-    }
+    }*/
     void CheckCallState(ExtraFrameHitPoints newHitPoint, Character_Mobility mobility = null) 
     {
         switch (newHitPoint.call)
