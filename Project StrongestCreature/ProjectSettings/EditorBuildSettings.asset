@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/FGCMaker/Scene/TestingGrounds.unity
+    guid: 977482309e168174cabe3b6bf4d0656b
   m_configObjects: {}
