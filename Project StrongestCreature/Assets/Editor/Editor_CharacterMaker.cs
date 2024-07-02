@@ -299,7 +299,7 @@ public class Editor_CharacterMaker : EditorWindow
             filledMaxHealth = _newProfile.MaxHealth >= 100f ? true : false;
             filledMaxStun = _newProfile.MaxStunValue >= 30f ? true : false;
             filledDefenseValue = _newProfile.DefenseValue >= 25f ? true : false;
-            filledRegenRate = _newProfile.HealthRegenRate >= 3 ? true : false;
+            filledRegenRate = _newProfile.HealthRegenRate >= 2 ? true : false;
             filledMoveListCount = _newProfile.moveListCount > 0 ? true : false;
         }
         catch (NullReferenceException)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Animations;
 using System;
 
 [CreateAssetMenu(menuName = "Character/Character Profile")]
@@ -41,7 +42,7 @@ public class Character_Profile : ScriptableObject
 
     #region Character Animator Info
     [Header("Character Animator Information")]
-    public Animator Animator;
+    public AnimatorController characterAnimator;
     public List<AnimationClip> AllCharacterAnimations = new List<AnimationClip>();
     public List<AnimationLayerInfo> LayerInfo = new List<AnimationLayerInfo>();
     public GameObject CharacterModel;
