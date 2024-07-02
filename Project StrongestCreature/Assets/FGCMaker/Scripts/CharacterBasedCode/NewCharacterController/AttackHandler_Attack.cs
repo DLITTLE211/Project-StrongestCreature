@@ -204,8 +204,9 @@ public class AttackHandler_Attack : AttackHandler_Base
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Debug.LogError(e.ToString());
                 frameCount = lastAttack.AttackAnims.animLength + 1f;
                 Debug.Log("Null Check");
                 Debug.Log($"Inactive frame: {lastAttack.AttackAnims._frameData.inactive}");

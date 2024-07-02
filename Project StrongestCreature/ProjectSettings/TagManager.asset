@@ -7,6 +7,7 @@ TagManager:
   - PCharacter
   - Wall
   - Ground
+  - CameraWall
   layers:
   - Default
   - TransparentFX
