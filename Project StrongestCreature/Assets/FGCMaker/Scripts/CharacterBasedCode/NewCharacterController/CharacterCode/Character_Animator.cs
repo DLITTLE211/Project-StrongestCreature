@@ -216,7 +216,7 @@ public class Character_Animator : MonoBehaviour
         if (_attack != null)
         {
             lastAttack = _attack;
-            lastAttack.AttackAnims.AddRequiredCallbacks(_base,_attack);
+            lastAttack.AttackAnims.AddRequiredCallbacks(_base, lastAttack);
             if (lastAttack.AttackAnims.HitBox != null)
             {
                 lastAttack.AttackAnims.HitBox.hitboxProperties = _attack;
@@ -293,70 +293,6 @@ public class Character_Animator : MonoBehaviour
     {
         StartCoroutine(lastAttack.AttackAnims.TickAnimFrameCount(lastAttack));
     }
-
-   /* IEnumerator TickAnimFrameCount()
-    {
-        float waitTime = 1f / 60f;
-        SetStartValues();
-
-        while (frameCount <= lastAttack.AttackAnims.animLength)
-        {
-            try
-            {
-                if (frameCount >= waitTime * lastAttack.AttackAnims._frameData.init && init == false)
-                {
-                    inputWindowOpen = false;
-                    Debug.Log(frameCount * 60 + "on init");
-                    lastAttack.AttackAnims.OnInit(_base, lastAttack);
-                    init = true;
-                }
-                if (frameCount >= waitTime * lastAttack.AttackAnims._frameData.startup && startup == false)
-                {
-                    Debug.Log(frameCount * 60 + "on startup");
-                    lastAttack.AttackAnims.OnStartup(_base);
-                    startup = true;
-                }
-                if (frameCount >= waitTime * lastAttack.AttackAnims._frameData.active && active == false)
-                {
-                    Debug.Log(frameCount * 60 + "on active");
-                    lastAttack.AttackAnims.OnActive(_base);
-                    active = true;
-                }
-                if (frameCount >= waitTime * lastAttack.AttackAnims._frameData.inactive && inactive == false)
-                {
-                    inputWindowOpen = true;
-                    Debug.Log(frameCount * 60 + "on recovery");
-                    inactive = true;
-                    lastAttack.AttackAnims.OnRecov(_base);
-                }
-                if (lastAttack.AttackAnims._frameData._extraPoints.Count > 0)
-                {
-                    for (int i = 0; i < lastAttack.AttackAnims._frameData._extraPoints.Count; i++)
-                    {
-                        ExtraFrameHitPoints newHitPoint = lastAttack.AttackAnims._frameData._extraPoints[i];
-                        if (frameCount >= waitTime * newHitPoint.hitFramePoints && newHitPoint.hitFrameBools == false)
-                        {
-                            CheckCallState(newHitPoint);
-                            newHitPoint.hitFrameBools = true;
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                frameCount = lastAttack.AttackAnims.animLength + 1f;
-                Debug.Log("Null Check");
-                Debug.Log($"Inactive frame: {lastAttack.AttackAnims._frameData.inactive}");
-                Debug.Log($"Last Attack null?: {lastAttack == null}");
-                Debug.Log($"Inactive bool state: {inactive}");
-                Debug.Break();
-            }
-            frameCount += 1f * waitTime;
-            yield return new WaitForSeconds(waitTime);
-        }
-      
-        CountUpNegativeFrames(lastAttack.AttackAnims._frameData.recovery);
-    }*/
     void CheckCallState(ExtraFrameHitPoints newHitPoint, Character_Mobility mobility = null) 
     {
         switch (newHitPoint.call)

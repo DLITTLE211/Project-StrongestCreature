@@ -41,6 +41,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     public void SetAttackAnim(Character_Animator _playerAnim = null)
     {
         playerAnim = _playerAnim.myAnim;
+        animLength = animClip.length;
         _frameData.SetRecoveryFrames(animClip.frameRate,animLength);
         try
         {
@@ -138,13 +139,16 @@ public class AttackHandler_Attack : AttackHandler_Base
 
     public void AddRequiredCallbacks(Character_Base curBase, Attack_BaseProperties newAttackProperties = null)
     {
-        if (requiredHitboxCallBacks.Count > 0)
+        if (requiredHitboxCallBacks == null)
         {
-            requiredHitboxCallBacks.Clear();
+            requiredHitboxCallBacks = new List<RequiredCallback>();
         }
         else
         {
-            requiredHitboxCallBacks = new List<RequiredCallback>();
+            if (requiredHitboxCallBacks.Count > 0 )
+            {
+                requiredHitboxCallBacks.Clear();
+            }
         }
 
         init = false;
@@ -164,7 +168,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         requiredHitboxCallBacks.Add(new RequiredCallback(() => OnStartup(curBase), _frameData.startup, startup));
         requiredHitboxCallBacks.Add(new RequiredCallback(() => OnActive(curBase), _frameData.active, active));
-        requiredHitboxCallBacks.Add(new RequiredCallback(() => OnRecov(curBase), _frameData.recovery, inactive));
+        requiredHitboxCallBacks.Add(new RequiredCallback(() => OnRecov(curBase), _frameData.inactive, inactive));
         requiredHitboxCallBacks.Add(new RequiredCallback(() => OnExit(), _frameData.lastFrame, lastFrame));
     }
     public void AddCustomCallbacks()
@@ -185,15 +189,19 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             try
             {
-                if (frameCount >= waitTime * requiredHitboxCallBacks[0].timeStamp && requiredHitboxCallBacks[0].funcBool == false && requiredHitboxCallBacks.Count > 0) 
+                float curFuncTimeStamp = waitTime * requiredHitboxCallBacks[0].timeStamp;
+                if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false && requiredHitboxCallBacks.Count > 0) 
                 {
                     requiredHitboxCallBacks[0].func();
                     requiredHitboxCallBacks.RemoveAt(0);
                 }
-                if (frameCount >= waitTime * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false && customHitboxCallBacks.Count > 0)
+                if (customHitboxCallBacks != null)
                 {
-                    Messenger.Broadcast<CustomCallback>(Events.CustomCallback, customHitboxCallBacks[0]);
-                    customHitboxCallBacks.RemoveAt(0);
+                    if (frameCount >= waitTime * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false && customHitboxCallBacks.Count > 0)
+                    {
+                        Messenger.Broadcast<CustomCallback>(Events.CustomCallback, customHitboxCallBacks[0]);
+                        customHitboxCallBacks.RemoveAt(0);
+                    }
                 }
             }
             catch (Exception)
@@ -207,6 +215,11 @@ public class AttackHandler_Attack : AttackHandler_Base
             }
             frameCount += 1f * waitTime;
             yield return new WaitForSeconds(waitTime);
+        }
+        if (requiredHitboxCallBacks.Count == 1)
+        {
+            requiredHitboxCallBacks[0].func();
+            requiredHitboxCallBacks.RemoveAt(0);
         }
         Messenger.Broadcast<int>(Events.AddNegativeFrames, lastAttack.AttackAnims._frameData.recovery);
 

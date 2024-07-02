@@ -99,8 +99,8 @@ MonoBehaviour:
               lastFrame: 0
               _extraPoints: []
             _hitCount:
-              _count: 0
-              _startCount: 0
+              _count: 1
+              _startCount: 1
               _refreshRate: 0
               _startRefreshRate: 0
           lateralKBP:
