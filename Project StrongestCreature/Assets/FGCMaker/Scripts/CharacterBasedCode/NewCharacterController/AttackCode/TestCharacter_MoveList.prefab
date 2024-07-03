@@ -53,7 +53,7 @@ MonoBehaviour:
       _correctInput:
       - _correctSequence: 5A
         correctAttack: 0
-        correctInput: 0
+        correctInput: 401
         moveInput: 0
         attackInput: 0
         property:
@@ -127,7 +127,7 @@ MonoBehaviour:
       _correctInput:
       - _correctSequence: 6C
         correctAttack: 0
-        correctInput: 0
+        correctInput: 48
         moveInput: 0
         attackInput: 0
         property:
@@ -156,14 +156,14 @@ MonoBehaviour:
             animLength: 0
             HitBox: {fileID: 0}
             attackType: 0
-            hb_placement: {x: 0, y: 0, z: 0}
+            hb_placement: {x: 0.55, y: 0.25, z: 0}
             hb_orientation: {x: 0, y: 0, z: 0}
-            hb_size: {x: 0, y: 0}
+            hb_size: {x: 0.3, y: 0.3}
             extendedHitBox: {fileID: 0}
             hurtType: 0
-            hu_placement: {x: 0, y: 0, z: 0}
+            hu_placement: {x: 0.55, y: 0.25, z: 0}
             hu_orientation: {x: 0, y: 0, z: 0}
-            hu_size: {x: 0, y: 0}
+            hu_size: {x: 0.35, y: 0.35}
             _frameData:
               init: 0
               startup: 3

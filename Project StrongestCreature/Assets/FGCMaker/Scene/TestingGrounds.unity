@@ -2412,6 +2412,7 @@ MonoBehaviour:
   canTick: 0
   inputWindowOpen: 0
   _canRecover: 0
+  FreezeCall: 0
 --- !u!1 &94634922
 GameObject:
   m_ObjectHideFlags: 0
@@ -7772,6 +7773,8 @@ MonoBehaviour:
   _base: {fileID: 993311525}
   xVal: 0
   yVal: 0
+  forceHitCall: 56
+  teleportCall: 64
   isFrozen: 0
 --- !u!1 &498465947
 GameObject:
@@ -10918,6 +10921,7 @@ MonoBehaviour:
   canTick: 0
   inputWindowOpen: 0
   _canRecover: 0
+  FreezeCall: 0
 --- !u!95 &705305729
 Animator:
   serializedVersion: 5
@@ -14732,7 +14736,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &882403984
@@ -16888,7 +16892,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &982141381
@@ -18011,6 +18015,8 @@ MonoBehaviour:
   _base: {fileID: 94923329}
   xVal: 0
   yVal: 0
+  forceHitCall: 0
+  teleportCall: 0
   isFrozen: 0
 --- !u!1 &1064684077
 GameObject:
@@ -18136,7 +18142,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1064684080

@@ -28,7 +28,7 @@ public class Attack_Manager : MonoBehaviour
     }
     public void ReceiveAttack(Attack_BaseProperties attack)
     {
-        GetAttackCriteriaifNotNull(attack);
+        GetAttackCriteriaifNotNull(attack); 
     }
     public void GetAttackCriteriaifNotNull(Attack_BaseProperties newAttack)
     {
