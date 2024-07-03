@@ -97,7 +97,10 @@ MonoBehaviour:
               inactive: 6
               recovery: 0
               lastFrame: 0
-              _extraPoints: []
+              _extraPoints:
+              - hitFramePoints: 0
+                call: 0
+                hitFrameBool: 0
             _hitCount:
               _count: 1
               _startCount: 1

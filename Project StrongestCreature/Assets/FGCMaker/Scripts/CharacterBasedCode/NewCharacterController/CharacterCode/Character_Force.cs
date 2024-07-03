@@ -26,6 +26,8 @@ public class Character_Force : MonoBehaviour
     [SerializeField] private float xVal, yVal;
     [SerializeField] private Rigidbody _myRB => _base.myRb;
     [SerializeField] private Player_SideRecognition _side => _base.pSide;
+    [SerializeField] private HitPointCall forceHitCall;
+    [SerializeField] private HitPointCall teleportCall;
     private float jumpSpeed;
     private float forwardSpeed;
     [SerializeField] bool isFrozen;
@@ -36,7 +38,28 @@ public class Character_Force : MonoBehaviour
         canToggleKinematic = true;
         jumpSpeed = ((_base.JumpForce + (0.5f * Time.fixedDeltaTime * -_base._cGravity.ReturnCurrentGravity())) / _myRB.mass);
         forwardSpeed = ((-_base.JumpDirForce + (0.5f * Time.fixedDeltaTime * -_myRB.drag)) / _myRB.mass);
+
+        Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
     }
+    void ApplyForceOnCustomCallback(CustomCallback callback) 
+    {
+        if (callback.customCall.HasFlag(forceHitCall)) 
+        {
+            AddForceOnCommand(-1);
+        }
+        if (callback.customCall.HasFlag(teleportCall))
+        {
+           // Teleport();
+        }
+    }
+    /*public void ApplyForceOnCustomCallback(CustomCallback callback) 
+    {
+        if (callback.customCall == HitPointCall.Force_Large) { }
+
+        if (callback.customCall == HitPointCall.Force_Medium) { }
+
+        if (callback.customCall == HitPointCall.Force_Small) { }
+    }*/
     private void Update()
     {
         _base._cAnimator.myAnim.SetFloat("y", _myRB.velocity.y);

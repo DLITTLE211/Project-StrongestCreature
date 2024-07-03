@@ -7,6 +7,7 @@ using UnityEngine;
 public class Character_MobilityAsset : ScriptableObject
 {
     [SerializeField]private List<Character_Mobility> mobilityOptions;
+    float frameCount;
     public List<Character_Mobility> MobilityOptions 
     {
         get 
@@ -41,6 +42,30 @@ public class Character_MobilityAsset : ScriptableObject
         {
            mobilityOptions[i].ClearAnimatorAndBase();
         }
+    }
+    public IEnumerator TickMobilityAnimation(Character_Mobility inputToActivate, MobilityAnimation anim, float totalWaitTime, Callback endFunc)
+    {
+        float waitTime = 1f / 60f;
+        frameCount = 0;
+
+        inputToActivate.baseCharacter._cAnimator.PlayNextAnimation(Animator.StringToHash(anim.animName[0]), 0.25f);
+        while (frameCount <= anim.animLength[0])
+        {
+            #region Mobility Anim Checks
+            for (int i = 0; i < anim.frameData._extraPoints.Count; i++)
+            {
+                ExtraFrameHitPoints newHitPoint = anim.frameData._extraPoints[i];
+                if (frameCount >= waitTime * newHitPoint.hitFramePoints && newHitPoint.hitFrameBool == false)
+                {
+                    inputToActivate.baseCharacter._cAnimator.CheckCallState(newHitPoint, inputToActivate);
+                    newHitPoint.hitFrameBool = true;
+                }
+            }
+            frameCount += waitTime;
+            yield return new WaitForSeconds(waitTime);
+            #endregion
+        }
+        endFunc();
     }
 }
 

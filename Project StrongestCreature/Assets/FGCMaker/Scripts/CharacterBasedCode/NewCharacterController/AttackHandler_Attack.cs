@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEditor;
 
 [System.Serializable]
 public class AttackHandler_Attack : AttackHandler_Base
@@ -42,7 +44,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     {
         playerAnim = _playerAnim.myAnim;
         animLength = animClip.length;
-        _frameData.SetRecoveryFrames(animClip.frameRate,animLength);
+        _frameData.SetRecoveryFrames(animClip.frameRate, animLength);
         try
         {
             animName = animClip.name;
@@ -68,7 +70,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         {
             HitBox = newHitBox;
         }
-        else 
+        else
         {
             if (HitBox != newHitBox)
             {
@@ -81,12 +83,12 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         else
         {
-            bias = (hb_placement.x*2);
+            bias = (hb_placement.x * 2);
         }
     }
     Vector3 ReturnHITPosToVector3()
     {
-        return new Vector3(hb_placement.x - bias,hb_placement.y,hb_placement.z);
+        return new Vector3(hb_placement.x - bias, hb_placement.y, hb_placement.z);
     }
     Vector3 ReturnHURTPosToVector3()
     {
@@ -118,7 +120,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     public override void OnActive(Character_Base curBase)
     {
         active = true;
-        HitBox.ActivateHitbox(HitBox, extendedHitBox,animName, _hitCount);
+        HitBox.ActivateHitbox(HitBox, extendedHitBox, animName, _hitCount);
         DebugMessageHandler.instance.DisplayErrorMessage(1, $"Entered active");
     }
     public override void OnRecov(Character_Base curBase)
@@ -130,7 +132,7 @@ public class AttackHandler_Attack : AttackHandler_Base
     public override void OnExit()
     {
         lastFrame = true;
-        if (HitBox.gameObject.activeInHierarchy) 
+        if (HitBox.gameObject.activeInHierarchy)
         {
             HitBox.DestroyHitbox(HitBox, extendedHitBox);
         }
@@ -145,7 +147,7 @@ public class AttackHandler_Attack : AttackHandler_Base
         }
         else
         {
-            if (requiredHitboxCallBacks.Count > 0 )
+            if (requiredHitboxCallBacks.Count > 0)
             {
                 requiredHitboxCallBacks.Clear();
             }
@@ -174,10 +176,10 @@ public class AttackHandler_Attack : AttackHandler_Base
     public void AddCustomCallbacks()
     {
         customHitboxCallBacks = new List<CustomCallback>();
-        for (int i = 0; i < _frameData._extraPoints.Count; i++) 
+        for (int i = 0; i < _frameData._extraPoints.Count; i++)
         {
             _frameData._extraPoints[i].hitFrameBool = false;
-            CustomCallback customCallback = new CustomCallback(_frameData._extraPoints[i].call, _frameData._extraPoints[i].hitFramePoints,_frameData._extraPoints[i].hitFrameBool);
+            CustomCallback customCallback = new CustomCallback(_frameData._extraPoints[i].call, _frameData._extraPoints[i].hitFramePoints, _frameData._extraPoints[i].hitFrameBool);
             customHitboxCallBacks.Add(customCallback);
         }
     }
@@ -190,7 +192,7 @@ public class AttackHandler_Attack : AttackHandler_Base
             try
             {
                 float curFuncTimeStamp = waitTime * requiredHitboxCallBacks[0].timeStamp;
-                if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false && requiredHitboxCallBacks.Count > 0) 
+                if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false && requiredHitboxCallBacks.Count > 0)
                 {
                     requiredHitboxCallBacks[0].func();
                     requiredHitboxCallBacks.RemoveAt(0);
@@ -231,14 +233,14 @@ public class AttackHandler_Attack : AttackHandler_Base
 public class HitCount
 {
     public int _count, _startCount;
-    [Range(0,0.25f)]public float _refreshRate, _startRefreshRate;
+    [Range(0, 0.25f)] public float _refreshRate, _startRefreshRate;
     public void ResetRefresh()
     {
         _refreshRate = _startRefreshRate;
     }
     public void ResetHitCount()
     {
-        if(_startCount < 1) 
+        if (_startCount < 1)
         {
             _startCount = 1;
         }
@@ -248,9 +250,9 @@ public class HitCount
 [Serializable]
 public class FrameData
 {
-    public int init, startup, active, inactive,recovery, lastFrame;
+    public int init, startup, active, inactive, recovery, lastFrame;
     public List<ExtraFrameHitPoints> _extraPoints;
-    public void SetRecoveryFrames(float sampleRate,float animLength) 
+    public void SetRecoveryFrames(float sampleRate, float animLength)
     {
         int totalFrames = (int)(Mathf.Ceil(animLength / (1 / sampleRate)));
         lastFrame = totalFrames;
@@ -263,7 +265,7 @@ public class FrameData
             }
         }
     }
-    public void ResetExtraFrames() 
+    public void ResetExtraFrames()
     {
         if (_extraPoints.Count > 0)
         {
@@ -275,15 +277,15 @@ public class FrameData
     }
 }
 [Serializable]
-public class RequiredCallback 
+public class RequiredCallback
 {
     public Callback func;
     public float timeStamp;
     public bool funcBool;
-    public RequiredCallback(Callback _func, float _timeStamp, bool _funcBool) 
+    public RequiredCallback(Callback _func, float _timeStamp, bool _funcBool)
     {
         func = _func;
-        timeStamp = _timeStamp; 
+        timeStamp = _timeStamp;
         funcBool = _funcBool;
     }
 }
@@ -301,30 +303,29 @@ public class CustomCallback
     }
 }
 [Serializable]
-public class ExtraFrameHitPoints 
+public class ExtraFrameHitPoints
 {
     public int hitFramePoints;
     public HitPointCall call;
     public bool hitFrameBool;
 }
 
-[Serializable]
-public enum HitPointCall 
+[Serializable, Flags]
+public enum HitPointCall
 {
-    Phase,
-    ShootProjectile,
-    Force_Small,
-    Force_Medium,
-    Force_Large,
-    Teleport,
-    KillStance,
-    ToggleArmor,
-    ToggleInvincible,
-    ToggleAntiAir,
-    ActivateMobilityAction,
-    ClearMobility,
-    UnFreeze,
-    ToggleFreeze_Self,
-    ToggleFreeze_Other,
-    ToggleFreeze_Both,
+    ShootProjectile = 4,
+    Force_Small = 8,
+    Force_Medium = 16,
+    Force_Large = 32,
+    Teleport = 64,
+    KillStance = 128,
+    ToggleArmor = 256,
+    ToggleInvincible = 512,
+    ToggleAntiAir = 1024,
+    ActivateMobilityAction = 2048,
+    ClearMobility = 4096,
+    UnFreeze = 8192,
+    ToggleFreeze_Self = 16384,
+    ToggleFreeze_Other = 32768,
+    ToggleFreeze_Both = 65536,
 }

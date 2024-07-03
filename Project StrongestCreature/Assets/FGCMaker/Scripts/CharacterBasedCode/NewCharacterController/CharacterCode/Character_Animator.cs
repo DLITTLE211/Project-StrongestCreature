@@ -34,22 +34,58 @@ public class Character_Animator : MonoBehaviour
     public bool inputWindowOpen;
     public bool _canRecover;
 
-    float frameCount;
-
     internal int negativeFrameCount;
-
-    bool init;
-    bool startup;
-    bool active;
-    bool inactive;
     Vector3 startPos;
 
+    [SerializeField] private HitPointCall FreezeCall;
     private void Start()
     {
         inputWindowOpen = true;
         startPos = _model.localPosition;
         Messenger.AddListener<int>(Events.AddNegativeFrames, CountUpNegativeFrames);
+        Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
     }
+    void ApplyForceOnCustomCallback(CustomCallback callback)
+    {
+        if (callback.customCall.HasFlag(FreezeCall))
+        {
+           // AddForceOnCommand(-1);
+        }
+    }
+    #region Shake Player Code
+    private void Update()
+    {
+        if (Shake)
+        {
+            StartCoroutine(CallShake());
+        }
+    }
+    IEnumerator CallShake()
+    {
+        float r_Xpos = UnityEngine.Random.Range(-0.05f, 0.05f);
+        float r_Ypos = UnityEngine.Random.Range(-0.05f, 0.05f);
+        _model.localPosition = new Vector3(r_Xpos, r_Ypos, 0f);
+        yield return null;
+        _model.localPosition = startPos;
+    }
+    public void SetShake(bool state)
+    {
+        if (Shake != state)
+        {
+            Shake = state;
+            if (!state)
+            {
+                _model.localPosition = startPos;
+            }
+        }
+    }
+    public void EndShake()
+    {
+        SetShake(false);
+        StopCoroutine(CallShake());
+    }
+    #endregion
+
     public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false)
     {
         if (attackOverride)
@@ -152,7 +188,7 @@ public class Character_Animator : MonoBehaviour
             {
                 activatedInput = inputToActivate;
                 _lastMovementState = lastMovementState.populated;
-                StartMobiltyFrameCount(inputToActivate, anim, totalWaitTime);
+                StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate, anim, totalWaitTime, () => KillInput(totalWaitTime)));
             }
             else if ((CheckAttackState(lastAttack.JumpCancelable) && inputToActivate.movementPriority != 2))
             {
@@ -161,51 +197,25 @@ public class Character_Animator : MonoBehaviour
                 _base._cForce.CallLockKinematic();
                 ClearLastAttack();
                 _lastMovementState = lastMovementState.populated;
-                StartMobiltyFrameCount(inputToActivate, anim, totalWaitTime);
+                StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate, anim, totalWaitTime, () => KillInput(totalWaitTime)));
             }
         }
         else
         {
             activatedInput = inputToActivate;
             _lastMovementState = lastMovementState.populated;
-            StartMobiltyFrameCount(inputToActivate, anim, totalWaitTime);
+            StartCoroutine(_base._extraMoveAsset.TickMobilityAnimation(inputToActivate, anim, totalWaitTime, () => KillInput(totalWaitTime)));
         }
     }
-    IEnumerator WaitToKillInput(float time) 
+    public void KillInput(float totalWaitTime)
+    {
+        StartCoroutine(WaitToKillInput(totalWaitTime));
+    }
+    IEnumerator WaitToKillInput(float time)
     {
         yield return new WaitForSeconds(time);
         NullifyMobilityOption();
     }
-    public void StartMobiltyFrameCount(Character_Mobility inputToActivate, MobilityAnimation anim, float totalWaitTime)
-    {
-        StartCoroutine(TickMobilityAnimation(inputToActivate, anim, totalWaitTime));
-    }
-
-    IEnumerator TickMobilityAnimation(Character_Mobility inputToActivate, MobilityAnimation anim, float totalWaitTime)
-    {
-        float waitTime = 1f / 60f;
-        SetStartValues();
-
-        PlayNextAnimation(Animator.StringToHash(anim.animName[0]), 0.25f);
-        while (frameCount <= anim.animLength[0])
-        {
-            #region Mobility Anim Checks
-            for (int i = 0; i < anim.frameData._extraPoints.Count; i++)
-            {
-                ExtraFrameHitPoints newHitPoint = anim.frameData._extraPoints[i];
-                if (frameCount >= waitTime * newHitPoint.hitFramePoints && newHitPoint.hitFrameBool == false)
-                {
-                    CheckCallState(newHitPoint, inputToActivate);
-                    newHitPoint.hitFrameBool = true;
-                }
-            }
-            frameCount += waitTime;
-            yield return new WaitForSeconds(waitTime);
-            #endregion
-        }
-        StartCoroutine(WaitToKillInput(totalWaitTime));
-    }
-
     public Character_Mobility returnActivatedInput()
     {
         return activatedInput;
@@ -230,46 +240,6 @@ public class Character_Animator : MonoBehaviour
         activatedInput.activeMove = false;
         CountUpNegativeFrames(activatedInput.mobilityAnim.frameData.recovery);
     }
-
-    private void Update()
-    {
-        if (Shake)
-        {
-            StartCoroutine(CallShake());
-        }
-    }
-    public void SetStartValues()
-    {
-        frameCount = 0;
-        init = false;
-        startup = false;
-        active = false;
-        inactive = false;
-    }
-    IEnumerator CallShake()
-    {
-        float r_Xpos = UnityEngine.Random.Range(-0.05f, 0.05f);
-        float r_Ypos = UnityEngine.Random.Range(-0.05f, 0.05f);
-        _model.localPosition = new Vector3(r_Xpos, r_Ypos, 0f);
-        yield return null;
-        _model.localPosition = startPos;
-    }
-    public void SetShake(bool state)
-    {
-        if (Shake != state)
-        {
-            Shake = state;
-            if (!state)
-            {
-                _model.localPosition = startPos;
-            }
-        }
-    }
-    public void EndShake()
-    {
-        SetShake(false);
-        StopCoroutine(CallShake());
-    }
     public void HaltTimer()
     {
         _timer.HaltTimer();
@@ -293,7 +263,7 @@ public class Character_Animator : MonoBehaviour
     {
         StartCoroutine(lastAttack.AttackAnims.TickAnimFrameCount(lastAttack));
     }
-    void CheckCallState(ExtraFrameHitPoints newHitPoint, Character_Mobility mobility = null) 
+    public void CheckCallState(ExtraFrameHitPoints newHitPoint, Character_Mobility mobility = null) 
     {
         switch (newHitPoint.call)
         {
@@ -316,10 +286,6 @@ public class Character_Animator : MonoBehaviour
                 break;
             case HitPointCall.ToggleFreeze_Other:
                 _base.opponentPlayer._cAnimator.SetSelfFreeze();
-                break;
-            case HitPointCall.Phase:
-                //ToggleOpponentFreeze();
-                //ClearLastAttack();
                 break;
             case HitPointCall.ShootProjectile:
                 ShootProjectile();
