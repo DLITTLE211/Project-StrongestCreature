@@ -2412,7 +2412,7 @@ MonoBehaviour:
   canTick: 0
   inputWindowOpen: 0
   _canRecover: 0
-  FreezeCall: 0
+  FreezeCall: 122880
 --- !u!1 &94634922
 GameObject:
   m_ObjectHideFlags: 0

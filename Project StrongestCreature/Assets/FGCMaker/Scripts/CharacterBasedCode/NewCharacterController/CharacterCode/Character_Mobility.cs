@@ -41,9 +41,6 @@ public class Character_Mobility : IMobility
     }
     public void TurnInputsToString(Character_Base _base)
     {
-        baseCharacter = _base;
-        cTimer = _base._cMobiltyTimer;
-        mobilityAnim.playerAnim = _base._cAnimator.myAnim;
         Messenger.AddListener(Events.ResetMoveOnTimer, ResetCurrentInput);
         for (int i = 0; i < _movementInputs.Count; i++) 
         {
