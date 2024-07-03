@@ -33,7 +33,6 @@ public class AttackHandler_Attack : AttackHandler_Base
 
     List<RequiredCallback> requiredHitboxCallBacks;
     List<CustomCallback> customHitboxCallBacks;
-
     bool init;
     bool startup;
     bool active;
@@ -179,7 +178,10 @@ public class AttackHandler_Attack : AttackHandler_Base
         for (int i = 0; i < _frameData._extraPoints.Count; i++)
         {
             _frameData._extraPoints[i].hitFrameBool = false;
-            CustomCallback customCallback = new CustomCallback(_frameData._extraPoints[i].call, _frameData._extraPoints[i].hitFramePoints, _frameData._extraPoints[i].hitFrameBool);
+            CustomCallback customCallback = new CustomCallback(_frameData._extraPoints[i].call, _frameData._extraPoints[i].hitFramePoints, 
+                _frameData._extraPoints[i].hitFrameBool,_frameData._extraPoints[i].camPos, 
+                _frameData._extraPoints[i].camRotation, _frameData._extraPoints[i].Force, 
+                _frameData._extraPoints[i].projectileSpeed);
             customHitboxCallBacks.Add(customCallback);
         }
     }
@@ -295,11 +297,24 @@ public class CustomCallback
     public HitPointCall customCall;
     public float timeStamp;
     public bool funcBool;
-    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool)
+
+    public float forceFloat,projectileSpeedFloat;
+    public Vector3 camPositionVector, camRotateVector;
+    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation, float _forceFloat = -1, float _projectileFloat = -1)
     {
         customCall = _customCall;
         timeStamp = _timeStamp;
         funcBool = _funcBool;
+        camPositionVector = position;
+        camRotateVector = rotation;
+        if (forceFloat > 0) 
+        {
+            forceFloat = _forceFloat;
+        }
+        if (projectileSpeedFloat > 0)
+        {
+            projectileSpeedFloat = _projectileFloat;
+        }
     }
 }
 [Serializable]
@@ -308,6 +323,8 @@ public class ExtraFrameHitPoints
     public int hitFramePoints;
     public HitPointCall call;
     public bool hitFrameBool;
+    public float Force, projectileSpeed;
+    public Vector3 camPos, camRotation;
 }
 
 [Serializable, Flags]
