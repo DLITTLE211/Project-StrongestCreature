@@ -26,9 +26,9 @@ public class InGameCameraController : MonoBehaviour
     }
     void ApplyForceOnCustomCallback(CustomCallback callback)
     {
-        if (callback.customCall.HasFlag(cameraControlCalls))
+        if (cameraControlCalls.HasFlag(callback.customCall))
         {
-            switch (cameraControlCalls)
+            switch (callback.customCall)
             {
                 case HitPointCall.PanPosOnTarget:
                     PositionChangeOnTarget(callback);

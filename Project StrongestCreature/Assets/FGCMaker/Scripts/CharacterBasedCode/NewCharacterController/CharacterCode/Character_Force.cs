@@ -43,7 +43,7 @@ public class Character_Force : MonoBehaviour
     }
     void ApplyForceOnCustomCallback(CustomCallback callback) 
     {
-        if (callback.customCall.HasFlag(forceHitCall)) 
+        if (forceHitCall.HasFlag(callback.customCall)) 
         {
             switch (callback.customCall) 
             {
@@ -58,7 +58,7 @@ public class Character_Force : MonoBehaviour
                     break;
             }
         }
-        if (callback.customCall.HasFlag(teleportCall))
+        if (teleportCall.HasFlag(callback.customCall))
         {
             if (callback.customCall == HitPointCall.TeleportForward) 
             {

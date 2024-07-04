@@ -133,7 +133,7 @@ MonoBehaviour:
     property:
       _attackName: 
       _cTimer: {fileID: 0}
-      rawAttackDamage: 12
+      rawAttackDamage: 9
       counterHitDamageMult: 1.25
       hitstopValue: 20
       hitstunValue: 25

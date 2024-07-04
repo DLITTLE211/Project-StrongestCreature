@@ -49,9 +49,9 @@ public class Character_Animator : MonoBehaviour
     }
     void ApplyForceOnCustomCallback(CustomCallback callback)
     {
-        if (callback.customCall.HasFlag(FreezeCall))
+        if (FreezeCall.HasFlag(callback.customCall))
         {
-            switch (FreezeCall)
+            switch (callback.customCall)
             {
                 case HitPointCall.ToggleFreeze_Both:
                     SetOpponentFreeze();
@@ -68,9 +68,9 @@ public class Character_Animator : MonoBehaviour
                     break;
             }
         }
-        if (callback.customCall.HasFlag(mobilityCall))
+        if (mobilityCall.HasFlag(callback.customCall))
         {
-            switch (mobilityCall)
+            switch (callback.customCall)
             {
                 case HitPointCall.ClearMobility:
                     ClearLastActivatedInput();
