@@ -8493,6 +8493,8 @@ MonoBehaviour:
   - {fileID: 993311515}
   - {fileID: 94923331}
   offset: {x: -0.53, y: -0.008, z: -0.3}
+  cameraControlCalls: 917504
+  isTracking: 0
 --- !u!1 &566836024
 GameObject:
   m_ObjectHideFlags: 0

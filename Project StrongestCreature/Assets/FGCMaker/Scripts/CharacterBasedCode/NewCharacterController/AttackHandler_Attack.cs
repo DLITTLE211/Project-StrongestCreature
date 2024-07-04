@@ -300,13 +300,15 @@ public class CustomCallback
 
     public float forceFloat,projectileSpeedFloat;
     public Vector3 camPositionVector, camRotateVector;
-    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation, float _forceFloat = -1, float _projectileFloat = -1)
+    public bool snapMovement;
+    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation, float _forceFloat = -1, float _projectileFloat = -1, bool isSnapping = false)
     {
         customCall = _customCall;
         timeStamp = _timeStamp;
         funcBool = _funcBool;
         camPositionVector = position;
         camRotateVector = rotation;
+        snapMovement = isSnapping;
         if (forceFloat > 0) 
         {
             forceFloat = _forceFloat;
@@ -315,6 +317,7 @@ public class CustomCallback
         {
             projectileSpeedFloat = _projectileFloat;
         }
+        
     }
 }
 [Serializable]
@@ -325,6 +328,7 @@ public class ExtraFrameHitPoints
     public bool hitFrameBool;
     public float Force, projectileSpeed;
     public Vector3 camPos, camRotation;
+    public bool snapMovement;
 }
 
 [Serializable, Flags]
@@ -347,13 +351,7 @@ public enum HitPointCall
     ToggleFreeze_Both = 32768,
     TeleportBackward = 65536,
 
-    PanRotateBehindP1 =131072,
-    PanRotateBehindP2 =262144,
-    PanZoomOnP1 =524288,
-    PanZoomOnP2 =1078576,
-
-    SnapRotateBehindP1 =2097152,
-    SnapRotateBehindP2 =4194304,
-    SnapZoomOnP1 =8388608,
-    SnapZoomOnP2 =167772416,
+    PanPosOnTarget = 131072,
+    PanRotateOnTarget = 262144,
+    PanZoomOnTarget =524288,
 }

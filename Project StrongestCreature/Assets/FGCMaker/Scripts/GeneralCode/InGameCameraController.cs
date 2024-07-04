@@ -17,11 +17,30 @@ public class InGameCameraController : MonoBehaviour
     [SerializeField] Camera orthoCamera, perspectiveBGCamera;
     [SerializeField] Transform[] playerCharacters;
     [SerializeField] Vector3 offset;
-
-
+    [SerializeField] private HitPointCall cameraControlCalls;
+    [SerializeField] private bool isTracking;
     private void Start()
     {
         InitCameraInformation();
+        Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
+    }
+    void ApplyForceOnCustomCallback(CustomCallback callback)
+    {
+        if (callback.customCall.HasFlag(cameraControlCalls))
+        {
+            switch (cameraControlCalls)
+            {
+                case HitPointCall.PanPosOnTarget:
+                    PositionChangeOnTarget(callback);
+                    break;
+                case HitPointCall.PanRotateOnTarget:
+                    RotateOnTarget(callback);
+                    break;
+                case HitPointCall.PanZoomOnTarget:
+                    ZoomOnTarget(callback);
+                    break;
+            }
+        }
     }
     #region Function Summary
     /// <summary>
@@ -38,11 +57,14 @@ public class InGameCameraController : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (!checkCenterPoint())
+        if (isTracking)
         {
-            ZoomCamera();
-            CameraToPlayerCenter(orthoCamera);
-            CameraToPlayerCenter(perspectiveBGCamera);
+            if (!checkCenterPoint())
+            {
+                ZoomCamera();
+                CameraToPlayerCenter(orthoCamera);
+                CameraToPlayerCenter(perspectiveBGCamera);
+            }
         }
     }
     #region Function Summary
@@ -168,4 +190,40 @@ public class InGameCameraController : MonoBehaviour
     }
 
 
+    void RotateOnTarget(CustomCallback callback)
+    {
+        isTracking = false;
+        if (callback.snapMovement)
+        {
+
+        }
+        else 
+        {
+
+        }
+    }
+    void PositionChangeOnTarget(CustomCallback callback)
+    {
+        isTracking = false;
+        if (callback.snapMovement)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+    void ZoomOnTarget(CustomCallback callback)
+    {
+        isTracking = false;
+        if (callback.snapMovement)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
 }
