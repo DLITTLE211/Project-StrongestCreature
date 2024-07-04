@@ -66,7 +66,7 @@ public class HurtBox : CollisionDetection
         for (int i = 0; i < hitCount._count; i++)
         {
             yield return new WaitForSeconds(hitCount._refreshRate);
-            Base_Target.comboList3_0.CheckAndApply(_hitbox.hitboxProperties, Base_Target, Base_Attacker,false);
+            Base_Attacker.comboList3_0.CheckAndApply(_hitbox.hitboxProperties, Base_Target, Base_Attacker,false);
         }
         _hitbox.DestroyHitbox(_hitbox, Base_Attacker.pSide.thisPosition.GiveHurtBox());
         hitCount.ResetRefresh();
@@ -278,7 +278,7 @@ public class HurtBox : CollisionDetection
             {
                 Attack_BaseProperties currentAttack = Base_Attacker.pSide.thisPosition.ReturnPhysicalSideHitBox().hitboxProperties;
 
-                Base_Target.comboList3_0.CheckAndApply(currentAttack, Base_Target, Base_Attacker,false);
+                Base_Attacker.comboList3_0.CheckAndApply(currentAttack, Base_Target, Base_Attacker,false);
                 await Character_Hitstop.Instance.CallHitStop(currentAttack, currentAttack.hitstopValue, Base_Target);
                 Base_Target._cHitController.HandleHitState(currentAttack);
                 Base_Target._cGravity.UpdateGravityScaleOnHit(currentAttack.hitstunValue);

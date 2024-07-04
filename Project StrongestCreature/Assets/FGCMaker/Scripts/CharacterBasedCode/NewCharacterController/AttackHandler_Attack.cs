@@ -194,17 +194,23 @@ public class AttackHandler_Attack : AttackHandler_Base
             try
             {
                 float curFuncTimeStamp = waitTime * requiredHitboxCallBacks[0].timeStamp;
-                if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false && requiredHitboxCallBacks.Count > 0)
+                if (requiredHitboxCallBacks.Count > 0)
                 {
-                    requiredHitboxCallBacks[0].func();
-                    requiredHitboxCallBacks.RemoveAt(0);
+                    if (frameCount >= curFuncTimeStamp && requiredHitboxCallBacks[0].funcBool == false)
+                    {
+                        requiredHitboxCallBacks[0].func();
+                        requiredHitboxCallBacks.RemoveAt(0);
+                    }
                 }
                 if (customHitboxCallBacks != null)
                 {
-                    if (frameCount >= waitTime * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false && customHitboxCallBacks.Count > 0)
+                    if (customHitboxCallBacks.Count > 0)
                     {
-                        Messenger.Broadcast<CustomCallback>(Events.CustomCallback, customHitboxCallBacks[0]);
-                        customHitboxCallBacks.RemoveAt(0);
+                        if (frameCount >= waitTime * customHitboxCallBacks[0].timeStamp && customHitboxCallBacks[0].funcBool == false)
+                        {
+                            Messenger.Broadcast<CustomCallback>(Events.CustomCallback, customHitboxCallBacks[0]);
+                            customHitboxCallBacks.RemoveAt(0);
+                        }
                     }
                 }
             }

@@ -57,7 +57,7 @@ public class Character_MobilityAsset : ScriptableObject
                 ExtraFrameHitPoints newHitPoint = anim.frameData._extraPoints[i];
                 if (frameCount >= waitTime * newHitPoint.hitFramePoints && newHitPoint.hitFrameBool == false)
                 {
-                    inputToActivate.baseCharacter._cAnimator.CheckCallState(newHitPoint, inputToActivate);
+                    inputToActivate.baseCharacter._extraMoveAsset.CallMobilityAction(inputToActivate);
                     newHitPoint.hitFrameBool = true;
                 }
             }

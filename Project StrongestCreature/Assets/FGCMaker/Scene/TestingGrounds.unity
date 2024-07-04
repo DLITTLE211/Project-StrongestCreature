@@ -2359,7 +2359,6 @@ MonoBehaviour:
     counterHitDamageMult: 0
     hitstopValue: 0
     hitstunValue: 0
-    _attackScaling: 0
     hitLevel: 0
     attackHashes: 
     _meterRequirement: 0
@@ -2414,8 +2413,8 @@ MonoBehaviour:
   inputWindowOpen: 0
   _canRecover: 0
   FreezeCall: 122880
-  mobilityCall: 6144
-  attackCall: 128
+  mobilityCall: 2048
+  attackCall: 66
 --- !u!1 &94634922
 GameObject:
   m_ObjectHideFlags: 0
@@ -8494,7 +8493,7 @@ MonoBehaviour:
   - {fileID: 94923331}
   offset: {x: -0.53, y: -0.008, z: -0.3}
   cameraControlCalls: 917504
-  isTracking: 0
+  isTracking: 1
 --- !u!1 &566836024
 GameObject:
   m_ObjectHideFlags: 0
@@ -10873,7 +10872,6 @@ MonoBehaviour:
     counterHitDamageMult: 0
     hitstopValue: 0
     hitstunValue: 0
-    _attackScaling: 0
     hitLevel: 0
     attackHashes: 
     _meterRequirement: 0

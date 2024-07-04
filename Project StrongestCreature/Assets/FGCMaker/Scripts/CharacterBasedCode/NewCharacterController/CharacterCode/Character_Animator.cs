@@ -72,22 +72,21 @@ public class Character_Animator : MonoBehaviour
         {
             switch (mobilityCall)
             {
-                case HitPointCall.ActivateMobilityAction:
-                    SetOpponentFreeze();
-                    SetSelfFreeze();
-                    break;
                 case HitPointCall.ClearMobility:
-                    SetOpponentFreeze();
+                    ClearLastActivatedInput();
                     break;
             }
         }
-        if (callback.customCall.HasFlag(attackCall))
+        if (attackCall.HasFlag(callback.customCall))
         {
-            switch (attackCall)
+            switch (callback.customCall)
             {
                 case HitPointCall.KillStance:
                     ClearLastAttack();
                     _base._cAttackTimer.SetTimerType();
+                    break;
+                case HitPointCall.ShootProjectile:
+                    ShootProjectile();
                     break;
             }
         }
@@ -302,15 +301,6 @@ public class Character_Animator : MonoBehaviour
     public void StartFrameCount()
     {
         StartCoroutine(lastAttack.AttackAnims.TickAnimFrameCount(lastAttack));
-    }
-    public void CheckCallState(ExtraFrameHitPoints newHitPoint, Character_Mobility mobility = null) 
-    {
-        switch (newHitPoint.call)
-        {
-            case HitPointCall.ShootProjectile:
-                ShootProjectile();
-                break;
-        }
     }
     public void AddForceOnAttack(float forceValue)
     {

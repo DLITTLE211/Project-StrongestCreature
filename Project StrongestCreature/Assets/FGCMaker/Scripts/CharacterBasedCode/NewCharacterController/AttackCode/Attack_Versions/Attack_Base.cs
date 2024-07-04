@@ -21,7 +21,6 @@ public class Attack_BaseProperties
     public float counterHitDamageMult;
     [Range(1, 100)] public int hitstopValue;
     [Range(1, 200)] public int hitstunValue;
-    [Range(15, 75)] public int _attackScaling;
     public HitLevel hitLevel;
     [SerializeField] public List<int> attackHashes;
     [Space(20)]

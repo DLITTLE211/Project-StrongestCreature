@@ -86,7 +86,7 @@ public class Character_DamageCalculator : MonoBehaviour
         float counterHitValue = counterHitCalculation == 0 ? 1 : counterHitCalculation;
         float defenseValue = _healtController.defenseValue / 100;
 
-        calculatedScaling += _oppCounter.CurrentHitCount <= 1 ? 0 : (defenseValue + (currentComboHitCount * _curRawDamage._attackScaling / 100));
+        calculatedScaling += _oppCounter.CurrentHitCount <= 1 ? 0 : (defenseValue + (currentComboHitCount * _curRawDamage.attackScalingPercent / 100));
         calculatedDamage = ((counterHitValue * curRawDamage) + afflictionDebuffDamage) - (calculatedScaling);
         calculatedRecovDamage = (calculatedDamage / 2) / currentComboHitCount;
         float calculatedChipDamage = calculatedDamage / 10f;
