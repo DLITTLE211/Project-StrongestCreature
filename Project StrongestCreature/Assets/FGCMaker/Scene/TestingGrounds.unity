@@ -2364,6 +2364,7 @@ MonoBehaviour:
     attackHashes: 
     _meterRequirement: 0
     _meterAwardedOnHit: 0
+    attackScalingPercent: 0
     dashCancelable: 0
     JumpCancelable: 0
     _airInfo: 0
@@ -2413,6 +2414,8 @@ MonoBehaviour:
   inputWindowOpen: 0
   _canRecover: 0
   FreezeCall: 122880
+  mobilityCall: 6144
+  attackCall: 128
 --- !u!1 &94634922
 GameObject:
   m_ObjectHideFlags: 0
@@ -10873,6 +10876,7 @@ MonoBehaviour:
     attackHashes: 
     _meterRequirement: 0
     _meterAwardedOnHit: 0
+    attackScalingPercent: 0
     dashCancelable: 0
     JumpCancelable: 0
     _airInfo: 0
@@ -10921,7 +10925,9 @@ MonoBehaviour:
   canTick: 0
   inputWindowOpen: 0
   _canRecover: 0
-  FreezeCall: 0
+  FreezeCall: 122880
+  mobilityCall: 6144
+  attackCall: 128
 --- !u!95 &705305729
 Animator:
   serializedVersion: 5
@@ -18015,8 +18021,8 @@ MonoBehaviour:
   _base: {fileID: 94923329}
   xVal: 0
   yVal: 0
-  forceHitCall: 0
-  teleportCall: 0
+  forceHitCall: 56
+  teleportCall: 64
   isFrozen: 0
 --- !u!1 &1064684077
 GameObject:

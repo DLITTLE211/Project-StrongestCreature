@@ -334,7 +334,7 @@ public enum HitPointCall
     Force_Small = 8,
     Force_Medium = 16,
     Force_Large = 32,
-    Teleport = 64,
+    TeleportForward = 64,
     KillStance = 128,
     ToggleArmor = 256,
     ToggleInvincible = 512,
@@ -345,4 +345,5 @@ public enum HitPointCall
     ToggleFreeze_Self = 16384,
     ToggleFreeze_Other = 32768,
     ToggleFreeze_Both = 65536,
+    TeleportBackward = 131072,
 }

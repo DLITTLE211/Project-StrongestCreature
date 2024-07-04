@@ -50,6 +50,7 @@ public class Character_Profile : ScriptableObject
 
     #region Character MoveList Info
     [Header("Character MoveList Information")]
+    public Character_MoveList _characterMoveList;
     public int moveListCount;
     public List<GameObject> CharacterMoveListPrefab;
     public Character_MobilityAsset _CharacterMobility;

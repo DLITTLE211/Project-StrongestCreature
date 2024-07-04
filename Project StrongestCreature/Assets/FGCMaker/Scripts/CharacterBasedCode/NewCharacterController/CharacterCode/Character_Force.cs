@@ -45,11 +45,29 @@ public class Character_Force : MonoBehaviour
     {
         if (callback.customCall.HasFlag(forceHitCall)) 
         {
-            AddForceOnCommand(-1);
+            switch (callback.customCall) 
+            {
+                case HitPointCall.Force_Small:
+                    AddForceOnCommand(3.15f);
+                    break;
+                case HitPointCall.Force_Medium:
+                    AddForceOnCommand(6f);
+                    break;
+                case HitPointCall.Force_Large:
+                    AddForceOnCommand(10f);
+                    break;
+            }
         }
         if (callback.customCall.HasFlag(teleportCall))
         {
-           // Teleport();
+            if (callback.customCall == HitPointCall.TeleportForward) 
+            {
+                TeleportOnCommand(callback.forceFloat);
+            }
+            if (callback.customCall == HitPointCall.TeleportBackward)
+            {
+                TeleportOnCommand(-callback.forceFloat);
+            }
         }
     }
     /*public void ApplyForceOnCustomCallback(CustomCallback callback) 
@@ -130,6 +148,20 @@ public class Character_Force : MonoBehaviour
             value *= -1;
         }
         _myRB.AddForce(transform.right * value, ForceMode.VelocityChange);
+    }
+    void TeleportOnCommand(float value)
+    {
+        Vector3 curPos = new Vector3(_myRB.transform.position.x, _myRB.transform.position.y, _myRB.transform.position.z);
+        Vector3 newPos;
+        if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
+        {
+            value *= -1;
+            newPos = new Vector3(-(_myRB.transform.position.x + 2), _myRB.transform.position.y, _myRB.transform.position.z);
+            _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
+            return;
+        }
+        newPos = new Vector3(_myRB.transform.position.x + 2, _myRB.transform.position.y, _myRB.transform.position.z);
+        _myRB.transform.position = Vector3.Slerp(curPos, newPos, 1f);
     }
 
     #region Function Summary

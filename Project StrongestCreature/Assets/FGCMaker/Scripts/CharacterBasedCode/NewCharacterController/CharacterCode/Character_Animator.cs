@@ -38,18 +38,58 @@ public class Character_Animator : MonoBehaviour
     Vector3 startPos;
 
     [SerializeField] private HitPointCall FreezeCall;
+    [SerializeField] private HitPointCall mobilityCall;
+    [SerializeField] private HitPointCall attackCall;
     private void Start()
     {
         inputWindowOpen = true;
         startPos = _model.localPosition;
-        Messenger.AddListener<int>(Events.AddNegativeFrames, CountUpNegativeFrames);
+        Messenger.AddListener<int>(Events.AddNegativeFrames, CountUpNegativeFrames); 
         Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
     }
     void ApplyForceOnCustomCallback(CustomCallback callback)
     {
         if (callback.customCall.HasFlag(FreezeCall))
         {
-           // AddForceOnCommand(-1);
+            switch (FreezeCall)
+            {
+                case HitPointCall.ToggleFreeze_Both:
+                    SetOpponentFreeze();
+                    SetSelfFreeze();
+                    break;
+                case HitPointCall.ToggleFreeze_Other:
+                    SetOpponentFreeze();
+                    break;
+                case HitPointCall.ToggleFreeze_Self:
+                    SetSelfFreeze();
+                    break;
+                case HitPointCall.UnFreeze:
+                    SetSelfUnfreeze();
+                    break;
+            }
+        }
+        if (callback.customCall.HasFlag(mobilityCall))
+        {
+            switch (mobilityCall)
+            {
+                case HitPointCall.ActivateMobilityAction:
+                    SetOpponentFreeze();
+                    SetSelfFreeze();
+                    break;
+                case HitPointCall.ClearMobility:
+                    SetOpponentFreeze();
+                    break;
+            }
+        }
+        if (callback.customCall.HasFlag(attackCall))
+        {
+            switch (attackCall)
+            {
+                case HitPointCall.KillStance:
+                    ClearLastAttack();
+                    _base._cAttackTimer.SetTimerType();
+                    break;
+            }
         }
     }
     #region Shake Player Code
@@ -267,46 +307,8 @@ public class Character_Animator : MonoBehaviour
     {
         switch (newHitPoint.call)
         {
-            case HitPointCall.ActivateMobilityAction:
-                _base._extraMoveAsset.CallMobilityAction(mobility);
-                break;
-            case HitPointCall.ClearMobility:
-                ClearLastActivatedInput();
-                break;
-            case HitPointCall.ToggleFreeze_Both:
-                SetSelfFreeze();
-                SetOpponentFreeze();
-                break;
-            case HitPointCall.UnFreeze:
-                _base.opponentPlayer._cAnimator.SetSelfUnfreeze();
-                SetSelfUnfreeze();
-                break;
-            case HitPointCall.ToggleFreeze_Self:
-                SetSelfFreeze();
-                break;
-            case HitPointCall.ToggleFreeze_Other:
-                _base.opponentPlayer._cAnimator.SetSelfFreeze();
-                break;
             case HitPointCall.ShootProjectile:
                 ShootProjectile();
-                break;
-            case HitPointCall.Force_Small:
-                AddForceOnAttack(3.15f);
-                break;
-
-            case HitPointCall.Force_Medium:
-                AddForceOnAttack(6);
-                break;
-
-            case HitPointCall.Force_Large:
-                AddForceOnAttack(10);
-                break;
-            case HitPointCall.Teleport:
-                break;
-
-            case HitPointCall.KillStance:
-                ClearLastAttack();
-                _base._cAttackTimer.SetTimerType();
                 break;
         }
     }

@@ -9,9 +9,9 @@ public class Character_DamageCalculator : MonoBehaviour
     [SerializeField] private float calculatedScaling;
     [SerializeField] private float calculatedMeterScaling;
 
-    [SerializeField] private float counterHitMult, 
-                                   afflictionDebuffDamage, 
-                                   currentComboHitCount;
+    [SerializeField] private float counterHitMult; 
+    [SerializeField] private float afflictionDebuffDamage;
+    [SerializeField] private float currentComboHitCount;
 
     public Character_Health _healtController;
     public Character_ComboCounter _oppCounter;
@@ -19,9 +19,9 @@ public class Character_DamageCalculator : MonoBehaviour
 
     [SerializeField] private TMP_Text _damageText;
     float damageTextAmount;
-    public void TakeDamage(Attack_BaseProperties _curRawDamage)
+    public void TakeDamage(Attack_BaseProperties currentAttack)
     {
-        curRawDamage = _curRawDamage.rawAttackDamage;
+        curRawDamage = currentAttack.rawAttackDamage;
         if (CheckAfflictionState())
         {
             afflictionDebuffDamage = _healtController.currentAffliction.effectNumber;
@@ -36,21 +36,38 @@ public class Character_DamageCalculator : MonoBehaviour
         float counterHitValue = counterHitCalculation == 0 ? 1 : counterHitCalculation;
         float defenseValue = _healtController.defenseValue / 100;
 
-        calculatedScaling += _oppCounter.CurrentHitCount <= 1 ? 0 : (defenseValue + (currentComboHitCount * _curRawDamage._attackScaling/100));
-        calculatedDamage = ((counterHitValue * curRawDamage) + afflictionDebuffDamage) - (calculatedScaling);
+        calculatedDamage = ((counterHitValue + curRawDamage) + afflictionDebuffDamage) - (calculatedScaling);
         calculatedRecovDamage = (calculatedDamage / 2) / currentComboHitCount;
 
-        if (_curRawDamage._meterRequirement <= 0)
+        if (currentAttack._meterRequirement <= 0)
         {
-            calculatedMeterScaling += _oppCounter.CurrentHitCount <= 1 ? 0 : _curRawDamage._meterAwardedOnHit / (currentComboHitCount * 0.5f);
-            float scaledMeterValue = Mathf.Abs((_curRawDamage._meterAwardedOnHit - calculatedMeterScaling));
+            calculatedMeterScaling += _oppCounter.CurrentHitCount <= 1 ? 0 : currentAttack._meterAwardedOnHit / (currentComboHitCount * 0.5f);
+            float scaledMeterValue = Mathf.Abs((currentAttack._meterAwardedOnHit - calculatedMeterScaling));
             _base.opponentPlayer._cSuperMeter.AddMeter(scaledMeterValue);
         }
 
         _healtController.ApplyMainHealthDamage(Mathf.Abs(calculatedDamage));
         UpdateDamageText(calculatedDamage);
-
         _healtController.ApplyRecoveryHealthDamage(Mathf.Abs(calculatedRecovDamage));
+        ApplyScalingForNextAttack(currentAttack);
+    }
+    void ApplyScalingForNextAttack(Attack_BaseProperties currentAttack) 
+    {
+        if (_oppCounter.CurrentHitCount <= 1)
+        {
+            calculatedScaling = 0;
+        }
+        else
+        {
+            if (_oppCounter.CurrentHitCount > 7)
+            {
+                calculatedScaling = currentAttack.attackScalingPercent * 0.005f;
+            }
+            else
+            {
+                calculatedScaling = currentAttack.attackScalingPercent * 0.01f;
+            }
+        }
     }
     public void TakeChipDamage(Attack_BaseProperties _curRawDamage)
     {
