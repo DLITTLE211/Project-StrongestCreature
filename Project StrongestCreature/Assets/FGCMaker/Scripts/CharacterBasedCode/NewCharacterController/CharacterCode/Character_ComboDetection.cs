@@ -8,9 +8,11 @@ public class Character_ComboDetection : MonoBehaviour
     [SerializeField] private Character_Animator _animator;
     [SerializeField] private string lastInput;
     public bool inStance, inRekka, superMobilityOption;
+    private bool canCheckMovement;
 
     private void Start()
     {
+        canCheckMovement = false;
         lastInput = "";
     }
     public void PrimeCombos()
@@ -80,6 +82,7 @@ public class Character_ComboDetection : MonoBehaviour
             _base._extraMoveControls[i].ResetCurrentInput();
             _base._extraMoveControls[i].SetAnims(_base._cAnimator);
         }
+        canCheckMovement = true;
     }
     void ResetComboList() 
     {
@@ -126,7 +129,7 @@ public class Character_ComboDetection : MonoBehaviour
     {
         if (input.Button_State._state == ButtonStateMachine.InputState.directional)
         {
-            if (lastInput != input.Button_State.directionalInput.ToString())
+            if (lastInput != input.Button_State.directionalInput.ToString() && canCheckMovement)
             {
                 lastInput = input.Button_State.directionalInput.ToString();
                 SpecialInputVerifier(input);

@@ -98,6 +98,12 @@ MonoBehaviour:
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
             snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              hitstopValue: 0
+              hitstunValue: 0
+              hitLevel: 0
           - hitFramePoints: 36
             call: 4096
             hitFrameBool: 0
@@ -106,6 +112,12 @@ MonoBehaviour:
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
             snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              hitstopValue: 0
+              hitstunValue: 0
+              hitLevel: 0
         _hitCount:
           _count: 0
           _startCount: 4
@@ -180,6 +192,12 @@ MonoBehaviour:
             camPos: {x: 0, y: 0, z: 0}
             camRotation: {x: 0, y: 0, z: 0}
             snapMovement: 0
+            customDamage:
+              rawAttackDamage: 0
+              counterHitDamageMult: 0
+              hitstopValue: 0
+              hitstunValue: 0
+              hitLevel: 0
         _hitCount:
           _count: 0
           _startCount: 3
@@ -295,7 +313,7 @@ MonoBehaviour:
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
-            animClip: {fileID: 0}
+            animClip: {fileID: 7400000, guid: f5c37fcbb18c12748a93e0e79e5fee3f, type: 2}
             animName: 
             animLength: 0
             HitBox: {fileID: 0}
@@ -357,7 +375,7 @@ MonoBehaviour:
           _moveType: 0
           AttackAnims:
             playerAnim: {fileID: 0}
-            animClip: {fileID: 0}
+            animClip: {fileID: 7400000, guid: e165e794058579c49b4e6565caa3d883, type: 2}
             animName: 
             animLength: 0
             HitBox: {fileID: 0}
@@ -399,6 +417,7 @@ MonoBehaviour:
     curInput: 0
     curAttack: 0
     lastDirection: 5
+  BasicThrows: []
   movelistBaseProperties: []
   currentPathData:
     _curInputPath: 0

@@ -122,7 +122,7 @@ public class Character_HurtboxController : MonoBehaviour
         hurtBoxesSizes.Add(triggerBox.transform.localScale);
         hurtBoxesSizes.Add(new Vector3(triggerBox.transform.localScale.x, triggerBox.transform.localScale.y - (triggerBox.transform.localScale.y / 2), triggerBox.transform.localScale.z));
         hurtBoxesSizes.Add(new Vector3(triggerBox.transform.localScale.y, triggerBox.transform.localScale.x, triggerBox.transform.localScale.z));
-        hurtBoxesPositions.Add(0);
+        hurtBoxesPositions.Add(triggerBox.transform.localPosition.y);
         hurtBoxesPositions.Add(-0.35f);
         float layFlatValue = _base.pSide.thisPosition._directionFacing == Character_Face_Direction.FacingRight ? 90 : -90f;
         hurtBoxRotations.Add(new Vector3(0, 0, 0f));
