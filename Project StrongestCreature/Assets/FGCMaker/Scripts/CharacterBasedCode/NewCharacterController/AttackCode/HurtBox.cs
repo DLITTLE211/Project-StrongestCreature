@@ -160,7 +160,7 @@ public class HurtBox : CollisionDetection
             case HurtBoxType.ParryLow:
                 if (_hitbox.HBType == HitBoxType.Low ^ _hitbox.HBType == HitBoxType.Unblockable)
                 {
-                    //Send Parry Low;
+                    //Send ParrierForceIdle();
                 }
                 else
                 {
@@ -181,7 +181,7 @@ public class HurtBox : CollisionDetection
             case HurtBoxType.ParryHigh:
                 if (_hitbox.HBType == HitBoxType.High ^ _hitbox.HBType == HitBoxType.Overhead ^ _hitbox.HBType == HitBoxType.Unblockable)
                 {
-                    //Send Parry High;
+                    //Send ParrierForceIdle();
                 }
                 else
                 {

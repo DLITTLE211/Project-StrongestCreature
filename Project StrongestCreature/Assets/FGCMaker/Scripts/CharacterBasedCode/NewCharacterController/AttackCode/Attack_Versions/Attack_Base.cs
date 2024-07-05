@@ -29,7 +29,7 @@ public class Attack_BaseProperties
     [Header("_____REQUIREMENTS/RESTRICTIONS______")]
     [Range(0, 3)] public int _meterRequirement;
     [Range(0, 30)] public int _meterAwardedOnHit;
-    [Range(0, 40)] public int attackScalingPercent;
+    [Range(-10, 40)] public int attackScalingPercent;
     public bool dashCancelable, JumpCancelable;
 
     #region MoveType Properties

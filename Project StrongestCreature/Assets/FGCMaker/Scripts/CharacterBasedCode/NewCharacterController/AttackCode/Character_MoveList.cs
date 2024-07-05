@@ -9,6 +9,7 @@ public class Character_MoveList : MonoBehaviour
     [SerializeField] protected internal List<Attack_RekkaSpecialMove> rekkaSpecials;
     [SerializeField] protected internal List<Attack_BasicSpecialMove> special_Simple;
     [SerializeField] protected internal List<Attack_NonSpecialAttack> simpleAttacks;
+    [SerializeField] protected internal List<Attack_ThrowBase> BasicThrows;
     [Header("Complete Movelist Properties")]
     [Space(15)]
     [SerializeField] private List<Attack_BaseProperties> movelistBaseProperties;

@@ -304,10 +304,10 @@ public class CustomCallback
     public float timeStamp;
     public bool funcBool;
 
-    public float forceFloat,projectileSpeedFloat;
+    public float forceFloat,projectileSpeedFloat, throwDamage;
     public Vector3 camPositionVector, camRotateVector;
     public bool snapMovement;
-    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation, float _forceFloat = -1, float _projectileFloat = -1, bool isSnapping = false)
+    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation,float _throwDamage, float _forceFloat = -1, float _projectileFloat = -1, bool isSnapping = false)
     {
         customCall = _customCall;
         timeStamp = _timeStamp;
@@ -315,11 +315,15 @@ public class CustomCallback
         camPositionVector = position;
         camRotateVector = rotation;
         snapMovement = isSnapping;
-        if (forceFloat > 0) 
+        if (_throwDamage > 0)
+        {
+            throwDamage = _throwDamage;
+        }
+        if (_forceFloat > 0) 
         {
             forceFloat = _forceFloat;
         }
-        if (projectileSpeedFloat > 0)
+        if (_projectileFloat > 0)
         {
             projectileSpeedFloat = _projectileFloat;
         }
@@ -332,7 +336,7 @@ public class ExtraFrameHitPoints
     public int hitFramePoints;
     public HitPointCall call;
     public bool hitFrameBool;
-    public float Force, projectileSpeed;
+    public float Force, projectileSpeed,throwDamage;
     public Vector3 camPos, camRotation;
     public bool snapMovement;
 }
@@ -360,4 +364,7 @@ public enum HitPointCall
     PanPosOnTarget = 131072,
     PanRotateOnTarget = 262144,
     PanZoomOnTarget =524288,
+
+    DealCustomDamage = 1048576,
+    ForceSideSwitch = 2097152,
 }
