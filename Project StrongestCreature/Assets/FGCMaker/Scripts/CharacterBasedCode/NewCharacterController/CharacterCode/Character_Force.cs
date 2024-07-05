@@ -240,12 +240,32 @@ public class Character_Force : MonoBehaviour
         if (_side.thisPosition._directionFacing == Character_Face_Direction.FacingLeft)
         {
             _myRB.AddForce(transform.right * H_KnockBack, ForceMode.VelocityChange);
-            _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+            if (property._airInfo == AirAttackInfo.GroundOnly)
+            {
+                _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+            }
+            else if(property._airInfo == AirAttackInfo.AirOnly)
+            {
+                if (_base._cHurtBox.IsGrounded() == false) 
+                {
+                    _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+                }
+            }
         }
         else
         {
-            _myRB.AddForce(transform.right * (-H_KnockBack), ForceMode.VelocityChange);
-            _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+            _myRB.AddForce(transform.right * (-H_KnockBack), ForceMode.VelocityChange); 
+            if (property._airInfo == AirAttackInfo.GroundOnly)
+            {
+                _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+            }
+            else if (property._airInfo == AirAttackInfo.AirOnly)
+            {
+                if (_base._cHurtBox.IsGrounded() == false)
+                {
+                    _myRB.AddForce(transform.up * V_KnockDown, ForceMode.VelocityChange);
+                }
+            }
         }
     }
 
