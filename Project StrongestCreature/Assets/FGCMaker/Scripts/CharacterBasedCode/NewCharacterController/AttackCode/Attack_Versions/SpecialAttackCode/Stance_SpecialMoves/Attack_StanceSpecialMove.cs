@@ -200,8 +200,8 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
     public void SetAttackAnims(Character_Animator animator)
     {
         stanceStartProperty.SetAttackAnims(animator);
-        stanceInput.stanceAttack._stanceButtonInput.ActivateAttackInfo();
-        stanceInput.stanceKill._stanceButtonInput.ActivateAttackInfo();
+        stanceInput.stanceAttack._stanceButtonInput.ActivateAttackInfo(StanceSpecialAttack_Name);
+        stanceInput.stanceKill._stanceButtonInput.ActivateAttackInfo(StanceSpecialAttack_Name);
     }
     public override void ResetCombo()
     {

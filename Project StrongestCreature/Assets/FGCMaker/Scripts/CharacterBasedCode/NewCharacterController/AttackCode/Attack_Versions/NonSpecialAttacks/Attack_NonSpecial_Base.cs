@@ -17,11 +17,11 @@ public abstract class Attack_NonSpecial_Base
 public class Attack_BasicInput
 {
     public List<Attack_BaseInput> _correctInput;
-    public void ActivateAttackInfo()
+    public void ActivateAttackInfo(string speicalAttackName)
     {
         for (int i = 0; i < _correctInput.Count; i++)
         {
-            _correctInput[i].SetAttackInfo(_correctInput[i]._correctSequence);
+            _correctInput[i].SetAttackInfo(_correctInput[i]._correctSequence, speicalAttackName, i);
         }
     }
 }
@@ -67,13 +67,17 @@ public class Attack_BaseInput
 
     }
 
-    public void SetAttackInfo(string NewAttackString)
+    public void SetAttackInfo(string NewAttackString, string specialAttackName, int iterator)
     {
         correctInput = (NewAttackString.ToCharArray()[1]);
         correctAttack = Int32.Parse(NewAttackString.Split(correctInput)[0]);
         verifyAttackInput = ((Attack_BaseInput.MoveInput)correctAttack, (Attack_BaseInput.AttackInput)correctInput);
         moveInput = verifyAttackInput.Item1;
         attackInput = verifyAttackInput.Item2;
+        if (property._attackName == "") 
+        {
+            property._attackName = $"{specialAttackName}{iterator}";
+        }
     }
 }
 

@@ -9,11 +9,60 @@ public class Character_MoveList : MonoBehaviour
     [SerializeField] protected internal List<Attack_RekkaSpecialMove> rekkaSpecials;
     [SerializeField] protected internal List<Attack_BasicSpecialMove> special_Simple;
     [SerializeField] protected internal List<Attack_NonSpecialAttack> simpleAttacks;
+    [Header("Complete Movelist Properties")]
+    [Space(15)]
+    [SerializeField] private List<Attack_BaseProperties> movelistBaseProperties;
+    [Header("PathData")]
+    [Space(15)]
     [SerializeField] protected internal Path_Data currentPathData;
 
     public void UpdatePathData(Path_Data _pathData) 
     {
         currentPathData = _pathData;
+    }
+    public void ExtractBaseProperties()
+    {
+        movelistBaseProperties = new List<Attack_BaseProperties>();
+        for (int i = 0; i < simpleAttacks.Count; i++)
+        {
+            for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
+            {
+                movelistBaseProperties.Add(simpleAttacks[i]._attackInput._correctInput[j].property);
+            }
+        }
+        for (int i = 0; i < special_Simple.Count; i++)
+        {
+            movelistBaseProperties.Add(special_Simple[i].property);
+        }
+        for (int i = 0; i < rekkaSpecials.Count; i++)
+        {
+            movelistBaseProperties.Add(rekkaSpecials[i].rekkaInput.mainAttackProperty);
+            for (int j = 0; j < rekkaSpecials[i].rekkaInput._rekkaPortion.Count; j++)
+            {
+                for (int k = 0; k < rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput.Count; k++)
+                {
+                    movelistBaseProperties.Add(rekkaSpecials[i].rekkaInput._rekkaPortion[j].individualRekkaAttack._correctInput[k].property);
+                }
+            }
+        }
+        for (int i = 0; i < stanceSpecials.Count; i++)
+        {
+            movelistBaseProperties.Add(stanceSpecials[i].stanceStartProperty);
+            if (stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput != null)
+            {
+                if (stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput.Count > 0) 
+                {
+                    movelistBaseProperties.Add(stanceSpecials[i].stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property);
+                }
+            }
+            if (stanceSpecials[i].stanceInput.stanceKill._stanceButtonInput._correctInput != null)
+            {
+                if (stanceSpecials[i].stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0)
+                {
+                    movelistBaseProperties.Add(stanceSpecials[i].stanceInput.stanceKill._stanceButtonInput._correctInput[0].property);
+                }
+            }
+        }
     }
     public void CheckAndApply(Attack_BaseProperties attack, Character_Base target, Character_Base attacker, bool blockedAttack)
     {

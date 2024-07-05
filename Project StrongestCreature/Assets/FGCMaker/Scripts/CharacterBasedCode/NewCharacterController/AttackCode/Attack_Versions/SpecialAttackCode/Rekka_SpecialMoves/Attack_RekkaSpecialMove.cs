@@ -40,7 +40,7 @@ public class Attack_RekkaSpecialMove : Attack_Special_Rekka  , IAttack_RekkaFuct
         rekkaInput.mainAttackProperty.SetAttackAnims(animator);
         for (int i = 0; i < rekkaInput._rekkaPortion.Count; i++)
         {
-            rekkaInput._rekkaPortion[i].individualRekkaAttack.ActivateAttackInfo();
+            rekkaInput._rekkaPortion[i].individualRekkaAttack.ActivateAttackInfo(RekkaSpecialAttack_Name);
         }
     }
 

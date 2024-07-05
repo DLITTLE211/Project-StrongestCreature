@@ -20,20 +20,6 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttack_BasicFun
     [SerializeField] private int lastDirection;
     public (Attack_BaseInput.MoveInput, Attack_BaseInput.AttackInput) _newinput;
 
-    public Attack_NonSpecialAttack Clone() 
-    {
-        return new Attack_NonSpecialAttack(this);
-    }
-    public Attack_NonSpecialAttack(Attack_NonSpecialAttack newNormal)
-    {
-        this._pathdata = newNormal._pathdata;
-        this.curInput = newNormal.curInput;
-        this.curAttack = newNormal.curAttack;
-        this.lastDirection = newNormal.lastDirection;
-        this.SpecialAttackName = newNormal.SpecialAttackName;
-        this._attackInput = newNormal._attackInput;
-    }
-
     #region Attack Base Code
     public override void CheckButtonInfo(InputAction buttonInfo)
     {
@@ -169,7 +155,7 @@ public class Attack_NonSpecialAttack : Attack_NonSpecial_Base,  IAttack_BasicFun
         }
         try 
         {
-            _attackInput.ActivateAttackInfo();
+            _attackInput.ActivateAttackInfo(SpecialAttackName);
         }
         catch(ArgumentNullException e) { DebugMessageHandler.instance.DisplayErrorMessage(3, $"{e.Message} has taken place. Skipping Step..."); }
     }
