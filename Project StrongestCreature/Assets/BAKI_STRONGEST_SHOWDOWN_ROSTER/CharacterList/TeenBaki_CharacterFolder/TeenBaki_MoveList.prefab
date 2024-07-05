@@ -44,9 +44,210 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2920041e96dfbf64a9dd3858357296d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stanceSpecials: []
+  stanceSpecials:
+  - StanceSpecialAttack_Name: Blink Strike (Heavy)
+    stanceStartProperty:
+      _attackName: Blink Strike (Walk)
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 0
+      counterHitDamageMult: 0
+      hitstopValue: 0
+      hitstunValue: 0
+      hitLevel: 0
+      attackHashes: 
+      _meterRequirement: 0
+      _meterAwardedOnHit: 0
+      attackScalingPercent: -10
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        cancelFrom: 2
+        cancelTo: 3
+      _moveType: 3
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: 4019475804494772040, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 7
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 0
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 0
+          recovery: 0
+          lastFrame: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      lateralKBP:
+        lateralKBP: 0
+        Value: 0
+      verticalKBP:
+        verticalKBP: 0
+        Value: 0
+      KnockDown: 0
+    stanceInput:
+      _stanceInput:
+        attackString: 623B
+        attackStringArray: 
+      _stanceInputState:
+        _state: 1
+        directionalInput: 0
+      stanceAttack:
+        _stanceButtonInput:
+          _correctInput:
+          - _correctSequence: 5B
+            correctAttack: 0
+            correctInput: 0
+            moveInput: 0
+            attackInput: 0
+            property:
+              _attackName: Blink Strike (Release)
+              _cTimer: {fileID: 0}
+              rawAttackDamage: 18
+              counterHitDamageMult: 1.65
+              hitstopValue: 20
+              hitstunValue: 19
+              hitLevel: 4
+              attackHashes: 
+              _meterRequirement: 0
+              _meterAwardedOnHit: 0
+              attackScalingPercent: 0
+              dashCancelable: 0
+              JumpCancelable: 0
+              _airInfo: 0
+              cancelProperty:
+                cancelFrom: 3
+                cancelTo: 8
+              _moveType: 3
+              AttackAnims:
+                playerAnim: {fileID: 0}
+                animClip: {fileID: -1221156174797838894, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+                animName: 
+                animLength: 0
+                HitBox: {fileID: 0}
+                attackType: 1
+                hb_placement: {x: 0, y: 0, z: 0}
+                hb_orientation: {x: 0, y: 0, z: 0}
+                hb_size: {x: 0, y: 0}
+                extendedHitBox: {fileID: 0}
+                hurtType: 0
+                hu_placement: {x: 0, y: 0, z: 0}
+                hu_orientation: {x: 0, y: 0, z: 0}
+                hu_size: {x: 0, y: 0}
+                _frameData:
+                  init: 0
+                  startup: 0
+                  active: 0
+                  inactive: 0
+                  recovery: 0
+                  lastFrame: 0
+                  _extraPoints: []
+                _hitCount:
+                  _count: 0
+                  _startCount: 0
+                  _refreshRate: 0
+                  _startRefreshRate: 0
+              lateralKBP:
+                lateralKBP: 3
+                Value: 6
+              verticalKBP:
+                verticalKBP: 2
+                Value: 4
+              KnockDown: 0
+            attackInputState:
+              _state: 0
+              directionalInput: 0
+      stanceKill:
+        _stanceButtonInput:
+          _correctInput: []
+    curInput: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    moveComplete: 0
+    inStanceState: 0
   rekkaSpecials: []
-  special_Simple: []
+  special_Simple:
+  - BasicSpecialAttack_Name: Blink Strike (Light)
+    property:
+      _attackName: 
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 15
+      counterHitDamageMult: 1.065
+      hitstopValue: 20
+      hitstunValue: 19
+      hitLevel: 4
+      attackHashes: 
+      _meterRequirement: 0
+      _meterAwardedOnHit: 8
+      attackScalingPercent: 11
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        cancelFrom: 2
+        cancelTo: 8
+      _moveType: 1
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: -5822560235860408203, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 1
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 0
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 0
+          recovery: 0
+          lastFrame: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      lateralKBP:
+        lateralKBP: 3
+        Value: 6
+      verticalKBP:
+        verticalKBP: 2
+        Value: 4
+      KnockDown: 0
+    attackInput:
+      attackString: 623A
+      attackStringArray: 
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    curInput: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    moveComplete: 0
+    framesBetweenAttacks: 0
   simpleAttacks:
   - SpecialAttackName: Standing Light Punch
     _attackInput:

@@ -42,7 +42,8 @@ public class Character_Profile : ScriptableObject
 
     #region Character Animator Info
     [Header("Character Animator Information")]
-    public AnimatorController characterAnimator;
+    public GameObject characterModel;
+    public Animator characterAnimator;
     public List<AnimationClip> AllCharacterAnimations = new List<AnimationClip>();
     public List<AnimationLayerInfo> LayerInfo = new List<AnimationLayerInfo>();
     public GameObject CharacterModel;
@@ -62,6 +63,10 @@ public class Character_Profile : ScriptableObject
     public List<CharacterIntro> BasicCharacterInteractions = new List<CharacterIntro>();
     public List<CharacterIntro> SpecialCharacterInteractions = new List<CharacterIntro>();
     #endregion
+    public void SetCharacterAnimator()
+    {
+        characterAnimator = characterModel.GetComponentInChildren<Animator>();
+    }
 }
 
 [Serializable]

@@ -5,10 +5,19 @@ using System;
 
 public class Character_MoveList : MonoBehaviour
 {
+    [Header("_____Stance Special Moves_____")]
     [SerializeField] protected internal List<Attack_StanceSpecialMove> stanceSpecials;
+    [Space(15)]
+    [Header("_____Rekka Special Moves_____")]
     [SerializeField] protected internal List<Attack_RekkaSpecialMove> rekkaSpecials;
+    [Space(15)]
+    [Header("_____Basic Special Moves_____")]
     [SerializeField] protected internal List<Attack_BasicSpecialMove> special_Simple;
+    [Space(15)]
+    [Header("_____Simple Attacks_____")]
     [SerializeField] protected internal List<Attack_NonSpecialAttack> simpleAttacks;
+    [Space(15)]
+    [Header("_____Basic Throws_____")]
     [SerializeField] protected internal List<Attack_ThrowBase> BasicThrows;
     [Header("Complete Movelist Properties")]
     [Space(15)]
@@ -24,6 +33,8 @@ public class Character_MoveList : MonoBehaviour
     public void ExtractBaseProperties()
     {
         movelistBaseProperties = new List<Attack_BaseProperties>();
+
+        #region Simple Attacks Storage
         for (int i = 0; i < simpleAttacks.Count; i++)
         {
             for (int j = 0; j < simpleAttacks[i]._attackInput._correctInput.Count; j++)
@@ -31,10 +42,16 @@ public class Character_MoveList : MonoBehaviour
                 movelistBaseProperties.Add(simpleAttacks[i]._attackInput._correctInput[j].property);
             }
         }
+        #endregion
+
+        #region Simple Special Moves Storage
         for (int i = 0; i < special_Simple.Count; i++)
         {
             movelistBaseProperties.Add(special_Simple[i].property);
         }
+        #endregion
+
+        #region Rekka Move Storage
         for (int i = 0; i < rekkaSpecials.Count; i++)
         {
             movelistBaseProperties.Add(rekkaSpecials[i].rekkaInput.mainAttackProperty);
@@ -46,6 +63,9 @@ public class Character_MoveList : MonoBehaviour
                 }
             }
         }
+        #endregion
+
+        #region Stance Special Storage
         for (int i = 0; i < stanceSpecials.Count; i++)
         {
             movelistBaseProperties.Add(stanceSpecials[i].stanceStartProperty);
@@ -64,6 +84,7 @@ public class Character_MoveList : MonoBehaviour
                 }
             }
         }
+        #endregion
     }
     public void CheckAndApply(Attack_BaseProperties attack, Character_Base target, Character_Base attacker, bool blockedAttack)
     {

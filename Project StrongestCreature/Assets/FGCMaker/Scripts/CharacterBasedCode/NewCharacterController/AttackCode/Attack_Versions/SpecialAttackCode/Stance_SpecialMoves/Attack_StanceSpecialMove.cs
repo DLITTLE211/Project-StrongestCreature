@@ -136,13 +136,16 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
                     PreformAttack(curBase, stanceInput.stanceAttack);
                     return true;
                 }
-                if (IsStanceInputCorrect(Input, curBase, stanceInput.stanceKill, attackInput))
+                if (stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0)
                 {
-                    
-                    stanceStartProperty.InputTimer._base._cAttackTimer.SetTimerType(TimerType.Normal,0.1f);
-                    PreformAttack(curBase, stanceInput.stanceKill);
-                    ResetCombo();
-                    return true;
+                    if (IsStanceInputCorrect(Input, curBase, stanceInput.stanceKill, attackInput))
+                    {
+
+                        stanceStartProperty.InputTimer._base._cAttackTimer.SetTimerType(TimerType.Normal, 0.1f);
+                        PreformAttack(curBase, stanceInput.stanceKill);
+                        ResetCombo();
+                        return true;
+                    }
                 }
             }
         }
