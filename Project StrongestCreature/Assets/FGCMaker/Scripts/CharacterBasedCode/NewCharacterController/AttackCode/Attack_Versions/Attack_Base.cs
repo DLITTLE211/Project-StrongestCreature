@@ -57,6 +57,15 @@ public class Attack_BaseProperties
     }
 }
 [Serializable]
+public class CustomDamageField 
+{
+    public float rawAttackDamage;
+    public float counterHitDamageMult;
+    [Range(1, 100)] public int hitstopValue;
+    [Range(1, 200)] public int hitstunValue;
+    public HitLevel hitLevel;
+}
+[Serializable]
 public class Attack_Input 
 {
     public string attackString;

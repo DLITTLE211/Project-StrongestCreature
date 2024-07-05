@@ -7,10 +7,27 @@ public class Player_SideManager : MonoBehaviour
     public Transform LeftWall, RightWall;
     public Player_SideRecognition _p1Position;
     public Player_SideRecognition _p2Position;
-
+    public HitPointCall sideCall;
     private void Start()
     {
         SetStartingFaceState();
+        Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
+    }
+    void ApplyForceOnCustomCallback(CustomCallback callback)
+    {
+        if (sideCall.HasFlag(callback.customCall))
+        {
+            switch (callback.customCall)
+            {
+                case HitPointCall.ForceSideSwitch:
+                    ForceSideSwitch();
+                    break;
+            }
+        }
+    }
+    public void ForceSideSwitch() 
+    {
+
     }
     private void Update()
     {

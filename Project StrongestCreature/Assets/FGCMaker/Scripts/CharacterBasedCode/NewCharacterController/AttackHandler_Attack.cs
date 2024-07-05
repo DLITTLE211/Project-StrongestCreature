@@ -304,10 +304,11 @@ public class CustomCallback
     public float timeStamp;
     public bool funcBool;
 
-    public float forceFloat,projectileSpeedFloat, throwDamage;
+    public float forceFloat,projectileSpeedFloat;
     public Vector3 camPositionVector, camRotateVector;
     public bool snapMovement;
-    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation,float _throwDamage, float _forceFloat = -1, float _projectileFloat = -1, bool isSnapping = false)
+    public CustomDamageField customDamage;
+    public CustomCallback(HitPointCall _customCall, float _timeStamp, bool _funcBool, Vector3 position, Vector3 rotation, float _forceFloat = -1, float _projectileFloat = -1, bool isSnapping = false, CustomDamageField _customDamage = null)
     {
         customCall = _customCall;
         timeStamp = _timeStamp;
@@ -315,9 +316,9 @@ public class CustomCallback
         camPositionVector = position;
         camRotateVector = rotation;
         snapMovement = isSnapping;
-        if (_throwDamage > 0)
+        if (_customDamage != null)
         {
-            throwDamage = _throwDamage;
+            customDamage = _customDamage;
         }
         if (_forceFloat > 0) 
         {
@@ -336,9 +337,10 @@ public class ExtraFrameHitPoints
     public int hitFramePoints;
     public HitPointCall call;
     public bool hitFrameBool;
-    public float Force, projectileSpeed,throwDamage;
+    public float Force, projectileSpeed;
     public Vector3 camPos, camRotation;
     public bool snapMovement;
+    public CustomDamageField customDamage;
 }
 
 [Serializable, Flags]

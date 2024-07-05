@@ -7,6 +7,8 @@ public enum MoveType
     BasicSpeical,
     Rekka,
     Stance,
+    Super,
+    Throw,
 
     /*
      * Basic special move: Completed. Search for input, upon completion 

@@ -2115,7 +2115,7 @@ MonoBehaviour:
           cancelProperty:
             cancelFrom: 1
             cancelTo: 0
-          _moveType: 0
+          _moveType: 5
           AttackAnims:
             playerAnim: {fileID: 0}
             animClip: {fileID: 4862085902718227824, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
@@ -2212,7 +2212,7 @@ MonoBehaviour:
           cancelProperty:
             cancelFrom: 1
             cancelTo: 0
-          _moveType: 0
+          _moveType: 5
           AttackAnims:
             playerAnim: {fileID: 0}
             animClip: {fileID: 4862085902718227824, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
