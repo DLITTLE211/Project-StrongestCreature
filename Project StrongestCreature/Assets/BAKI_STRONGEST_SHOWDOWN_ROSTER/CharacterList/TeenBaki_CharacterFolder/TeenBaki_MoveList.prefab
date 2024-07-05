@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2920041e96dfbf64a9dd3858357296d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CommandThrows: []
+  CounterAttacks: []
   stanceSpecials:
   - StanceSpecialAttack_Name: Blink Strike (Heavy)
     stanceStartProperty:
@@ -170,7 +172,7 @@ MonoBehaviour:
                 Value: 4
               KnockDown: 0
             attackInputState:
-              _state: 0
+              _state: 2
               directionalInput: 0
       stanceKill:
         _stanceButtonInput:
@@ -239,6 +241,204 @@ MonoBehaviour:
       KnockDown: 0
     attackInput:
       attackString: 623A
+      attackStringArray: 
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    curInput: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    moveComplete: 0
+    framesBetweenAttacks: 0
+  - BasicSpecialAttack_Name: Benda Slap (High)
+    property:
+      _attackName: 
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 18
+      counterHitDamageMult: 1.045
+      hitstopValue: 17
+      hitstunValue: 17
+      hitLevel: 2
+      attackHashes: 
+      _meterRequirement: 0
+      _meterAwardedOnHit: 7
+      attackScalingPercent: 12
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        cancelFrom: 1
+        cancelTo: 8
+      _moveType: 1
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: -1304916342993743281, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 2
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 0
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 0
+          recovery: 0
+          lastFrame: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      lateralKBP:
+        lateralKBP: 3
+        Value: 2
+      verticalKBP:
+        verticalKBP: 7
+        Value: 6
+      KnockDown: 0
+    attackInput:
+      attackString: 214A
+      attackStringArray: 
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    curInput: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    moveComplete: 0
+    framesBetweenAttacks: 0
+  - BasicSpecialAttack_Name: Benda Slap (Low)
+    property:
+      _attackName: 
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 15
+      counterHitDamageMult: 1.025
+      hitstopValue: 17
+      hitstunValue: 17
+      hitLevel: 1
+      attackHashes: 
+      _meterRequirement: 0
+      _meterAwardedOnHit: 7
+      attackScalingPercent: 10
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        cancelFrom: 1
+        cancelTo: 8
+      _moveType: 1
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: -6444692493166209453, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 0
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 0
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 0
+          recovery: 0
+          lastFrame: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      lateralKBP:
+        lateralKBP: 3
+        Value: 5
+      verticalKBP:
+        verticalKBP: 1
+        Value: 3
+      KnockDown: 0
+    attackInput:
+      attackString: 214B
+      attackStringArray: 
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    curInput: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    moveComplete: 0
+    framesBetweenAttacks: 0
+  - BasicSpecialAttack_Name: Cockroach Dash
+    property:
+      _attackName: 
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 30
+      counterHitDamageMult: 1
+      hitstopValue: 30
+      hitstunValue: 25
+      hitLevel: 4
+      attackHashes: 
+      _meterRequirement: 1
+      _meterAwardedOnHit: 0
+      attackScalingPercent: 10
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        cancelFrom: 3
+        cancelTo: 8
+      _moveType: 4
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: -6444692493166209453, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 0
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 0
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 0
+          recovery: 0
+          lastFrame: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      lateralKBP:
+        lateralKBP: 4
+        Value: 9
+      verticalKBP:
+        verticalKBP: 1
+        Value: 3
+      KnockDown: 1
+    attackInput:
+      attackString: 236236A
       attackStringArray: 
     attackInputState:
       _state: 0

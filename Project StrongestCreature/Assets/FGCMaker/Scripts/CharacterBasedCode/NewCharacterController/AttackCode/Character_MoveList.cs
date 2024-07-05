@@ -5,6 +5,10 @@ using System;
 
 public class Character_MoveList : MonoBehaviour
 {
+    [Header("_____Basic Throws_____")]
+    [SerializeField] protected internal List<Attack_ThrowBase> CommandThrows;
+    [Header("_____Basic Throws_____")]
+    [SerializeField] protected internal List<Attack_ThrowBase> CounterAttacks;
     [Header("_____Stance Special Moves_____")]
     [SerializeField] protected internal List<Attack_StanceSpecialMove> stanceSpecials;
     [Space(15)]

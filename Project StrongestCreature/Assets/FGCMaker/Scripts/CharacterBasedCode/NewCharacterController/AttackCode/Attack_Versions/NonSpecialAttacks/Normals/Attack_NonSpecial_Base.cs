@@ -21,7 +21,7 @@ public class Attack_BasicInput
     {
         for (int i = 0; i < _correctInput.Count; i++)
         {
-            _correctInput[i].SetAttackInfo(_correctInput[i]._correctSequence, speicalAttackName, i);
+            _correctInput[i].SetAttackInfo(_correctInput[i]._correctSequence, speicalAttackName);
         }
     }
 }
@@ -67,7 +67,7 @@ public class Attack_BaseInput
 
     }
 
-    public void SetAttackInfo(string NewAttackString, string specialAttackName, int iterator)
+    public void SetAttackInfo(string NewAttackString, string specialAttackName)
     {
         correctInput = (NewAttackString.ToCharArray()[1]);
         correctAttack = Int32.Parse(NewAttackString.Split(correctInput)[0]);
@@ -76,7 +76,7 @@ public class Attack_BaseInput
         attackInput = verifyAttackInput.Item2;
         if (property._attackName == "") 
         {
-            property._attackName = $"{specialAttackName}{iterator}";
+            property._attackName = $"{specialAttackName}_property";
         }
     }
 }
