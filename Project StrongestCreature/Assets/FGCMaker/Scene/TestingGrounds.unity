@@ -3026,6 +3026,7 @@ MonoBehaviour:
   _oppCounter: {fileID: 1192763487}
   _base: {fileID: 94923329}
   _damageText: {fileID: 752586224}
+  customDamageCall: 1048576
 --- !u!1 &132508870
 GameObject:
   m_ObjectHideFlags: 0
@@ -8296,6 +8297,7 @@ MonoBehaviour:
   RightWall: {fileID: 971839218}
   _p1Position: {fileID: 434338341}
   _p2Position: {fileID: 1211425607}
+  sideCall: 2097152
 --- !u!114 &529132895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11543,6 +11545,7 @@ MonoBehaviour:
   _oppCounter: {fileID: 1183931823}
   _base: {fileID: 993311525}
   _damageText: {fileID: 1216137438}
+  customDamageCall: 1048576
 --- !u!1 &761506510
 GameObject:
   m_ObjectHideFlags: 0
