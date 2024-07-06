@@ -6,6 +6,7 @@ using TMPro;
 using System;
 using DG.Tweening;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class CharacterSelect_Setup : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     [SerializeField] private List<Amplifiers> _activeAmplifiers;
     [SerializeField] private GameObject characterSelectButtonPrefab;
     [SerializeField] private GameObject characterSelectHolder;
-    [SerializeField] private List<CharacterSelect_Button> activeCharacterSelectButtons;
+    [SerializeField] private List<GameObject> activeCharacterSelectButtons;
     [SerializeField] private CharacterSelectPage _leftPlayerPage,_rightPlayerPage;
     // Start is called before the first frame update
     void Start()
@@ -25,26 +26,28 @@ public class CharacterSelect_Setup : MonoBehaviour
     }
     public void AddCharacterSelectButtons()
     {
-        StartCoroutine(CascadeActivateSelectButtons());
-    }
-    IEnumerator CascadeActivateSelectButtons()
-    {
         for (int i = 0; i < _activeProfiles.Count; i++)
         {
-            yield return new WaitForSeconds(0.05f);
             GameObject selectButton = Instantiate(characterSelectButtonPrefab, characterSelectHolder.transform);
             selectButton.gameObject.transform.localPosition = new Vector3(1, 1, 1);
             selectButton.gameObject.transform.localRotation = Quaternion.identity;
-            selectButton.gameObject.transform.localScale = Vector3.zero;
+            selectButton.gameObject.transform.localScale = Vector3.one;
             selectButton.GetComponentInChildren<Button>().image.sprite = _activeProfiles[i].CharacterProfileImage;
-            Vector3 selectButtonFirstSize = new Vector3(1.25f, 1.25f, 1.25f);
-            selectButton.gameObject.transform.DOScale(selectButtonFirstSize, 0.15f).OnComplete(() => 
-            {
-                selectButton.gameObject.transform.DOScale(Vector3.one, 0.05f);
-                CharacterSelect_Button _selectButtonInfo = selectButton.GetComponentInChildren<CharacterSelect_Button>();
-                _selectButtonInfo.characterProfile = _activeProfiles[i];
-                activeCharacterSelectButtons.Add(_selectButtonInfo);
-            });
+            GameObject _selectButtonInfo = selectButton;
+            _selectButtonInfo.GetComponentInChildren<CharacterSelect_Button>().characterProfile = _activeProfiles[i];
+            activeCharacterSelectButtons.Add(_selectButtonInfo);
+        }
+        StartCoroutine(CascadeScaleSelectButtons());
+    }
+    IEnumerator CascadeScaleSelectButtons()
+    {
+        for (int i = 0; i < activeCharacterSelectButtons.Count; i++)
+        {
+            yield return new WaitForSeconds(0.05f);
+            Vector3 selectButtonFirstSize = new Vector3(1.15f, 1.15f, 1.15f);
+            activeCharacterSelectButtons[i].transform.DOScale(selectButtonFirstSize, 0.15f);
+            yield return new WaitForSeconds(0.025f);
+            activeCharacterSelectButtons[i].transform.DOScale(Vector3.one, 0.15f);
         }
     }
 
