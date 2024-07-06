@@ -10,7 +10,10 @@ public class Player_SideManager : MonoBehaviour
     public HitPointCall sideCall;
     private void Start()
     {
-        SetStartingFaceState();
+        if (_p1Position.thisPosition != null && _p2Position.thisPosition != null)
+        {
+            SetStartingFaceState();
+        }
         Messenger.AddListener<CustomCallback>(Events.CustomCallback, ApplyForceOnCustomCallback);
     }
     void ApplyForceOnCustomCallback(CustomCallback callback)
@@ -31,17 +34,24 @@ public class Player_SideManager : MonoBehaviour
     }
     private void Update()
     {
-        if (_p1Position.gameObject.activeSelf)
+        CheckPlayerPositions();
+    }
+    void CheckPlayerPositions() 
+    {
+        if (_p1Position != null && _p2Position != null)
         {
-            _p1Position.thisPosition.UpdatePlayerFacingDirection(LeftWall, RightWall);
-        }
-        if (_p2Position.gameObject.activeSelf)
-        {
-            _p2Position.thisPosition.UpdatePlayerFacingDirection(LeftWall, RightWall);
-        }
-        if (_p1Position.gameObject.activeSelf && _p2Position.gameObject.activeSelf)
-        {
-            CheckPositionState();
+            if (_p1Position.gameObject.activeSelf)
+            {
+                _p1Position.thisPosition.UpdatePlayerFacingDirection(LeftWall, RightWall);
+            }
+            if (_p2Position.gameObject.activeSelf)
+            {
+                _p2Position.thisPosition.UpdatePlayerFacingDirection(LeftWall, RightWall);
+            }
+            if (_p1Position.gameObject.activeSelf && _p2Position.gameObject.activeSelf)
+            {
+                CheckPositionState();
+            }
         }
     }
     public void SetStartingFaceState()
