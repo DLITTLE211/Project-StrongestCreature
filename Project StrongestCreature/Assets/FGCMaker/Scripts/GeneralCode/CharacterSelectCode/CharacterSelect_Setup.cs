@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class CharacterSelect_Setup : MonoBehaviour
 {
     [SerializeField] private List<Character_Profile> _activeProfiles;
+    [SerializeField] private List<Amplifiers> _activeAmplifiers;
     [SerializeField] private GameObject characterSelectButtonPrefab;
     [SerializeField] private GameObject characterSelectHolder;
     [SerializeField] private List<CharacterSelect_Button> activeCharacterSelectButtons;
@@ -19,6 +20,8 @@ public class CharacterSelect_Setup : MonoBehaviour
     {
         AddCharacterSelectButtons();
         Messenger.AddListener<Character_Profile,int> (Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
+        _leftPlayerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
+        _rightPlayerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
     }
     public void AddCharacterSelectButtons()
     {
@@ -63,48 +66,11 @@ public class CharacterSelectPage
 {
     public Image characterBackgroundImage;
     public TMP_Text characterName;
-    public AmplifyCycler characterAmplify;
+    public CharacterSelect_AmplifySelecter characterAmplify;
     public void UpdateInfo(Character_Profile profile) 
     {
         characterBackgroundImage.preserveAspect = true;
         characterBackgroundImage.sprite = profile.CharacterProfileImage;
         characterName.text = profile.CharacterName;
-    }
-}
-[Serializable]
-public class AmplifyCycler
-{
-    public TMP_Text chosenAmplifier;
-    public Button LeftButton;
-    public Button RightButton;
-    private List<Amplifiers> totalAmplifiers;
-    int curAmplifier;
-    public void GetListOfAmplifiers(List<Amplifiers> _totalAmplifiers) 
-    {
-        totalAmplifiers = _totalAmplifiers;
-        curAmplifier = 0;
-    }
-    public void UpdateInfoDown()
-    {
-        if (curAmplifier <= 0) 
-        {
-            curAmplifier = totalAmplifiers.Count - 1;
-        }
-        else { curAmplifier--; }
-        SetInfo(totalAmplifiers[curAmplifier]);
-    }
-    public void UpdateInfoUp()
-    {
-        if (curAmplifier >= totalAmplifiers.Count - 1)
-        {
-            curAmplifier = 0;
-        }
-        else { curAmplifier++; }
-        SetInfo(totalAmplifiers[curAmplifier]);
-    }
-
-    public void SetInfo(Amplifiers curAmplifier) 
-    {
-       chosenAmplifier.text = curAmplifier.amplifier.ToString();
     }
 }
