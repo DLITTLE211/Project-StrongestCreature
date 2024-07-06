@@ -418,6 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ce6bf8a8109b349a6337485f01595b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterSelectSetup: {fileID: 1107754684}
 --- !u!1 &434392278
 GameObject:
   m_ObjectHideFlags: 0
@@ -3413,6 +3414,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8310166176ed5d14c86f0a5f730348df, type: 2}
   characterSelectButtonPrefab: {fileID: 9206346132393860188, guid: 417349bc215c33a4586da392c385e985, type: 3}
   characterSelectHolder: {fileID: 1767974627}
+  characterSelect_Header: {fileID: 2066079323}
+  characterSelectBackgroundImage: {fileID: 1370398434}
   activeCharacterSelectButtons: []
   _leftPlayerPage:
     characterBackgroundImage: {fileID: 1997312421}

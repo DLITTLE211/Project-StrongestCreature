@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using DG.Tweening;
 
 [System.Serializable]
 public class CharacterSelect_AmplifySelecter :MonoBehaviour
@@ -39,5 +40,22 @@ public class CharacterSelect_AmplifySelecter :MonoBehaviour
     public void SetInfo(Amplifiers curAmplifier)
     {
         chosenAmplifier.text = curAmplifier.amplifier.ToString();
+    }
+
+    public void SetAmplifyInfo()
+    {
+        chosenAmplifier.DOFade(1f, 0f);
+        LeftButton.interactable = true;
+        RightButton.interactable = true;
+        LeftButton.image.DOFade(1f, 0f);
+        RightButton.image.DOFade(1f, 0f);
+    }
+    public void ClearAmplifyInfo()
+    {
+        LeftButton.interactable = false;
+        RightButton.interactable = false;
+        chosenAmplifier.DOFade(0f, 1.5f);
+        LeftButton.image.DOFade(0f, 1.5f);
+        RightButton.image.DOFade(0f, 1.5f);
     }
 }

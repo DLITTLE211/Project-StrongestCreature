@@ -13,16 +13,26 @@ public class CharacterSelect_Setup : MonoBehaviour
     [SerializeField] private List<Character_Profile> _activeProfiles;
     [SerializeField] private List<Amplifiers> _activeAmplifiers;
     [SerializeField] private GameObject characterSelectButtonPrefab;
-    [SerializeField] private GameObject characterSelectHolder;
+    [SerializeField] private GameObject characterSelectHolder,characterSelect_Header;
+    [SerializeField] private Image characterSelectBackgroundImage;
     [SerializeField] private List<GameObject> activeCharacterSelectButtons;
     [SerializeField] private CharacterSelectPage _leftPlayerPage,_rightPlayerPage;
     // Start is called before the first frame update
     void Start()
     {
-        AddCharacterSelectButtons();
-        Messenger.AddListener<Character_Profile,int> (Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
+        Messenger.AddListener<Character_Profile, int>(Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
         _leftPlayerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
         _rightPlayerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
+        _leftPlayerPage.SetPlayerInfo();
+        _rightPlayerPage.SetPlayerInfo();
+        if (activeCharacterSelectButtons.Count > 0)
+        {
+            ReactivateCharacterSelectInfo();
+        }
+        else
+        {
+            AddCharacterSelectButtons();
+        }
     }
     public void AddCharacterSelectButtons()
     {
@@ -33,6 +43,7 @@ public class CharacterSelect_Setup : MonoBehaviour
             selectButton.gameObject.transform.localRotation = Quaternion.identity;
             selectButton.gameObject.transform.localScale = Vector3.one;
             selectButton.GetComponentInChildren<Button>().image.sprite = _activeProfiles[i].CharacterProfileImage;
+            selectButton.GetComponentInChildren<Button>().interactable = true;
             GameObject _selectButtonInfo = selectButton;
             _selectButtonInfo.GetComponentInChildren<CharacterSelect_Button>().characterProfile = _activeProfiles[i];
             activeCharacterSelectButtons.Add(_selectButtonInfo);
@@ -62,6 +73,42 @@ public class CharacterSelect_Setup : MonoBehaviour
             _rightPlayerPage.UpdateInfo(hoveredProfile);
         }
     }
+
+    public async Task ClearCharacterSelectInfo() 
+    {
+        for (int i = 0; i < activeCharacterSelectButtons.Count; i++)
+        {
+            activeCharacterSelectButtons[i].GetComponentInChildren<Button>().interactable = false;
+            activeCharacterSelectButtons[i].GetComponentInChildren<Button>().image.DOFade(0f, 1.5f);
+            activeCharacterSelectButtons[i].SetActive(false);
+        }
+        characterSelectBackgroundImage.gameObject.SetActive(false);
+        characterSelect_Header.SetActive(false);
+        characterSelectHolder.SetActive(false);
+        await Task.Delay(400);
+    }
+    public void ReactivateCharacterSelectInfo()
+    {
+        characterSelectBackgroundImage.gameObject.SetActive(true);
+        characterSelect_Header.SetActive(true);
+        characterSelectHolder.SetActive(true);
+        for (int i = 0; i < activeCharacterSelectButtons.Count; i++)
+        {
+            activeCharacterSelectButtons[i].GetComponentInChildren<Button>().interactable = true;
+            activeCharacterSelectButtons[i].GetComponentInChildren<Button>().image.DOFade(1f, 0f);
+            activeCharacterSelectButtons[i].SetActive(true);
+        }
+    }
+    public async Task ClearLeftPlayerInfo()
+    {
+        _leftPlayerPage.ClearPlayerInfo();
+        await Task.Delay(400);
+    }
+    public async Task ClearRightPlayerInfo()
+    {
+        _rightPlayerPage.ClearPlayerInfo();
+        await Task.Delay(400);
+    }
 }
 
 [Serializable]
@@ -75,5 +122,19 @@ public class CharacterSelectPage
         characterBackgroundImage.preserveAspect = true;
         characterBackgroundImage.sprite = profile.CharacterProfileImage;
         characterName.text = profile.CharacterName;
+    }
+
+    public void SetPlayerInfo()
+    {
+        characterBackgroundImage.DOFade(1f, 0f);
+        characterName.DOFade(1f, 0f);
+        characterAmplify.SetAmplifyInfo();
+    }
+
+    public void ClearPlayerInfo() 
+    {
+        characterBackgroundImage.DOFade(0f, 1.5f);
+        characterName.DOFade(0f, 1.5f);
+        characterAmplify.ClearAmplifyInfo();
     }
 }
