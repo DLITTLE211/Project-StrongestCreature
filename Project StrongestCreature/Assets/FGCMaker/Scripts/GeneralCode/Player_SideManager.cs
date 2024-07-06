@@ -10,7 +10,7 @@ public class Player_SideManager : MonoBehaviour
     public HitPointCall sideCall;
     private void Start()
     {
-        if (_p1Position.thisPosition != null && _p2Position.thisPosition != null)
+        if (_p1Position != null && _p2Position != null)
         {
             SetStartingFaceState();
         }

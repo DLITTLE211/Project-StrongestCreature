@@ -391,6 +391,7 @@ MonoBehaviour:
     currentNames: []
     usedIntID: 
     usedStrings: []
+  _characterSelectSetup: {fileID: 1107754684}
 --- !u!4 &387354833
 Transform:
   m_ObjectHideFlags: 0
