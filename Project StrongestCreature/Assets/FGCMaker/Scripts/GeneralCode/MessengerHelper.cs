@@ -64,6 +64,7 @@ public enum Events
     ClearLastTime,
     CustomCallback,
     AddNegativeFrames,
+    DisplayCharacterInfo,
 }
 
 static internal class Messenger
