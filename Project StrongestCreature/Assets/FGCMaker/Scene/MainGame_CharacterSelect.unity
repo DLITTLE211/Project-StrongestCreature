@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3736090}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: EmptyObjectsInSceneView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 56277156}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Top_AmplifierTextGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 104669618}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Bottom_AmplifierToggleGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 148809115}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CharacterSelect_Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,150 +276,6 @@ RectTransform:
   m_AnchoredPosition: {x: -10, y: -5}
   m_SizeDelta: {x: -1680, y: -69.999985}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &387354827
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 387354833}
-  - component: {fileID: 387354832}
-  - component: {fileID: 387354831}
-  - component: {fileID: 387354830}
-  - component: {fileID: 387354829}
-  - component: {fileID: 387354828}
-  - component: {fileID: 387354834}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &387354828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387354827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 012680874c85ef14fbc7108332febcb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player1:
-    character: {fileID: 0}
-    characterName: 
-    isTimeSet: 0
-    idleReturnTime: 0
-    _frameDataText: {fileID: 0}
-  player2:
-    character: {fileID: 0}
-    characterName: 
-    isTimeSet: 0
-    idleReturnTime: 0
-    _frameDataText: {fileID: 0}
---- !u!114 &387354829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387354827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 911741f06d7577348836cd09197c0522, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  p1: {fileID: 0}
-  p2: {fileID: 0}
-  TimeScale: 1
-  canHS: 0
---- !u!114 &387354830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387354827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0231cfda7deb83d4fab60c6cc63a6c51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LeftWall: {fileID: 0}
-  RightWall: {fileID: 0}
-  _p1Position: {fileID: 0}
-  _p2Position: {fileID: 0}
-  sideCall: 2097152
---- !u!114 &387354831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387354827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 914bc8eb6cb351e4c826f424a350c0a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  filterLog: 1
-  filterWarning: 0
-  filterError: 0
---- !u!114 &387354832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387354827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1232a1bf985ede54eb1edca0486fdbec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  players:
-    availableIds: 
-    totalPlayers:
-    - {fileID: 0}
-    - {fileID: 0}
-    joystickNames: []
-    currentNames: []
-    usedIntID: 
-    usedStrings: []
-  _characterSelectSetup: {fileID: 1107754684}
---- !u!4 &387354833
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387354827}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.010051332, y: 1.1416924, z: 2.1545484}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &387354834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387354827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83ce6bf8a8109b349a6337485f01595b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterSelectSetup: {fileID: 1107754684}
 --- !u!1 &434392278
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +287,7 @@ GameObject:
   - component: {fileID: 434392279}
   - component: {fileID: 434392281}
   - component: {fileID: 434392280}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +363,7 @@ GameObject:
   - component: {fileID: 496286062}
   - component: {fileID: 496286064}
   - component: {fileID: 496286063}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: ChosenCharacterImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +439,7 @@ GameObject:
   - component: {fileID: 503951626}
   - component: {fileID: 503951628}
   - component: {fileID: 503951627}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: ChosenAmplifier_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -718,7 +574,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 551505487}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Top_AmplifierTextGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -757,7 +613,7 @@ GameObject:
   - component: {fileID: 569417455}
   - component: {fileID: 569417457}
   - component: {fileID: 569417456}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Character_Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -894,7 +750,7 @@ GameObject:
   - component: {fileID: 573882771}
   - component: {fileID: 573882773}
   - component: {fileID: 573882772}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -968,7 +824,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 586487729}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CharacterImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1006,7 +862,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 851666455}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BackgroundImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1043,7 +899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 873311690}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Character Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1080,7 +936,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 951474044}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: LowerGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1122,7 +978,7 @@ GameObject:
   - component: {fileID: 995452093}
   - component: {fileID: 995452092}
   - component: {fileID: 995452091}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CharacterSelect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1225,7 +1081,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1038265045}
   - component: {fileID: 1038265044}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RewiredInputManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3075,7 +2931,7 @@ GameObject:
   - component: {fileID: 1066661555}
   - component: {fileID: 1066661554}
   - component: {fileID: 1066661557}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -3129,7 +2985,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3176,10 +3032,10 @@ MonoBehaviour:
   m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 256
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -3212,7 +3068,7 @@ GameObject:
   - component: {fileID: 1068915064}
   - component: {fileID: 1068915063}
   - component: {fileID: 1068915062}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Right_ToggleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3343,7 +3199,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1107754683}
   - component: {fileID: 1107754684}
-  m_Layer: 0
+  - component: {fileID: 1107754685}
+  m_Layer: 8
   m_Name: CharacterSelect_Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3377,6 +3234,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f233efdd21fcef34f98639a2e3d41afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterSelectButtonPrefab: {fileID: 9206346132393860188, guid: 417349bc215c33a4586da392c385e985, type: 3}
+  characterSelectHolder: {fileID: 1767974627}
+  characterSelect_Header: {fileID: 2066079323}
+  characterSelect_Assets:
+  - {fileID: 1066661553}
+  - {fileID: 995452090}
   _activeProfiles:
   - {fileID: 11400000, guid: 0cf4e6787272b2b448ab5d372f552710, type: 2}
   - {fileID: 11400000, guid: 0cf4e6787272b2b448ab5d372f552710, type: 2}
@@ -3413,9 +3276,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 49f41cbe983f6c14580511c22d2ae62d, type: 2}
   - {fileID: 11400000, guid: ec7b88c4619bf4943b9b8bde4d61b70c, type: 2}
   - {fileID: 11400000, guid: 8310166176ed5d14c86f0a5f730348df, type: 2}
-  characterSelectButtonPrefab: {fileID: 9206346132393860188, guid: 417349bc215c33a4586da392c385e985, type: 3}
-  characterSelectHolder: {fileID: 1767974627}
-  characterSelect_Header: {fileID: 2066079323}
   characterSelectBackgroundImage: {fileID: 1370398434}
   activeCharacterSelectButtons: []
   _leftPlayerPage:
@@ -3426,6 +3286,26 @@ MonoBehaviour:
     characterBackgroundImage: {fileID: 496286063}
     characterName: {fileID: 569417456}
     characterAmplify: {fileID: 1938629287}
+  players:
+    availableIds: 
+    totalPlayers: []
+    joystickNames: []
+    currentNames: []
+    usedIntID: 
+    usedStrings: []
+--- !u!114 &1107754685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107754682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ce6bf8a8109b349a6337485f01595b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterSelectSetup: {fileID: 1107754684}
 --- !u!1 &1114804976
 GameObject:
   m_ObjectHideFlags: 0
@@ -3437,7 +3317,7 @@ GameObject:
   - component: {fileID: 1114804977}
   - component: {fileID: 1114804979}
   - component: {fileID: 1114804978}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: AmplifierText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3572,7 +3452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1120126770}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CharacterSelect_LeftPlayerSide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3609,7 +3489,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1237709080}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CharacterImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3648,7 +3528,7 @@ GameObject:
   - component: {fileID: 1304593688}
   - component: {fileID: 1304593690}
   - component: {fileID: 1304593689}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: AmplifierText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3785,7 +3665,7 @@ GameObject:
   - component: {fileID: 1370398433}
   - component: {fileID: 1370398435}
   - component: {fileID: 1370398434}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: ChosenCharacterImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3859,7 +3739,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1380589098}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: LowerGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3898,7 +3778,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1400035183}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CharacterSelect_PlayerSides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3938,7 +3818,7 @@ GameObject:
   - component: {fileID: 1406352475}
   - component: {fileID: 1406352477}
   - component: {fileID: 1406352476}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Character_Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4076,7 +3956,7 @@ GameObject:
   - component: {fileID: 1533234946}
   - component: {fileID: 1533234945}
   - component: {fileID: 1533234944}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Left_ToggleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4209,7 +4089,7 @@ GameObject:
   - component: {fileID: 1566467738}
   - component: {fileID: 1566467737}
   - component: {fileID: 1566467736}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Right_ToggleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4339,7 +4219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1669735720}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Bottom_AmplifierToggleGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4379,7 +4259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1767974628}
   - component: {fileID: 1767974629}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CharacterSelect_CharacterButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4440,7 +4320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1845020788}
   - component: {fileID: 1845020789}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MessengerHelper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4485,7 +4365,7 @@ GameObject:
   - component: {fileID: 1882897840}
   - component: {fileID: 1882897842}
   - component: {fileID: 1882897841}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: ChosenAmplifier_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4622,7 +4502,7 @@ GameObject:
   - component: {fileID: 1912672449}
   - component: {fileID: 1912672451}
   - component: {fileID: 1912672450}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Character Select Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4758,7 +4638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1938629286}
   - component: {fileID: 1938629287}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: AmplifySection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4813,7 +4693,7 @@ GameObject:
   - component: {fileID: 1982503667}
   - component: {fileID: 1982503669}
   - component: {fileID: 1982503668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4898,7 +4778,7 @@ GameObject:
   - component: {fileID: 1997312420}
   - component: {fileID: 1997312422}
   - component: {fileID: 1997312421}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: ChosenCharacterImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4974,7 +4854,7 @@ GameObject:
   - component: {fileID: 2021797715}
   - component: {fileID: 2021797717}
   - component: {fileID: 2021797716}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Background_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5051,7 +4931,7 @@ GameObject:
   - component: {fileID: 2023930439}
   - component: {fileID: 2023930438}
   - component: {fileID: 2023930437}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Left_ToggleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5181,7 +5061,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2026069499}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Character Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5218,7 +5098,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2066079324}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CharacterSelect_Header
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5256,7 +5136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2070314385}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CharacterSelect_RightPlayerSide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5294,7 +5174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2084060707}
   - component: {fileID: 2084060708}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: AmplifySection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5347,7 +5227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2145000361}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CharacterImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}

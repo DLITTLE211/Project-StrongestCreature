@@ -27,7 +27,6 @@ public class CharacterSelect_Button : MonoBehaviour
         {
             UnselectButton();
         }
-
     }
     public void HighlightSelection()
     {

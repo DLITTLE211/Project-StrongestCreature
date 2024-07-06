@@ -365,7 +365,7 @@ public enum HitPointCall
 
     PanPosOnTarget = 131072,
     PanRotateOnTarget = 262144,
-    PanZoomOnTarget =524288,
+    PanZoomOnTarget = 524288,
 
     DealCustomDamage = 1048576,
     ForceSideSwitch = 2097152,

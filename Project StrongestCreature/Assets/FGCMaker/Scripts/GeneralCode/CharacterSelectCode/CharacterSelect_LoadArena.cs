@@ -38,10 +38,12 @@ public class CharacterSelect_LoadArena : MonoBehaviour
         };
         await Task.WhenAll(tasks);
         SceneManager.LoadScene("MainGame_Arena", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("MainGame_CharacterSelect");
     }
 
     private void OnDestroy()
     {
+        SceneManager.LoadScene("MainGame_CharacterSelect", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync("MainGame_Arena");
         _arenaLoaded = false;
     }

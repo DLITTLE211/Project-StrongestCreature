@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Character_AvailableID players;
-    [SerializeField] private CharacterSelect_Setup _characterSelectSetup;
+    [SerializeField] private static CharacterSelect_Setup _characterSelectSetup;
     void Start()
     {
         /*
@@ -21,46 +21,12 @@ public class GameManager : MonoBehaviour
         ReInput.ControllerConnectedEvent += SetupPlayers;
         ReInput.ControllerDisconnectedEvent += DesyncPlayers;
         SetTargetFrameRate();
-        //SetupPlayers();
-        SetupCharacterSelectButtons();
+        SetupPlayers();
     }
 
     public void SetTargetFrameRate(int frameRate = 60) 
     {
         Application.targetFrameRate = frameRate;
-    }
-    public void SetupCharacterSelectButtons(ControllerStatusChangedEventArgs args = null) 
-    {
-        if (args == null)
-        {
-            players.InitAvailableIDs();
-        }
-        if (ReInput.controllers.GetJoystickNames().Length <= 0)
-        {
-            for (int i = 0; i < players.totalPlayers.Count; i++)
-            {
-                players.totalPlayers[i].Initialize(Character_SubStates.Dummy, -1);
-            }
-        }
-        else
-        {
-            players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
-            if (ReInput.controllers.GetJoystickNames().Length == 1)
-            {
-                players.AddUsedID(players.joystickNames[0]);
-            }
-            else
-            {
-                for (int i = 0; i < players.totalPlayers.Count; i++)
-                {
-                    if (players.totalPlayers[i].playerID == -1)
-                    {
-                        players.AddUsedID(players.joystickNames[i]);
-                    }
-                    else { continue; }
-                }
-            }
-        }
     }
     public void SetupPlayers(ControllerStatusChangedEventArgs args = null)
     {

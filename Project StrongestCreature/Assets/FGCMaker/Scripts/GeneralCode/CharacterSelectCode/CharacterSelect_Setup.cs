@@ -10,13 +10,21 @@ using System.Threading.Tasks;
 
 public class CharacterSelect_Setup : MonoBehaviour
 {
+    [SerializeField] private GameObject characterSelectButtonPrefab;
+    [SerializeField] private GameObject characterSelectHolder;
+    [SerializeField] private GameObject characterSelect_Header;
+    [SerializeField] private List<GameObject> characterSelect_Assets;
+
+
     [SerializeField] private List<Character_Profile> _activeProfiles;
     [SerializeField] private List<Amplifiers> _activeAmplifiers;
-    [SerializeField] private GameObject characterSelectButtonPrefab;
-    [SerializeField] private GameObject characterSelectHolder,characterSelect_Header;
     [SerializeField] private Image characterSelectBackgroundImage;
     [SerializeField] private List<GameObject> activeCharacterSelectButtons;
     [SerializeField] private CharacterSelectPage _leftPlayerPage,_rightPlayerPage;
+
+
+    public Character_AvailableID players;
+    [SerializeField] private Player _leftPlayer,_rightPlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,8 +68,51 @@ public class CharacterSelect_Setup : MonoBehaviour
             yield return new WaitForSeconds(0.025f);
             activeCharacterSelectButtons[i].transform.DOScale(Vector3.one, 0.15f);
         }
+        SetPlayerControllers();
     }
 
+    void SetPlayerControllers() 
+    {
+        if (ReInput.controllers.GetJoystickNames().Length <= 0)
+        {
+            return;
+        }
+        else
+        {
+            players.InitAvailableIDs();
+            players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
+            if (ReInput.controllers.GetJoystickNames().Length == 1)
+            {
+                players.AddUsedID(players.joystickNames[0]);
+                _leftPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[0]);
+                _leftPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[0], true);
+                _leftPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[0], $"UI_CanvasController", $"TestPlayer{players.UsedID.Item1[0]}");
+            }
+            else
+            {
+                for (int i = 0; i < ReInput.controllers.GetJoystickNames().Length; i++)
+                {
+                    if (players.totalPlayers[i].playerID == -1)
+                    {
+                        players.AddUsedID(players.joystickNames[i]);
+                    }
+                    if (i == 0)
+                    {
+                        _leftPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[i]);
+                        _leftPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[i], true);
+                        _leftPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[i], $"UI_CanvasController", $"TestPlayer{players.UsedID.Item1[i]}");
+                    }
+                    if (i == 1)
+                    {
+                        _rightPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[i]);
+                        _rightPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[i], true);
+                        _rightPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[i], $"UI_CanvasController", $"TestPlayer{players.UsedID.Item1[i]}");
+                    }
+                    else { continue; }
+                }
+            }
+        }
+    }
     public void DisplayCharacterSelectInformation(Character_Profile hoveredProfile, int curHighlightedPlayerID)
     {
         if (curHighlightedPlayerID == 0)
@@ -98,6 +149,11 @@ public class CharacterSelect_Setup : MonoBehaviour
             activeCharacterSelectButtons[i].GetComponentInChildren<Button>().image.DOFade(1f, 0f);
             activeCharacterSelectButtons[i].SetActive(true);
         }
+
+        for (int i = 0; i < characterSelect_Assets.Count; i++)
+        {
+            characterSelect_Assets[i].SetActive(true);
+        }
     }
     public async Task ClearLeftPlayerInfo()
     {
@@ -107,6 +163,10 @@ public class CharacterSelect_Setup : MonoBehaviour
     public async Task ClearRightPlayerInfo()
     {
         _rightPlayerPage.ClearPlayerInfo();
+        for (int i = 0; i < characterSelect_Assets.Count; i++)
+        {
+            characterSelect_Assets[i].SetActive(false);
+        }
         await Task.Delay(400);
     }
 }
