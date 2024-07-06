@@ -21,7 +21,7 @@ public abstract class ThrowActionBase
 {
     public string ThrowName;
     public Attack_BasicInput _attackInput;
-    public AttackHandler_Attack _throwAnimation;
+    public List<AttackHandler_Attack> _throwAnimation;
     public abstract bool ContinueCombo(Character_ButtonInput i, Character_ButtonInput j, Character_Base curBase);
     public abstract void CheckButtonInfo(InputAction buttonInfo);
     public abstract void ResetCombo();
@@ -180,8 +180,12 @@ public class Attack_ThrowBase : ThrowActionBase , IThrowAction
 
     public void SendSuccessfulDamageInfo(Path_Data _data, Character_Base target, bool blockedAttack = false)
     {
-        curBase._cAnimator.PlayNextAnimation(Animator.StringToHash(_throwAnimation.animName),0,true);
         target._cDamageCalculator.TakeDamage(_attackInput._correctInput[_data._curInputPath].property);
+    }
+
+    public void PlayNextAttackAnimation(int currentAnimation) 
+    {
+        curBase._cAnimator.PlayNextAnimation(Animator.StringToHash(_throwAnimation[currentAnimation].animName), 0, true);
     }
 
     public void SetComboTimer(Character_InputTimer_Attacks timer)

@@ -6,6 +6,8 @@ using System;
 public class Character_MoveList : MonoBehaviour
 {
     [Header("_____Basic Throws_____")]
+    [SerializeField] protected internal List<Attack_ThrowBase> BasicSuperAttacks;
+    [Header("_____Basic Throws_____")]
     [SerializeField] protected internal List<Attack_ThrowBase> CommandThrows;
     [Header("_____Basic Throws_____")]
     [SerializeField] protected internal List<Attack_ThrowBase> CounterAttacks;
