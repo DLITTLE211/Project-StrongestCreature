@@ -44,9 +44,403 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2920041e96dfbf64a9dd3858357296d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BasicSuperAttacks: []
-  CommandThrows: []
-  CounterAttacks: []
+  BasicSuperAttacks:
+  - specialMoveName: 
+    attackInput:
+      attackString: 
+      attackStringArray: 
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    property:
+      _attackName: 
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 0
+      counterHitDamageMult: 0
+      hitstopValue: 0
+      hitstunValue: 0
+      hitLevel: 0
+      attackHashes: 
+      _meterRequirement: 0
+      _meterAwardedOnHit: 0
+      attackScalingPercent: 0
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        cancelFrom: 0
+        cancelTo: 0
+      _moveType: 0
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: 0}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 0
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 0
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 0
+          recovery: 0
+          lastFrame: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      lateralKBP:
+        lateralKBP: 0
+        Value: 0
+      verticalKBP:
+        verticalKBP: 0
+        Value: 0
+      KnockDown: 0
+    _customAnimation: []
+    curInput: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    moveComplete: 0
+    curBase: {fileID: 0}
+    framesBetweenAttacks: 0
+  - specialMoveName: 
+    attackInput:
+      attackString: 
+      attackStringArray: 
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    property:
+      _attackName: 
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 0
+      counterHitDamageMult: 0
+      hitstopValue: 0
+      hitstunValue: 0
+      hitLevel: 0
+      attackHashes: 
+      _meterRequirement: 0
+      _meterAwardedOnHit: 0
+      attackScalingPercent: 0
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        cancelFrom: 0
+        cancelTo: 0
+      _moveType: 0
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: 0}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 0
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 0
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 0
+          recovery: 0
+          lastFrame: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      lateralKBP:
+        lateralKBP: 0
+        Value: 0
+      verticalKBP:
+        verticalKBP: 0
+        Value: 0
+      KnockDown: 0
+    _customAnimation: []
+    curInput: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    moveComplete: 0
+    curBase: {fileID: 0}
+    framesBetweenAttacks: 0
+  CommandThrows:
+  - specialMoveName: 
+    attackInput:
+      attackString: 
+      attackStringArray: 
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    property:
+      _attackName: 
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 0
+      counterHitDamageMult: 0
+      hitstopValue: 0
+      hitstunValue: 0
+      hitLevel: 0
+      attackHashes: 
+      _meterRequirement: 0
+      _meterAwardedOnHit: 0
+      attackScalingPercent: 0
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        cancelFrom: 0
+        cancelTo: 0
+      _moveType: 0
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: 0}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 0
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 0
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 0
+          recovery: 0
+          lastFrame: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      lateralKBP:
+        lateralKBP: 0
+        Value: 0
+      verticalKBP:
+        verticalKBP: 0
+        Value: 0
+      KnockDown: 0
+    _customAnimation: []
+    curInput: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    moveComplete: 0
+    curBase: {fileID: 0}
+    framesBetweenAttacks: 0
+  CounterAttacks:
+  - specialMoveName: Tiger King (Light)
+    attackInput:
+      attackString: 623C
+      attackStringArray: 
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    property:
+      _attackName: TIger King (Start)
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 0
+      counterHitDamageMult: 0
+      hitstopValue: 0
+      hitstunValue: 0
+      hitLevel: 0
+      attackHashes: 
+      _meterRequirement: 0
+      _meterAwardedOnHit: 0
+      attackScalingPercent: 0
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        cancelFrom: 1
+        cancelTo: 0
+      _moveType: 1
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: 4710477040780991208, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 7
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 9
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 0
+          recovery: 0
+          lastFrame: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      lateralKBP:
+        lateralKBP: 0
+        Value: 0
+      verticalKBP:
+        verticalKBP: 0
+        Value: 0
+      KnockDown: 0
+    _customAnimation:
+    - playerAnim: {fileID: 0}
+      animClip: {fileID: -211915676100462324, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 7
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 0
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
+    curInput: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    moveComplete: 0
+    curBase: {fileID: 0}
+    framesBetweenAttacks: 0
+  - specialMoveName: Tiger King (Heavy)
+    attackInput:
+      attackString: 623D
+      attackStringArray: 
+    attackInputState:
+      _state: 0
+      directionalInput: 0
+    property:
+      _attackName: TIger King (Start)
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 0
+      counterHitDamageMult: 0
+      hitstopValue: 0
+      hitstunValue: 0
+      hitLevel: 0
+      attackHashes: 
+      _meterRequirement: 0
+      _meterAwardedOnHit: 0
+      attackScalingPercent: 0
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        cancelFrom: 1
+        cancelTo: 0
+      _moveType: 1
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: 4710477040780991208, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 7
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 9
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 0
+          recovery: 0
+          lastFrame: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      lateralKBP:
+        lateralKBP: 0
+        Value: 0
+      verticalKBP:
+        verticalKBP: 0
+        Value: 0
+      KnockDown: 0
+    _customAnimation:
+    - playerAnim: {fileID: 0}
+      animClip: {fileID: -211915676100462324, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 7
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 0
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
+    curInput: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    moveComplete: 0
+    curBase: {fileID: 0}
+    framesBetweenAttacks: 0
   stanceSpecials:
   - StanceSpecialAttack_Name: Blink Strike (Heavy)
     stanceStartProperty:
@@ -183,7 +577,7 @@ MonoBehaviour:
     finalAttackButton: 0
     moveComplete: 0
     inStanceState: 0
-  - StanceSpecialAttack_Name: Flash Step (Series)
+  - StanceSpecialAttack_Name: Flash Step (Light Series)
     stanceStartProperty:
       _attackName: Flash Step (Teleport)
       _cTimer: {fileID: 0}
@@ -241,6 +635,265 @@ MonoBehaviour:
     stanceInput:
       _stanceInput:
         attackString: 214C
+        attackStringArray: 
+      _stanceInputState:
+        _state: 0
+        directionalInput: 0
+      stanceAttack:
+        _stanceButtonInput:
+          _correctInput:
+          - _correctSequence: 0B
+            correctAttack: 0
+            correctInput: 0
+            moveInput: 0
+            attackInput: 0
+            property:
+              _attackName: Flash Step (Multipunch)
+              _cTimer: {fileID: 0}
+              rawAttackDamage: 20
+              counterHitDamageMult: 1.005
+              hitstopValue: 25
+              hitstunValue: 22
+              hitLevel: 2
+              attackHashes: 
+              _meterRequirement: 0
+              _meterAwardedOnHit: 5
+              attackScalingPercent: 15
+              dashCancelable: 0
+              JumpCancelable: 0
+              _airInfo: 0
+              cancelProperty:
+                cancelFrom: 5
+                cancelTo: 9
+              _moveType: 3
+              AttackAnims:
+                playerAnim: {fileID: 0}
+                animClip: {fileID: -354913261071876262, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+                animName: 
+                animLength: 0
+                HitBox: {fileID: 0}
+                attackType: 1
+                hb_placement: {x: 0, y: 0, z: 0}
+                hb_orientation: {x: 0, y: 0, z: 0}
+                hb_size: {x: 0, y: 0}
+                extendedHitBox: {fileID: 0}
+                hurtType: 0
+                hu_placement: {x: 0, y: 0, z: 0}
+                hu_orientation: {x: 0, y: 0, z: 0}
+                hu_size: {x: 0, y: 0}
+                _frameData:
+                  init: 0
+                  startup: 0
+                  active: 0
+                  inactive: 0
+                  recovery: 0
+                  lastFrame: 0
+                  _extraPoints: []
+                _hitCount:
+                  _count: 0
+                  _startCount: 0
+                  _refreshRate: 0
+                  _startRefreshRate: 0
+              lateralKBP:
+                lateralKBP: 3
+                Value: 6
+              verticalKBP:
+                verticalKBP: 2
+                Value: 4
+              KnockDown: 1
+            attackInputState:
+              _state: 0
+              directionalInput: 0
+          - _correctSequence: 0A
+            correctAttack: 0
+            correctInput: 0
+            moveInput: 0
+            attackInput: 0
+            property:
+              _attackName: Flash Step (Uppercut)
+              _cTimer: {fileID: 0}
+              rawAttackDamage: 10
+              counterHitDamageMult: 1.065
+              hitstopValue: 18
+              hitstunValue: 15
+              hitLevel: 2
+              attackHashes: 
+              _meterRequirement: 0
+              _meterAwardedOnHit: 4
+              attackScalingPercent: 10
+              dashCancelable: 0
+              JumpCancelable: 0
+              _airInfo: 0
+              cancelProperty:
+                cancelFrom: 5
+                cancelTo: 7
+              _moveType: 3
+              AttackAnims:
+                playerAnim: {fileID: 0}
+                animClip: {fileID: -4138811306552428129, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+                animName: 
+                animLength: 0
+                HitBox: {fileID: 0}
+                attackType: 1
+                hb_placement: {x: 0, y: 0, z: 0}
+                hb_orientation: {x: 0, y: 0, z: 0}
+                hb_size: {x: 0, y: 0}
+                extendedHitBox: {fileID: 0}
+                hurtType: 0
+                hu_placement: {x: 0, y: 0, z: 0}
+                hu_orientation: {x: 0, y: 0, z: 0}
+                hu_size: {x: 0, y: 0}
+                _frameData:
+                  init: 0
+                  startup: 0
+                  active: 0
+                  inactive: 0
+                  recovery: 0
+                  lastFrame: 0
+                  _extraPoints: []
+                _hitCount:
+                  _count: 0
+                  _startCount: 0
+                  _refreshRate: 0
+                  _startRefreshRate: 0
+              lateralKBP:
+                lateralKBP: 3
+                Value: 5
+              verticalKBP:
+                verticalKBP: 1
+                Value: 3
+              KnockDown: 0
+            attackInputState:
+              _state: 0
+              directionalInput: 0
+          - _correctSequence: 2C
+            correctAttack: 0
+            correctInput: 0
+            moveInput: 0
+            attackInput: 0
+            property:
+              _attackName: Flash Step (NutShot)
+              _cTimer: {fileID: 0}
+              rawAttackDamage: 12
+              counterHitDamageMult: 1
+              hitstopValue: 20
+              hitstunValue: 17
+              hitLevel: 1
+              attackHashes: 
+              _meterRequirement: 0
+              _meterAwardedOnHit: 6
+              attackScalingPercent: 14
+              dashCancelable: 0
+              JumpCancelable: 0
+              _airInfo: 0
+              cancelProperty:
+                cancelFrom: 5
+                cancelTo: 7
+              _moveType: 3
+              AttackAnims:
+                playerAnim: {fileID: 0}
+                animClip: {fileID: -1221156174797838894, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+                animName: 
+                animLength: 0
+                HitBox: {fileID: 0}
+                attackType: 1
+                hb_placement: {x: 0, y: 0, z: 0}
+                hb_orientation: {x: 0, y: 0, z: 0}
+                hb_size: {x: 0, y: 0}
+                extendedHitBox: {fileID: 0}
+                hurtType: 0
+                hu_placement: {x: 0, y: 0, z: 0}
+                hu_orientation: {x: 0, y: 0, z: 0}
+                hu_size: {x: 0, y: 0}
+                _frameData:
+                  init: 0
+                  startup: 0
+                  active: 0
+                  inactive: 0
+                  recovery: 0
+                  lastFrame: 0
+                  _extraPoints: []
+                _hitCount:
+                  _count: 0
+                  _startCount: 0
+                  _refreshRate: 0
+                  _startRefreshRate: 0
+              lateralKBP:
+                lateralKBP: 3
+                Value: 4
+              verticalKBP:
+                verticalKBP: 1
+                Value: 2
+              KnockDown: 0
+            attackInputState:
+              _state: 0
+              directionalInput: 0
+      stanceKill:
+        _stanceButtonInput:
+          _correctInput: []
+    curInput: 0
+    movementPortionLength: 0
+    finalAttackButton: 0
+    moveComplete: 0
+    inStanceState: 0
+  - StanceSpecialAttack_Name: Flash Step (Heavy Series)
+    stanceStartProperty:
+      _attackName: Flash Step (Teleport)
+      _cTimer: {fileID: 0}
+      rawAttackDamage: 0
+      counterHitDamageMult: 0
+      hitstopValue: 0
+      hitstunValue: 0
+      hitLevel: 0
+      attackHashes: 
+      _meterRequirement: 0
+      _meterAwardedOnHit: 0
+      attackScalingPercent: -10
+      dashCancelable: 0
+      JumpCancelable: 0
+      _airInfo: 0
+      cancelProperty:
+        cancelFrom: 1
+        cancelTo: 5
+      _moveType: 3
+      AttackAnims:
+        playerAnim: {fileID: 0}
+        animClip: {fileID: 3711237410597857048, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+        animName: 
+        animLength: 0
+        HitBox: {fileID: 0}
+        attackType: 7
+        hb_placement: {x: 0, y: 0, z: 0}
+        hb_orientation: {x: 0, y: 0, z: 0}
+        hb_size: {x: 0, y: 0}
+        extendedHitBox: {fileID: 0}
+        hurtType: 0
+        hu_placement: {x: 0, y: 0, z: 0}
+        hu_orientation: {x: 0, y: 0, z: 0}
+        hu_size: {x: 0, y: 0}
+        _frameData:
+          init: 0
+          startup: 0
+          active: 0
+          inactive: 0
+          recovery: 0
+          lastFrame: 0
+          _extraPoints: []
+        _hitCount:
+          _count: 0
+          _startCount: 0
+          _refreshRate: 0
+          _startRefreshRate: 0
+      lateralKBP:
+        lateralKBP: 0
+        Value: 0
+      verticalKBP:
+        verticalKBP: 0
+        Value: 0
+      KnockDown: 0
+    stanceInput:
+      _stanceInput:
+        attackString: 214D
         attackStringArray: 
       _stanceInputState:
         _state: 0

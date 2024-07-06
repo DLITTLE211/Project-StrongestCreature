@@ -18,7 +18,8 @@ public enum HurtBoxType
     SoftKnockdown,
     HardKnockdown,
     Invincible,
-    Armor
+    Armor,
+    FullParry
 }
 [Serializable]
 public enum HitBoxType 
