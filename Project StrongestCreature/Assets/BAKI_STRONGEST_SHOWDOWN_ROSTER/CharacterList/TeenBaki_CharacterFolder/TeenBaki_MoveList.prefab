@@ -45,39 +45,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BasicSuperAttacks:
-  - specialMoveName: 
+  - specialMoveName: Triceratops Fist
     attackInput:
-      attackString: 
+      attackString: 214214A
       attackStringArray: 
     attackInputState:
       _state: 0
       directionalInput: 0
     property:
-      _attackName: 
+      _attackName: Triceratops Fist (Startup)
       _cTimer: {fileID: 0}
-      rawAttackDamage: 0
+      rawAttackDamage: 10
       counterHitDamageMult: 0
-      hitstopValue: 0
-      hitstunValue: 0
-      hitLevel: 0
+      hitstopValue: 17
+      hitstunValue: 12
+      hitLevel: 1
       attackHashes: 
-      _meterRequirement: 0
+      _meterRequirement: 2
       _meterAwardedOnHit: 0
-      attackScalingPercent: 0
+      attackScalingPercent: 10
       dashCancelable: 0
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        cancelFrom: 0
-        cancelTo: 0
-      _moveType: 0
+        cancelFrom: 1
+        cancelTo: 9
+      _moveType: 4
       AttackAnims:
         playerAnim: {fileID: 0}
-        animClip: {fileID: 0}
+        animClip: {fileID: -7349924103190138807, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
         animName: 
         animLength: 0
         HitBox: {fileID: 0}
-        attackType: 0
+        attackType: 1
         hb_placement: {x: 0, y: 0, z: 0}
         hb_orientation: {x: 0, y: 0, z: 0}
         hb_size: {x: 0, y: 0}
@@ -100,22 +100,76 @@ MonoBehaviour:
           _refreshRate: 0
           _startRefreshRate: 0
       lateralKBP:
-        lateralKBP: 0
-        Value: 0
+        lateralKBP: 2
+        Value: 2
       verticalKBP:
         verticalKBP: 0
         Value: 0
-      KnockDown: 0
-    _customAnimation: []
+      KnockDown: 2
+    _customAnimation:
+    - playerAnim: {fileID: 0}
+      animClip: {fileID: 3872982864370342849, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 7
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 7
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
+    - playerAnim: {fileID: 0}
+      animClip: {fileID: -2337255355880238026, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 7
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 7
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
     curInput: 0
     movementPortionLength: 0
     finalAttackButton: 0
     moveComplete: 0
     curBase: {fileID: 0}
     framesBetweenAttacks: 0
-  - specialMoveName: 
+  - specialMoveName: Ultimate Guillotine Choke
     attackInput:
-      attackString: 
+      attackString: 236236C
       attackStringArray: 
     attackInputState:
       _state: 0
@@ -123,29 +177,29 @@ MonoBehaviour:
     property:
       _attackName: 
       _cTimer: {fileID: 0}
-      rawAttackDamage: 0
+      rawAttackDamage: 20
       counterHitDamageMult: 0
-      hitstopValue: 0
-      hitstunValue: 0
+      hitstopValue: 25
+      hitstunValue: 15
       hitLevel: 0
       attackHashes: 
-      _meterRequirement: 0
+      _meterRequirement: 3
       _meterAwardedOnHit: 0
       attackScalingPercent: 0
       dashCancelable: 0
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        cancelFrom: 0
+        cancelFrom: 1
         cancelTo: 0
-      _moveType: 0
+      _moveType: 4
       AttackAnims:
         playerAnim: {fileID: 0}
-        animClip: {fileID: 0}
+        animClip: {fileID: 5464064686492668912, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
         animName: 
         animLength: 0
         HitBox: {fileID: 0}
-        attackType: 0
+        attackType: 1
         hb_placement: {x: 0, y: 0, z: 0}
         hb_orientation: {x: 0, y: 0, z: 0}
         hb_size: {x: 0, y: 0}
@@ -168,13 +222,40 @@ MonoBehaviour:
           _refreshRate: 0
           _startRefreshRate: 0
       lateralKBP:
-        lateralKBP: 0
-        Value: 0
+        lateralKBP: 1
+        Value: 2
       verticalKBP:
         verticalKBP: 0
         Value: 0
-      KnockDown: 0
-    _customAnimation: []
+      KnockDown: 2
+    _customAnimation:
+    - playerAnim: {fileID: 0}
+      animClip: {fileID: 3120397125411222643, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 7
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 7
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
     curInput: 0
     movementPortionLength: 0
     finalAttackButton: 0
@@ -182,15 +263,15 @@ MonoBehaviour:
     curBase: {fileID: 0}
     framesBetweenAttacks: 0
   CommandThrows:
-  - specialMoveName: 
+  - specialMoveName: Spinning Lotus
     attackInput:
-      attackString: 
+      attackString: 63214B
       attackStringArray: 
     attackInputState:
       _state: 0
       directionalInput: 0
     property:
-      _attackName: 
+      _attackName: Spinning Lotus Grab
       _cTimer: {fileID: 0}
       rawAttackDamage: 0
       counterHitDamageMult: 0
@@ -205,16 +286,16 @@ MonoBehaviour:
       JumpCancelable: 0
       _airInfo: 0
       cancelProperty:
-        cancelFrom: 0
+        cancelFrom: 1
         cancelTo: 0
-      _moveType: 0
+      _moveType: 1
       AttackAnims:
         playerAnim: {fileID: 0}
-        animClip: {fileID: 0}
+        animClip: {fileID: 6594631023453466586, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
         animName: 
         animLength: 0
         HitBox: {fileID: 0}
-        attackType: 0
+        attackType: 5
         hb_placement: {x: 0, y: 0, z: 0}
         hb_orientation: {x: 0, y: 0, z: 0}
         hb_size: {x: 0, y: 0}
@@ -243,7 +324,34 @@ MonoBehaviour:
         verticalKBP: 0
         Value: 0
       KnockDown: 0
-    _customAnimation: []
+    _customAnimation:
+    - playerAnim: {fileID: 0}
+      animClip: {fileID: -4925350466757417409, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 7
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 7
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
     curInput: 0
     movementPortionLength: 0
     finalAttackButton: 0
