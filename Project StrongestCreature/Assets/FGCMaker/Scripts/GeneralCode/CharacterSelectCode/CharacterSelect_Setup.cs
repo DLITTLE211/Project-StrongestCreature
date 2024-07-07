@@ -24,7 +24,8 @@ public class CharacterSelect_Setup : MonoBehaviour
 
 
     public Character_AvailableID players;
-    [SerializeField] private Player _leftPlayer,_rightPlayer;
+    [SerializeField] private PlayerCursor _leftPlayer,_rightPlayer;
+    public Transform upBound,downBound,leftBound,rightBound;
     // Start is called before the first frame update
     void Start()
     {
@@ -84,9 +85,7 @@ public class CharacterSelect_Setup : MonoBehaviour
             if (ReInput.controllers.GetJoystickNames().Length == 1)
             {
                 players.AddUsedID(players.joystickNames[0]);
-                _leftPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[0]);
-                _leftPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[0], true);
-                _leftPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[0], $"UI_CanvasController", $"TestPlayer{players.UsedID.Item1[0]}");
+                SetCharacterSelectCursorState(_leftPlayer, 0);
             }
             else
             {
@@ -98,20 +97,25 @@ public class CharacterSelect_Setup : MonoBehaviour
                     }
                     if (i == 0)
                     {
-                        _leftPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[i]);
-                        _leftPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[i], true);
-                        _leftPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[i], $"UI_CanvasController", $"TestPlayer{players.UsedID.Item1[i]}");
+                        SetCharacterSelectCursorState(_leftPlayer, i);
                     }
                     if (i == 1)
                     {
-                        _rightPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[i]);
-                        _rightPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[i], true);
-                        _rightPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[i], $"UI_CanvasController", $"TestPlayer{players.UsedID.Item1[i]}");
+                        SetCharacterSelectCursorState(_rightPlayer, i);
                     }
                     else { continue; }
                 }
             }
         }
+    }
+    void SetCharacterSelectCursorState(PlayerCursor player, int ID) 
+    {
+        player.curPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[ID]);
+        player.curPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
+        player.curPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID], $"UI_CanvasController", $"TestPlayer{players.UsedID.Item1[ID]}");
+        player.cursorObject.SetActive(true);
+        player.cursorText.text = $"{players.UsedID.Item1[ID] + 1}";
+        player.isConnected = true;
     }
     public void DisplayCharacterSelectInformation(Character_Profile hoveredProfile, int curHighlightedPlayerID)
     {
@@ -124,7 +128,6 @@ public class CharacterSelect_Setup : MonoBehaviour
             _rightPlayerPage.UpdateInfo(hoveredProfile);
         }
     }
-
     public async Task ClearCharacterSelectInfo() 
     {
         for (int i = 0; i < activeCharacterSelectButtons.Count; i++)
@@ -169,6 +172,101 @@ public class CharacterSelect_Setup : MonoBehaviour
         }
         await Task.Delay(400);
     }
+    private void Update()
+    {
+        if (_leftPlayer.isConnected) 
+        {
+            _leftPlayer.xVal = _leftPlayer.curPlayer.GetAxisRaw("Horizontal");
+            _leftPlayer.yVal = _leftPlayer.curPlayer.GetAxisRaw("Vertical");
+            _leftPlayer.xVal = (_leftPlayer.xVal >= _leftPlayer.xYield) ? 1 : ((_leftPlayer.xVal <= -_leftPlayer.xYield) ? -1 : 0);
+            _leftPlayer.yVal = (_leftPlayer.yVal >= _leftPlayer.yYield) ? 1 : ((_leftPlayer.yVal <= -_leftPlayer.yYield) ? -1 : 0);
+            if (_leftPlayer.xVal == 0 && _leftPlayer.yVal == 0) 
+            {
+                _leftPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 10000f;
+            }
+            else
+            {
+                float xVal = _leftPlayer.xVal * 2;
+                float yVal = _leftPlayer.yVal * 2;
+                _leftPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
+                if (HitHeightBound(_leftPlayer.cursorObject.transform)) 
+                {
+                    xVal = 0;
+                }
+                if (HitWidthBound(_leftPlayer.cursorObject.transform))
+                {
+                    yVal = 0;
+                }
+                _leftPlayer.cursorObject.transform.Translate(new Vector3(xVal, yVal, 0));
+            }
+        }
+        if (_rightPlayer.isConnected) 
+        {
+            _rightPlayer.xVal = _rightPlayer.curPlayer.GetAxisRaw("Horizontal");
+            _rightPlayer.yVal = _rightPlayer.curPlayer.GetAxisRaw("Vertical");
+            _rightPlayer.xVal = (_rightPlayer.xVal >= _rightPlayer.xYield) ? 1 : ((_rightPlayer.xVal <= -_rightPlayer.xYield) ? -1 : 0);
+            _rightPlayer.yVal = (_rightPlayer.yVal >= _rightPlayer.yYield) ? 1 : ((_rightPlayer.yVal <= -_rightPlayer.yYield) ? -1 : 0);
+            if (_rightPlayer.xVal == 0 && _rightPlayer.yVal == 0)
+            {
+                _rightPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 10000f;
+            }
+            else
+            {
+                float xVal = _rightPlayer.xVal * 2;
+                float yVal = _rightPlayer.yVal * 2;
+                _rightPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
+                if (HitHeightBound(_rightPlayer.cursorObject.transform))
+                {
+                    xVal = 0;
+                }
+                if (HitWidthBound(_rightPlayer.cursorObject.transform))
+                {
+                    yVal = 0;
+                }
+                _rightPlayer.cursorObject.transform.Translate(new Vector3(xVal, yVal, 0));
+            }
+        }
+    }
+
+    bool HitHeightBound(Transform cursorTransform) 
+    {
+        Bounds heightBounds = new Bounds(cursorTransform.localPosition, Vector3.zero);
+        heightBounds.SetMinMax(downBound.localPosition, upBound.localPosition);
+        float yPos = cursorTransform.localPosition.y;
+        if (yPos > heightBounds.max.y - 1f)
+        {
+            cursorTransform.GetComponent<Rigidbody2D>().drag = 10000f;
+            cursorTransform.localPosition = new Vector3(cursorTransform.localPosition.x, heightBounds.max.y - 10f, 0);
+            return true;
+        }
+        if (yPos < heightBounds.min.y + 1f)
+        {
+            cursorTransform.GetComponent<Rigidbody2D>().drag = 10000f;
+            cursorTransform.localPosition = new Vector3(cursorTransform.localPosition.x, heightBounds.min.y + 10f, 0); ;
+            return true;
+        }
+        return false;
+    }
+    bool HitWidthBound(Transform cursorTransform)
+    {
+        Bounds widthBounds = new Bounds(cursorTransform.localPosition, Vector3.zero);
+        widthBounds.SetMinMax(leftBound.localPosition, rightBound.localPosition);
+        float xPos = cursorTransform.localPosition.x;
+        if (xPos > widthBounds.max.x - 1)
+        {
+            cursorTransform.GetComponent<Rigidbody2D>().drag = 10000f;
+
+            cursorTransform.localPosition = new Vector3(widthBounds.max.x - 10f, cursorTransform.localPosition.y, 0);
+            return true;
+        }
+        if (xPos < widthBounds.min.x + 1)
+        {
+            cursorTransform.GetComponent<Rigidbody2D>().drag = 10000f;
+            cursorTransform.localPosition = new Vector3(widthBounds.min.x + 10f, cursorTransform.localPosition.y, 0);
+            return true;
+        }
+        return false;
+    }
 }
 
 [Serializable]
@@ -197,4 +295,15 @@ public class CharacterSelectPage
         characterName.DOFade(0f, 1.5f);
         characterAmplify.ClearAmplifyInfo();
     }
+}
+[Serializable]
+public class PlayerCursor 
+{
+    public Player curPlayer;
+    public GameObject cursorObject;
+    public Image cursorImage;
+    public TMP_Text cursorText;
+    public bool isConnected;
+    [SerializeField] public float xVal, yVal;
+    [SerializeField, Range(0f, 1f)] public float xYield, yYield;
 }
