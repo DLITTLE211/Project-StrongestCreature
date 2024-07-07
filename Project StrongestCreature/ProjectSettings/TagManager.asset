@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Ground
   - CameraWall
+  - LeftCursor
+  - RightCursor
   layers:
   - Default
   - TransparentFX

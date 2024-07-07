@@ -24,12 +24,13 @@ public class CharacterSelect_Setup : MonoBehaviour
 
 
     public Character_AvailableID players;
-    [SerializeField] private PlayerCursor _leftPlayer,_rightPlayer;
+    [SerializeField] private CharacterSelect_Cursor _leftPlayer,_rightPlayer;
     public Transform upBound,downBound,leftBound,rightBound;
     // Start is called before the first frame update
     void Start()
     {
         Messenger.AddListener<Character_Profile, int>(Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
+        Messenger.AddListener<int>(Events.ClearCharacterInfo, ClearCharacterSelectInformation);
         _leftPlayerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
         _rightPlayerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
         _leftPlayerPage.SetPlayerInfo();
@@ -55,6 +56,8 @@ public class CharacterSelect_Setup : MonoBehaviour
             selectButton.GetComponentInChildren<Button>().interactable = true;
             GameObject _selectButtonInfo = selectButton;
             _selectButtonInfo.GetComponentInChildren<CharacterSelect_Button>().characterProfile = _activeProfiles[i];
+            _selectButtonInfo.GetComponentInChildren<CharacterSelect_Button>().GetLeftCursor(_leftPlayer.cursorObject.transform);
+            _selectButtonInfo.GetComponentInChildren<CharacterSelect_Button>().GetRightCursor(_rightPlayer.cursorObject.transform);
             activeCharacterSelectButtons.Add(_selectButtonInfo);
         }
         StartCoroutine(CascadeScaleSelectButtons());
@@ -89,12 +92,10 @@ public class CharacterSelect_Setup : MonoBehaviour
             }
             else
             {
+                players.InitAvailableIDs();
                 for (int i = 0; i < ReInput.controllers.GetJoystickNames().Length; i++)
                 {
-                    if (players.totalPlayers[i].playerID == -1)
-                    {
-                        players.AddUsedID(players.joystickNames[i]);
-                    }
+                    players.AddUsedID(players.joystickNames[i]);
                     if (i == 0)
                     {
                         SetCharacterSelectCursorState(_leftPlayer, i);
@@ -108,9 +109,10 @@ public class CharacterSelect_Setup : MonoBehaviour
             }
         }
     }
-    void SetCharacterSelectCursorState(PlayerCursor player, int ID) 
+    void SetCharacterSelectCursorState(CharacterSelect_Cursor player, int ID) 
     {
         player.curPlayer = ReInput.players.GetPlayer(players.UsedID.Item1[ID]);
+        player.ID = ID;
         player.curPlayer.controllers.AddController(ControllerType.Joystick, players.UsedID.Item1[ID], true);
         player.curPlayer.controllers.maps.LoadMap(ControllerType.Joystick, players.UsedID.Item1[ID], $"UI_CanvasController", $"TestPlayer{players.UsedID.Item1[ID]}");
         player.cursorObject.SetActive(true);
@@ -126,6 +128,17 @@ public class CharacterSelect_Setup : MonoBehaviour
         if (curHighlightedPlayerID == 1)
         {
             _rightPlayerPage.UpdateInfo(hoveredProfile);
+        }
+    }
+    public void ClearCharacterSelectInformation(int curHighlightedPlayerID)
+    {
+        if (curHighlightedPlayerID == 0)
+        {
+            _leftPlayerPage.ClearInfo();
+        }
+        if (curHighlightedPlayerID == 1)
+        {
+            _rightPlayerPage.ClearInfo();
         }
     }
     public async Task ClearCharacterSelectInfo() 
@@ -281,6 +294,12 @@ public class CharacterSelectPage
         characterBackgroundImage.sprite = profile.CharacterProfileImage;
         characterName.text = profile.CharacterName;
     }
+    public void ClearInfo()
+    {
+        characterBackgroundImage.preserveAspect = false;
+        characterBackgroundImage.sprite = null;
+        characterName.text = "Choose Your Character";
+    }
 
     public void SetPlayerInfo()
     {
@@ -295,15 +314,4 @@ public class CharacterSelectPage
         characterName.DOFade(0f, 1.5f);
         characterAmplify.ClearAmplifyInfo();
     }
-}
-[Serializable]
-public class PlayerCursor 
-{
-    public Player curPlayer;
-    public GameObject cursorObject;
-    public Image cursorImage;
-    public TMP_Text cursorText;
-    public bool isConnected;
-    [SerializeField] public float xVal, yVal;
-    [SerializeField, Range(0f, 1f)] public float xYield, yYield;
 }
