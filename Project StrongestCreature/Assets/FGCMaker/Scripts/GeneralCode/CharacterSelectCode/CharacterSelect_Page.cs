@@ -11,6 +11,7 @@ public class CharacterSelect_Page : MonoBehaviour
     public TMP_Text characterName;
     public CharacterSelect_AmplifySelecter characterAmplify;
     public bool lockedIn;
+    public Character_Profile chosenCharacter;
     public void UpdateInfo(Character_Profile profile)
     {
         characterBackgroundImage.color = Color.white;
@@ -20,7 +21,8 @@ public class CharacterSelect_Page : MonoBehaviour
     }
     public void LockInfo(Character_Profile profile)
     {
-        lockedIn = true;
+        lockedIn = true; 
+        chosenCharacter = profile;
         characterBackgroundImage.sprite = profile.CharacterProfileImage;
         characterName.text = $"{profile.CharacterName} \n(Selected)";
     }

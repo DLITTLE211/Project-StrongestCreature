@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
-using TMPro;
 using System;
 using DG.Tweening;
 using UnityEngine.UI;
@@ -29,7 +28,9 @@ public class CharacterSelect_Setup : MonoBehaviour
 
 
     [Header("____Stage Select Information____")]
-
+    [SerializeField] private CharacterSelect_StageSelect _stageSelecter;
+    [SerializeField] private List<Stage_StageAsset> _activeStages;
+    [SerializeField] private Stage_StageAsset _chosenStage;
 
     [Header("____Rewired Players____")]
     public Character_AvailableID players;
@@ -222,9 +223,8 @@ public class CharacterSelect_Setup : MonoBehaviour
                 _rightPlayer.canChooseStage = true;
             }
         }
-
+        ActivateStageSelector();
     }
-
     #region CursorController
     void LeftCursorController() 
     {
@@ -240,7 +240,8 @@ public class CharacterSelect_Setup : MonoBehaviour
                 {
                     if (_leftPlayer.canChooseStage)
                     {
-                        //LockInStage();
+                        _chosenStage = _stageSelecter._stageAsset;
+                        //LoadArena();
                     }
                 }
             }
@@ -260,26 +261,43 @@ public class CharacterSelect_Setup : MonoBehaviour
             {
                 _leftPlayer.xVal = _leftPlayer.curPlayer.GetAxisRaw("Horizontal");
                 _leftPlayer.yVal = _leftPlayer.curPlayer.GetAxisRaw("Vertical");
-                _leftPlayer.xVal = (_leftPlayer.xVal >= _leftPlayer.xYield) ? 1 : ((_leftPlayer.xVal <= -_leftPlayer.xYield) ? -1 : 0);
-                _leftPlayer.yVal = (_leftPlayer.yVal >= _leftPlayer.yYield) ? 1 : ((_leftPlayer.yVal <= -_leftPlayer.yYield) ? -1 : 0);
-                if (_leftPlayer.xVal == 0 && _leftPlayer.yVal == 0)
+                if (!_leftPlayer.cursorPage.lockedIn)
                 {
-                    _leftPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 10000f;
+                    _leftPlayer.xVal = (_leftPlayer.xVal >= _leftPlayer.xYield) ? 1 : ((_leftPlayer.xVal <= -_leftPlayer.xYield) ? -1 : 0);
+                    _leftPlayer.yVal = (_leftPlayer.yVal >= _leftPlayer.yYield) ? 1 : ((_leftPlayer.yVal <= -_leftPlayer.yYield) ? -1 : 0);
+                    if (_leftPlayer.xVal == 0 && _leftPlayer.yVal == 0)
+                    {
+                        _leftPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 10000f;
+                    }
+                    else
+                    {
+                        float xVal = _leftPlayer.xVal * 7;
+                        float yVal = _leftPlayer.yVal * 7;
+                        _leftPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
+                        if (HitHeightBound(_leftPlayer.cursorObject.transform))
+                        {
+                            xVal = 0;
+                        }
+                        if (HitWidthBound(_leftPlayer.cursorObject.transform))
+                        {
+                            yVal = 0;
+                        }
+                        _leftPlayer.cursorObject.transform.Translate(new Vector3(xVal, yVal, 0));
+                    }
                 }
                 else
                 {
-                    float xVal = _leftPlayer.xVal * 7;
-                    float yVal = _leftPlayer.yVal * 7;
-                    _leftPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
-                    if (HitHeightBound(_leftPlayer.cursorObject.transform))
+                    if (_leftPlayer.canChooseStage)
                     {
-                        xVal = 0;
+                        if (_leftPlayer.curPlayer.GetButton("Forward"))
+                        {
+                            _stageSelecter.UpdateInfoUp();
+                        }
+                        if (_leftPlayer.curPlayer.GetButton("Backward"))
+                        {
+                            _stageSelecter.UpdateInfoDown();
+                        }
                     }
-                    if (HitWidthBound(_leftPlayer.cursorObject.transform))
-                    {
-                        yVal = 0;
-                    }
-                    _leftPlayer.cursorObject.transform.Translate(new Vector3(xVal, yVal, 0));
                 }
             }
         }
@@ -298,7 +316,8 @@ public class CharacterSelect_Setup : MonoBehaviour
                 {
                     if (_rightPlayer.canChooseStage)
                     {
-                        //LockInStage();
+                        _chosenStage = _stageSelecter._stageAsset;
+                        //LoadArena();
                     }
                 }
             }
@@ -318,26 +337,43 @@ public class CharacterSelect_Setup : MonoBehaviour
             {
                 _rightPlayer.xVal = _rightPlayer.curPlayer.GetAxisRaw("Horizontal");
                 _rightPlayer.yVal = _rightPlayer.curPlayer.GetAxisRaw("Vertical");
-                _rightPlayer.xVal = (_rightPlayer.xVal >= _rightPlayer.xYield) ? 1 : ((_rightPlayer.xVal <= -_rightPlayer.xYield) ? -1 : 0);
-                _rightPlayer.yVal = (_rightPlayer.yVal >= _rightPlayer.yYield) ? 1 : ((_rightPlayer.yVal <= -_rightPlayer.yYield) ? -1 : 0);
-                if (_rightPlayer.xVal == 0 && _rightPlayer.yVal == 0)
+                if (!_rightPlayer.cursorPage.lockedIn)
                 {
-                    _rightPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 10000f;
+                    _rightPlayer.xVal = (_rightPlayer.xVal >= _rightPlayer.xYield) ? 1 : ((_rightPlayer.xVal <= -_rightPlayer.xYield) ? -1 : 0);
+                    _rightPlayer.yVal = (_rightPlayer.yVal >= _rightPlayer.yYield) ? 1 : ((_rightPlayer.yVal <= -_rightPlayer.yYield) ? -1 : 0);
+                    if (_rightPlayer.xVal == 0 && _rightPlayer.yVal == 0)
+                    {
+                        _rightPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 10000f;
+                    }
+                    else
+                    {
+                        float xVal = _rightPlayer.xVal * 7;
+                        float yVal = _rightPlayer.yVal * 7;
+                        _rightPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
+                        if (HitHeightBound(_rightPlayer.cursorObject.transform))
+                        {
+                            xVal = 0;
+                        }
+                        if (HitWidthBound(_rightPlayer.cursorObject.transform))
+                        {
+                            yVal = 0;
+                        }
+                        _rightPlayer.cursorObject.transform.Translate(new Vector3(xVal, yVal, 0));
+                    }
                 }
-                else
+                else 
                 {
-                    float xVal = _rightPlayer.xVal * 7;
-                    float yVal = _rightPlayer.yVal * 7;
-                    _rightPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
-                    if (HitHeightBound(_rightPlayer.cursorObject.transform))
+                    if (_rightPlayer.canChooseStage) 
                     {
-                        xVal = 0;
+                        if (_rightPlayer.curPlayer.GetButton("Forward"))
+                        {
+                            _stageSelecter.UpdateInfoUp();
+                        }
+                        if (_rightPlayer.curPlayer.GetButton("Backward"))
+                        {
+                            _stageSelecter.UpdateInfoDown();
+                        }
                     }
-                    if (HitWidthBound(_rightPlayer.cursorObject.transform))
-                    {
-                        yVal = 0;
-                    }
-                    _rightPlayer.cursorObject.transform.Translate(new Vector3(xVal, yVal, 0));
                 }
             }
         }
@@ -389,4 +425,31 @@ public class CharacterSelect_Setup : MonoBehaviour
         CheckIfBothPlayersLockedIn();
         cursor.LockinCharacterChoice(chosenProfile);
     }
+
+    void ActivateStageSelector() 
+    {
+        _stageSelecter.SetArrowsLitState(_activeStages);
+    }
+    #region Return Character Select Information
+    public Character_Profile GetLeftPlayerProfile() 
+    {
+        if (_leftPlayer.cursorPage.chosenCharacter != null)
+        {
+            return _leftPlayer.cursorPage.chosenCharacter;
+        }
+        return null;
+    }
+    public Character_Profile GetRightPlayerProfile()
+    {
+        if(_rightPlayer.cursorPage.chosenCharacter != null) 
+        {
+            return _rightPlayer.cursorPage.chosenCharacter;
+        }
+        return null;
+    }
+    public Stage_StageAsset GetChosenStage()
+    {
+        return _chosenStage;
+    }
+    #endregion
 }
