@@ -66,6 +66,8 @@ public enum Events
     AddNegativeFrames,
     DisplayCharacterInfo,
     ClearCharacterInfo,
+    TryApplyCharacter,
+    LockinCharacterChoice,
 }
 
 static internal class Messenger

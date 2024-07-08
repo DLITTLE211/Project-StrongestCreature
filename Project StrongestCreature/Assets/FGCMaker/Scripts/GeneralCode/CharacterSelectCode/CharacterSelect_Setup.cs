@@ -20,7 +20,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     [SerializeField] private List<Amplifiers> _activeAmplifiers;
     [SerializeField] private Image characterSelectBackgroundImage;
     [SerializeField] private List<GameObject> activeCharacterSelectButtons;
-    [SerializeField] private CharacterSelectPage _leftPlayerPage,_rightPlayerPage;
+    [SerializeField] private CharacterSelect_Page _leftPlayerPage,_rightPlayerPage;
 
 
     public Character_AvailableID players;
@@ -29,8 +29,9 @@ public class CharacterSelect_Setup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Messenger.AddListener<Character_Profile, int>(Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
+        Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
         Messenger.AddListener<int>(Events.ClearCharacterInfo, ClearCharacterSelectInformation);
+        Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, LockinCharacterChoice);
         _leftPlayerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
         _rightPlayerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
         _leftPlayerPage.SetPlayerInfo();
@@ -119,13 +120,13 @@ public class CharacterSelect_Setup : MonoBehaviour
         player.cursorText.text = $"{players.UsedID.Item1[ID] + 1}";
         player.isConnected = true;
     }
-    public void DisplayCharacterSelectInformation(Character_Profile hoveredProfile, int curHighlightedPlayerID)
+    public void DisplayCharacterSelectInformation(Character_Profile hoveredProfile, CharacterSelect_Cursor cursorHighlight)
     {
-        if (curHighlightedPlayerID == 0)
+        if (cursorHighlight.ID == 0)
         {
             _leftPlayerPage.UpdateInfo(hoveredProfile);
         }
-        if (curHighlightedPlayerID == 1)
+        if (cursorHighlight.ID == 1)
         {
             _rightPlayerPage.UpdateInfo(hoveredProfile);
         }
@@ -185,61 +186,109 @@ public class CharacterSelect_Setup : MonoBehaviour
         }
         await Task.Delay(400);
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        if (_leftPlayer.isConnected) 
+        LeftCursorController();
+        RightCursorController();
+    }
+
+    void LeftCursorController() 
+    {
+        if (_leftPlayer.isConnected)
         {
-            _leftPlayer.xVal = _leftPlayer.curPlayer.GetAxisRaw("Horizontal");
-            _leftPlayer.yVal = _leftPlayer.curPlayer.GetAxisRaw("Vertical");
-            _leftPlayer.xVal = (_leftPlayer.xVal >= _leftPlayer.xYield) ? 1 : ((_leftPlayer.xVal <= -_leftPlayer.xYield) ? -1 : 0);
-            _leftPlayer.yVal = (_leftPlayer.yVal >= _leftPlayer.yYield) ? 1 : ((_leftPlayer.yVal <= -_leftPlayer.yYield) ? -1 : 0);
-            if (_leftPlayer.xVal == 0 && _leftPlayer.yVal == 0) 
+            if (_leftPlayer.curPlayer.GetButton(18) && _leftPlayer.profile == null)
             {
-                _leftPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 10000f;
+                Messenger.Broadcast<CharacterSelect_Cursor>(Events.TryApplyCharacter, _leftPlayer);
             }
-            else
+            if (_leftPlayer.curPlayer.GetButton(17) && _leftPlayer.profile != null)
             {
-                float xVal = _leftPlayer.xVal * 2;
-                float yVal = _leftPlayer.yVal * 2;
-                _leftPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
-                if (HitHeightBound(_leftPlayer.cursorObject.transform)) 
-                {
-                    xVal = 0;
-                }
-                if (HitWidthBound(_leftPlayer.cursorObject.transform))
-                {
-                    yVal = 0;
-                }
-                _leftPlayer.cursorObject.transform.Translate(new Vector3(xVal, yVal, 0));
+                _leftPlayer.UnlockCharacterChoice();
             }
-        }
-        if (_rightPlayer.isConnected) 
-        {
-            _rightPlayer.xVal = _rightPlayer.curPlayer.GetAxisRaw("Horizontal");
-            _rightPlayer.yVal = _rightPlayer.curPlayer.GetAxisRaw("Vertical");
-            _rightPlayer.xVal = (_rightPlayer.xVal >= _rightPlayer.xYield) ? 1 : ((_rightPlayer.xVal <= -_rightPlayer.xYield) ? -1 : 0);
-            _rightPlayer.yVal = (_rightPlayer.yVal >= _rightPlayer.yYield) ? 1 : ((_rightPlayer.yVal <= -_rightPlayer.yYield) ? -1 : 0);
-            if (_rightPlayer.xVal == 0 && _rightPlayer.yVal == 0)
+            if (_leftPlayer.curPlayer.GetButtonDown(19))
             {
-                _rightPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 10000f;
+                Debug.Log("Hit RightBumper on xbox");
             }
-            else
+            if (_leftPlayer.curPlayer.GetButtonDown(21))
             {
-                float xVal = _rightPlayer.xVal * 2;
-                float yVal = _rightPlayer.yVal * 2;
-                _rightPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
-                if (HitHeightBound(_rightPlayer.cursorObject.transform))
+                Debug.Log("Hit LeftBumper on xbox");
+            }
+            if (_leftPlayer.profile == null)
+            {
+                _leftPlayer.xVal = _leftPlayer.curPlayer.GetAxisRaw("Horizontal");
+                _leftPlayer.yVal = _leftPlayer.curPlayer.GetAxisRaw("Vertical");
+                _leftPlayer.xVal = (_leftPlayer.xVal >= _leftPlayer.xYield) ? 1 : ((_leftPlayer.xVal <= -_leftPlayer.xYield) ? -1 : 0);
+                _leftPlayer.yVal = (_leftPlayer.yVal >= _leftPlayer.yYield) ? 1 : ((_leftPlayer.yVal <= -_leftPlayer.yYield) ? -1 : 0);
+                if (_leftPlayer.xVal == 0 && _leftPlayer.yVal == 0)
                 {
-                    xVal = 0;
+                    _leftPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 10000f;
                 }
-                if (HitWidthBound(_rightPlayer.cursorObject.transform))
+                else
                 {
-                    yVal = 0;
+                    float xVal = _leftPlayer.xVal * 7;
+                    float yVal = _leftPlayer.yVal * 7;
+                    _leftPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
+                    if (HitHeightBound(_leftPlayer.cursorObject.transform))
+                    {
+                        xVal = 0;
+                    }
+                    if (HitWidthBound(_leftPlayer.cursorObject.transform))
+                    {
+                        yVal = 0;
+                    }
+                    _leftPlayer.cursorObject.transform.Translate(new Vector3(xVal, yVal, 0));
                 }
-                _rightPlayer.cursorObject.transform.Translate(new Vector3(xVal, yVal, 0));
             }
         }
     }
+    void RightCursorController()
+    {
+        if (_rightPlayer.isConnected)
+        {
+            if (_rightPlayer.curPlayer.GetButton(18) && _rightPlayer.profile == null)
+            {
+                Messenger.Broadcast<CharacterSelect_Cursor>(Events.TryApplyCharacter, _rightPlayer);
+            }
+            if (_rightPlayer.curPlayer.GetButton(17) && _rightPlayer.profile != null)
+            {
+                _rightPlayer.UnlockCharacterChoice();
+            }
+            if (_rightPlayer.curPlayer.GetButtonDown(19))
+            {
+                Debug.Log("Hit RightBumper on xbox");
+            }
+            if (_rightPlayer.curPlayer.GetButtonDown(21))
+            {
+                Debug.Log("Hit LeftBumper on xbox");
+            }
+            if (_rightPlayer.profile == null) 
+            {
+                _rightPlayer.xVal = _rightPlayer.curPlayer.GetAxisRaw("Horizontal");
+                _rightPlayer.yVal = _rightPlayer.curPlayer.GetAxisRaw("Vertical");
+                _rightPlayer.xVal = (_rightPlayer.xVal >= _rightPlayer.xYield) ? 1 : ((_rightPlayer.xVal <= -_rightPlayer.xYield) ? -1 : 0);
+                _rightPlayer.yVal = (_rightPlayer.yVal >= _rightPlayer.yYield) ? 1 : ((_rightPlayer.yVal <= -_rightPlayer.yYield) ? -1 : 0);
+                if (_rightPlayer.xVal == 0 && _rightPlayer.yVal == 0)
+                {
+                    _rightPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 10000f;
+                }
+                else
+                {
+                    float xVal = _rightPlayer.xVal * 7;
+                    float yVal = _rightPlayer.yVal * 7;
+                    _rightPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
+                    if (HitHeightBound(_rightPlayer.cursorObject.transform))
+                    {
+                        xVal = 0;
+                    }
+                    if (HitWidthBound(_rightPlayer.cursorObject.transform))
+                    {
+                        yVal = 0;
+                    }
+                    _rightPlayer.cursorObject.transform.Translate(new Vector3(xVal, yVal, 0));
+                }
+            }
+        }
+    }
+
 
     bool HitHeightBound(Transform cursorTransform) 
     {
@@ -280,38 +329,9 @@ public class CharacterSelect_Setup : MonoBehaviour
         }
         return false;
     }
-}
 
-[Serializable]
-public class CharacterSelectPage 
-{
-    public Image characterBackgroundImage;
-    public TMP_Text characterName;
-    public CharacterSelect_AmplifySelecter characterAmplify;
-    public void UpdateInfo(Character_Profile profile) 
+    void LockinCharacterChoice(Character_Profile chosenProfile, CharacterSelect_Cursor cursor) 
     {
-        characterBackgroundImage.preserveAspect = true;
-        characterBackgroundImage.sprite = profile.CharacterProfileImage;
-        characterName.text = profile.CharacterName;
-    }
-    public void ClearInfo()
-    {
-        characterBackgroundImage.preserveAspect = false;
-        characterBackgroundImage.sprite = null;
-        characterName.text = "Choose Your Character";
-    }
-
-    public void SetPlayerInfo()
-    {
-        characterBackgroundImage.DOFade(1f, 0f);
-        characterName.DOFade(1f, 0f);
-        characterAmplify.SetAmplifyInfo();
-    }
-
-    public void ClearPlayerInfo() 
-    {
-        characterBackgroundImage.DOFade(0f, 1.5f);
-        characterName.DOFade(0f, 1.5f);
-        characterAmplify.ClearAmplifyInfo();
+        cursor.LockinCharacterChoice(chosenProfile);
     }
 }
