@@ -10,40 +10,52 @@ using System.Threading.Tasks;
 
 public class CharacterSelect_Setup : MonoBehaviour
 {
+    [Header("____CharacterSelect Assets____")]
     [SerializeField] private GameObject characterSelectButtonPrefab;
     [SerializeField] private GameObject characterSelectHolder;
     [SerializeField] private GameObject characterSelect_Header;
     [SerializeField] private List<GameObject> characterSelect_Assets;
+    [SerializeField] private Image characterSelectBackgroundImage;
+    [Space(15)]
 
 
+    [Header("____Character Cursor Information____")]
     [SerializeField] private List<Character_Profile> _activeProfiles;
     [SerializeField] private List<Amplifiers> _activeAmplifiers;
-    [SerializeField] private Image characterSelectBackgroundImage;
     [SerializeField] private List<GameObject> activeCharacterSelectButtons;
     [SerializeField] private CharacterSelect_Page _leftPlayerPage,_rightPlayerPage;
+    [SerializeField] private CharacterSelect_Cursor _leftPlayer, _rightPlayer;
+    [Space(15)]
 
 
+    [Header("____Stage Select Information____")]
+
+
+    [Header("____Rewired Players____")]
     public Character_AvailableID players;
-    [SerializeField] private CharacterSelect_Cursor _leftPlayer,_rightPlayer;
     public Transform upBound,downBound,leftBound,rightBound;
     // Start is called before the first frame update
     void Start()
     {
+        SetupPlayerPage(_leftPlayerPage);
+        SetupPlayerPage(_rightPlayerPage);
+
         Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.DisplayCharacterInfo, DisplayCharacterSelectInformation);
         Messenger.AddListener<int>(Events.ClearCharacterInfo, ClearCharacterSelectInformation);
         Messenger.AddListener<Character_Profile, CharacterSelect_Cursor>(Events.LockinCharacterChoice, LockinCharacterChoice);
-        _leftPlayerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
-        _rightPlayerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
-        _leftPlayerPage.SetPlayerInfo();
-        _rightPlayerPage.SetPlayerInfo();
-        if (activeCharacterSelectButtons.Count > 0)
-        {
-            ReactivateCharacterSelectInfo();
-        }
-        else
-        {
-            AddCharacterSelectButtons();
-        }
+
+        AddCharacterSelectButtons();
+    }
+    void SetupPlayerPage(CharacterSelect_Page playerPage) 
+    {
+        playerPage.characterAmplify.GetListOfAmplifiers(_activeAmplifiers);
+        playerPage.SetPlayerInfo();
+    }
+
+    private void FixedUpdate()
+    {
+        LeftCursorController();
+        RightCursorController();
     }
     public void AddCharacterSelectButtons()
     {
@@ -142,6 +154,7 @@ public class CharacterSelect_Setup : MonoBehaviour
             _rightPlayerPage.ClearInfo();
         }
     }
+    #region Deactivate Character Select
     public async Task ClearCharacterSelectInfo() 
     {
         for (int i = 0; i < activeCharacterSelectButtons.Count; i++)
@@ -154,23 +167,6 @@ public class CharacterSelect_Setup : MonoBehaviour
         characterSelect_Header.SetActive(false);
         characterSelectHolder.SetActive(false);
         await Task.Delay(400);
-    }
-    public void ReactivateCharacterSelectInfo()
-    {
-        characterSelectBackgroundImage.gameObject.SetActive(true);
-        characterSelect_Header.SetActive(true);
-        characterSelectHolder.SetActive(true);
-        for (int i = 0; i < activeCharacterSelectButtons.Count; i++)
-        {
-            activeCharacterSelectButtons[i].GetComponentInChildren<Button>().interactable = true;
-            activeCharacterSelectButtons[i].GetComponentInChildren<Button>().image.DOFade(1f, 0f);
-            activeCharacterSelectButtons[i].SetActive(true);
-        }
-
-        for (int i = 0; i < characterSelect_Assets.Count; i++)
-        {
-            characterSelect_Assets[i].SetActive(true);
-        }
     }
     public async Task ClearLeftPlayerInfo()
     {
@@ -186,19 +182,67 @@ public class CharacterSelect_Setup : MonoBehaviour
         }
         await Task.Delay(400);
     }
-    private void FixedUpdate()
+    #endregion
+
+    void CheckIfBothPlayersLockedIn()
     {
-        LeftCursorController();
-        RightCursorController();
+        if (_leftPlayer.cursorObject.activeInHierarchy)
+        {
+            if (_leftPlayer.cursorPage.lockedIn == false)
+            {
+                return;
+            }
+            if (_rightPlayer.cursorObject.activeInHierarchy)
+            {
+                if (!_rightPlayer.canChooseStage)
+                {
+                    _leftPlayer.canChooseStage = true;
+                }
+            }
+            else
+            {
+                _leftPlayer.canChooseStage = true;
+            }
+        }
+        if (_rightPlayer.cursorObject.activeInHierarchy)
+        {
+            if (_rightPlayer.cursorPage.lockedIn == false)
+            {
+                return;
+            }
+            if (_leftPlayer.cursorObject.activeInHierarchy)
+            {
+                if (!_leftPlayer.canChooseStage)
+                {
+                    _rightPlayer.canChooseStage = true;
+                }
+            }
+            else
+            {
+                _rightPlayer.canChooseStage = true;
+            }
+        }
+
     }
 
+    #region CursorController
     void LeftCursorController() 
     {
         if (_leftPlayer.isConnected)
         {
-            if (_leftPlayer.curPlayer.GetButton(18) && _leftPlayer.profile == null)
+            if (_leftPlayer.curPlayer.GetButton(18))
             {
-                Messenger.Broadcast<CharacterSelect_Cursor>(Events.TryApplyCharacter, _leftPlayer);
+                if (_leftPlayer.profile == null)
+                {
+                    Messenger.Broadcast<CharacterSelect_Cursor>(Events.TryApplyCharacter, _leftPlayer);
+                }
+                else 
+                {
+                    if (_leftPlayer.canChooseStage)
+                    {
+                        //LockInStage();
+                    }
+                }
             }
             if (_leftPlayer.curPlayer.GetButton(17) && _leftPlayer.profile != null)
             {
@@ -244,9 +288,19 @@ public class CharacterSelect_Setup : MonoBehaviour
     {
         if (_rightPlayer.isConnected)
         {
-            if (_rightPlayer.curPlayer.GetButton(18) && _rightPlayer.profile == null)
+            if (_rightPlayer.curPlayer.GetButton(18))
             {
-                Messenger.Broadcast<CharacterSelect_Cursor>(Events.TryApplyCharacter, _rightPlayer);
+                if (_rightPlayer.profile == null)
+                {
+                    Messenger.Broadcast<CharacterSelect_Cursor>(Events.TryApplyCharacter, _rightPlayer);
+                }
+                else
+                {
+                    if (_rightPlayer.canChooseStage)
+                    {
+                        //LockInStage();
+                    }
+                }
             }
             if (_rightPlayer.curPlayer.GetButton(17) && _rightPlayer.profile != null)
             {
@@ -288,8 +342,6 @@ public class CharacterSelect_Setup : MonoBehaviour
             }
         }
     }
-
-
     bool HitHeightBound(Transform cursorTransform) 
     {
         Bounds heightBounds = new Bounds(cursorTransform.localPosition, Vector3.zero);
@@ -330,8 +382,11 @@ public class CharacterSelect_Setup : MonoBehaviour
         return false;
     }
 
+    #endregion
+
     void LockinCharacterChoice(Character_Profile chosenProfile, CharacterSelect_Cursor cursor) 
     {
+        CheckIfBothPlayersLockedIn();
         cursor.LockinCharacterChoice(chosenProfile);
     }
 }

@@ -19,6 +19,8 @@ public class CharacterSelect_Cursor : MonoBehaviour
     [SerializeField] public float xVal, yVal;
     [SerializeField, Range(0f, 1f)] public float xYield, yYield;
 
+    public bool canChooseStage;
+
     public void LockinCharacterChoice(Character_Profile chosenProfile)
     {
         profile = chosenProfile;
