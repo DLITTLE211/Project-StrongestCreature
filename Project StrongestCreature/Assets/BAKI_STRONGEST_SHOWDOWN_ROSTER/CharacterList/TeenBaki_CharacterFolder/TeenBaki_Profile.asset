@@ -25,6 +25,7 @@ MonoBehaviour:
   MaxStunValue: 80
   DefenseValue: 30
   HealthRegenRate: 3
+  characterModel: {fileID: 2619550513160664684, guid: 578bb02657ccb83479060e3c4b62ec43, type: 3}
   characterAnimator: {fileID: 9100000, guid: be9a7067718126e45aa7cf8813a6abd2, type: 2}
   AllCharacterAnimations:
   - {fileID: -3977307983880513915, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
@@ -118,6 +119,7 @@ MonoBehaviour:
   - {fileID: -7488435070052245135, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
   LayerInfo: []
   CharacterModel: {fileID: 919132149155446097, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+  _characterMoveList: {fileID: 0}
   moveListCount: 1
   CharacterMoveListPrefab:
   - {fileID: 3315631830582736349, guid: 4a9fa87af4e45cf44959e8930a1903b6, type: 3}

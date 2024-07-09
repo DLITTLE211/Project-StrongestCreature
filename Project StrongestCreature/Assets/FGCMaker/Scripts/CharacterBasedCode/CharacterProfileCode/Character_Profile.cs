@@ -65,7 +65,7 @@ public class Character_Profile : ScriptableObject
     #endregion
     public void SetCharacterAnimator()
     {
-        characterAnimator = characterModel.GetComponentInChildren<Animator>();
+        characterAnimator = characterModel.GetComponent<Animator>();
     }
 }
 
