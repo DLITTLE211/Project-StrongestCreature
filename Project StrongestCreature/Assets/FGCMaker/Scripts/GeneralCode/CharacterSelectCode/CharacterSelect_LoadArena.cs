@@ -15,19 +15,9 @@ public class CharacterSelect_LoadArena : MonoBehaviour
     {
         _arenaLoaded = false;
     }
-    private void Update()
+    public async void OnCharactersAndStageSelected() 
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) 
-        {
-            if (!_arenaLoaded)
-            {
-                OnCharacterSelected();
-            }
-        }
-    }
-    public void OnCharacterSelected() 
-    {
-        LoadArena();
+        await LoadArena();
     }
 
     async Task LoadArena()
@@ -37,6 +27,7 @@ public class CharacterSelect_LoadArena : MonoBehaviour
         chosenStage = _characterSelectSetup.GetChosenStage();
         Task[] tasks = new Task[]
         {
+            _characterSelectSetup.ClearStageSelect(),
             _characterSelectSetup.ClearCharacterSelectInfo(),
             _characterSelectSetup.ClearLeftPlayerInfo(),
             _characterSelectSetup.ClearRightPlayerInfo(),

@@ -17,8 +17,10 @@ public class CharacterSelect_StageSelect : MonoBehaviour
     public bool stageSelectActive;
     List<Stage_StageAsset> totalStages;
     private int _currentStage;
+    public bool allowStageSelect;
     private void Start()
     {
+        allowStageSelect = false;
         _mainHolder.SetActive(false);
     }
     public void SetArrowsLitState(List<Stage_StageAsset> _totalStages) 
@@ -38,10 +40,17 @@ public class CharacterSelect_StageSelect : MonoBehaviour
         stageSelectActive = true;
         _currentStage = 0;
         SetActiveStage(totalStages[_currentStage]);
+        allowStageSelect = true;
+    }
+    public void ClearStageSelect()
+    {
+        allowStageSelect = false;
+        _stageAsset = null;
+        _mainHolder.SetActive(false);
+        stageSelectActive = false;
     }
     public void CloseStageSelect()
     {
-        _stageAsset = null;
         _mainHolder.SetActive(false);
         stageSelectActive = false;
     }

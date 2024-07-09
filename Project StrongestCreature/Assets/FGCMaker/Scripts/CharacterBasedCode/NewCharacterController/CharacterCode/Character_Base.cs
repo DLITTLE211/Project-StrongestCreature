@@ -155,6 +155,7 @@ public class Character_Base : MonoBehaviour
         {
             case Character_SubStates.Controlled:
                 playerID = NewID;
+                DesyncVariables();
                 HandleButtonInitialization();
                 _subState = setSubState;
                 break;

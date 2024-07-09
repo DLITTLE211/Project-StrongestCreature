@@ -31,6 +31,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     [SerializeField] private CharacterSelect_StageSelect _stageSelecter;
     [SerializeField] private List<Stage_StageAsset> _activeStages;
     [SerializeField] private Stage_StageAsset _chosenStage;
+    [SerializeField] private CharacterSelect_LoadArena _arenaLoader;
 
     [Header("____Rewired Players____")]
     public Character_AvailableID players;
@@ -55,7 +56,7 @@ public class CharacterSelect_Setup : MonoBehaviour
         playerPage.SetPlayerInfo();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         LeftCursorController();
         RightCursorController();
@@ -185,6 +186,11 @@ public class CharacterSelect_Setup : MonoBehaviour
         }
         await Task.Delay(400);
     }
+    public async Task ClearStageSelect() 
+    {
+        _stageSelecter.CloseStageSelect();
+        await Task.Delay(400);
+    }
     #endregion
 
     void CheckIfBothPlayersLockedIn()
@@ -232,7 +238,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     {
         if (_leftPlayer.isConnected)
         {
-            if (_leftPlayer.curPlayer.GetButton(18))
+            if (_leftPlayer.curPlayer.GetButtonDown(18))
             {
                 if (_leftPlayer.profile == null)
                 {
@@ -240,10 +246,10 @@ public class CharacterSelect_Setup : MonoBehaviour
                 }
                 else
                 {
-                    if (_leftPlayer.canChooseStage)
+                    if (_leftPlayer.canChooseStage && _stageSelecter.allowStageSelect)
                     {
                         _chosenStage = _stageSelecter._stageAsset;
-                        //LoadArena();
+                        _arenaLoader.OnCharactersAndStageSelected();
                     }
                 }
             }
@@ -257,7 +263,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                 {
                     if (_stageSelecter.MainHolder.activeInHierarchy)
                     {
-                        _stageSelecter.CloseStageSelect();
+                        _stageSelecter.ClearStageSelect();
                         _leftPlayer.UnlockCharacterChoice();
                     }
                 }
@@ -291,8 +297,8 @@ public class CharacterSelect_Setup : MonoBehaviour
                 }
                 else
                 {
-                    float xVal = _leftPlayer.xVal * 7;
-                    float yVal = _leftPlayer.yVal * 7;
+                    float xVal = _leftPlayer.xVal * 3;
+                    float yVal = _leftPlayer.yVal * 3;
                     _leftPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
                     if (HitHeightBound(_leftPlayer.cursorObject.transform))
                     {
@@ -350,7 +356,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     {
         if (_rightPlayer.isConnected)
         {
-            if (_rightPlayer.curPlayer.GetButton(18))
+            if (_rightPlayer.curPlayer.GetButtonDown(18))
             {
                 if (_rightPlayer.profile == null)
                 {
@@ -358,10 +364,10 @@ public class CharacterSelect_Setup : MonoBehaviour
                 }
                 else
                 {
-                    if (_rightPlayer.canChooseStage)
+                    if (_rightPlayer.canChooseStage && _stageSelecter.allowStageSelect)
                     {
                         _chosenStage = _stageSelecter._stageAsset;
-                        //LoadArena();
+                        _arenaLoader.OnCharactersAndStageSelected();
                     }
                 }
             }
@@ -375,7 +381,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                 {
                     if (_stageSelecter.MainHolder.activeInHierarchy)
                     {
-                        _stageSelecter.CloseStageSelect();
+                        _stageSelecter.ClearStageSelect();
                         _rightPlayer.UnlockCharacterChoice();
                     }
                 }
@@ -409,8 +415,8 @@ public class CharacterSelect_Setup : MonoBehaviour
                 }
                 else
                 {
-                    float xVal = _rightPlayer.xVal * 7;
-                    float yVal = _rightPlayer.yVal * 7;
+                    float xVal = _rightPlayer.xVal * 3;
+                    float yVal = _rightPlayer.yVal * 3;
                     _rightPlayer.cursorObject.GetComponent<Rigidbody2D>().drag = 0;
                     if (HitHeightBound(_rightPlayer.cursorObject.transform))
                     {
