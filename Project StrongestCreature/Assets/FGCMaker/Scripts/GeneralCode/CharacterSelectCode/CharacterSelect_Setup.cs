@@ -36,7 +36,7 @@ public class CharacterSelect_Setup : MonoBehaviour
     public Character_AvailableID players;
     public Transform upBound,downBound,leftBound,rightBound;
 
-    public bool stageSelectCooldown;
+    [SerializeField] private bool stageSelectCooldown;
     // Start is called before the first frame update
     void Start()
     {
@@ -262,13 +262,21 @@ public class CharacterSelect_Setup : MonoBehaviour
                     }
                 }
             }
-            if (_leftPlayer.curPlayer.GetButtonDown(19))
+            if (_leftPlayer.curPlayer.GetButton(19))
             {
-                Debug.Log("Hit RightBumper on xbox");
+                if (!_leftPlayer.cursorPage.amplifySelectCooldown)
+                {
+                    StartCoroutine(_leftPlayer.cursorPage.DelayResetBool());
+                    _leftPlayer.cursorPage.characterAmplify.UpdateInfoUp();
+                }
             }
-            if (_leftPlayer.curPlayer.GetButtonDown(21))
+            if (_leftPlayer.curPlayer.GetButton(21))
             {
-                Debug.Log("Hit LeftBumper on xbox");
+                if (!_leftPlayer.cursorPage.amplifySelectCooldown)
+                {
+                    StartCoroutine(_leftPlayer.cursorPage.DelayResetBool());
+                    _leftPlayer.cursorPage.characterAmplify.UpdateInfoDown();
+                }
             }
             if (_leftPlayer.profile == null)
             {
@@ -310,7 +318,7 @@ public class CharacterSelect_Setup : MonoBehaviour
                             if (!stageSelectCooldown)
                             {
                                 _stageSelecter.UpdateInfoUp();
-                                StartCoroutine(DelayResetBool());
+                                StartCoroutine(DelayResetStageBool());
                             }
                         }
                         else if (_leftPlayer.xVal == -1)
@@ -318,12 +326,12 @@ public class CharacterSelect_Setup : MonoBehaviour
                             if (!stageSelectCooldown)
                             {
                                 _stageSelecter.UpdateInfoDown();
-                                StartCoroutine(DelayResetBool());
+                                StartCoroutine(DelayResetStageBool());
                             }
                         }
                         else 
                         {
-                            StopCoroutine(DelayResetBool());
+                            StopCoroutine(DelayResetStageBool());
                             stageSelectCooldown = false;
                         }
                     }
@@ -331,7 +339,7 @@ public class CharacterSelect_Setup : MonoBehaviour
             }
         }
     }
-    IEnumerator DelayResetBool() 
+    IEnumerator DelayResetStageBool() 
     {
         stageSelectCooldown = true;
         yield return new WaitForSeconds(1f);
@@ -372,13 +380,21 @@ public class CharacterSelect_Setup : MonoBehaviour
                     }
                 }
             }
-            if (_rightPlayer.curPlayer.GetButtonDown(19))
+            if (_rightPlayer.curPlayer.GetButton(19))
             {
-                Debug.Log("Hit RightBumper on xbox");
+                if (!_rightPlayer.cursorPage.amplifySelectCooldown)
+                {
+                    StartCoroutine(_rightPlayer.cursorPage.DelayResetBool());
+                    _rightPlayer.cursorPage.characterAmplify.UpdateInfoUp();
+                }
             }
-            if (_rightPlayer.curPlayer.GetButtonDown(21))
+            if (_rightPlayer.curPlayer.GetButton(21))
             {
-                Debug.Log("Hit LeftBumper on xbox");
+                if (!_rightPlayer.cursorPage.amplifySelectCooldown)
+                {
+                    StartCoroutine(_rightPlayer.cursorPage.DelayResetBool());
+                    _rightPlayer.cursorPage.characterAmplify.UpdateInfoDown();
+                }
             }
             if (_rightPlayer.profile == null)
             {

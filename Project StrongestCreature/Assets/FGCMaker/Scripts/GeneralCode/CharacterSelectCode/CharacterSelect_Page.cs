@@ -12,6 +12,8 @@ public class CharacterSelect_Page : MonoBehaviour
     public CharacterSelect_AmplifySelecter characterAmplify;
     public bool lockedIn;
     public Character_Profile chosenCharacter;
+    public Amplifiers chosenAmplifier;
+    public bool amplifySelectCooldown;
     public void UpdateInfo(Character_Profile profile)
     {
         characterBackgroundImage.color = Color.white;
@@ -47,5 +49,11 @@ public class CharacterSelect_Page : MonoBehaviour
         characterBackgroundImage.DOFade(0f, 1.5f);
         characterName.DOFade(0f, 1.5f);
         characterAmplify.ClearAmplifyInfo();
+    }
+    public IEnumerator DelayResetBool() 
+    {
+        amplifySelectCooldown = true;
+        yield return new WaitForSeconds(0.75f);
+        amplifySelectCooldown = false;
     }
 }

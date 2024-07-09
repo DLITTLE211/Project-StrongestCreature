@@ -8,15 +8,17 @@ using DG.Tweening;
 [System.Serializable]
 public class CharacterSelect_AmplifySelecter :MonoBehaviour
 {
-    public TMP_Text chosenAmplifier;
-    public Button LeftButton;
-    public Button RightButton;
+    public TMP_Text chosenAmplifierText;
+    public Image LeftBumperImage;
+    public Image RightBumperImage;
     private List<Amplifiers> totalAmplifiers;
+    public Amplifiers chosenAmplifier;
     int curAmplifier;
     public void GetListOfAmplifiers(List<Amplifiers> _totalAmplifiers)
     {
         totalAmplifiers = _totalAmplifiers;
         curAmplifier = 0;
+        SetInfo(totalAmplifiers[curAmplifier]);
     }
     public void UpdateInfoDown()
     {
@@ -39,23 +41,20 @@ public class CharacterSelect_AmplifySelecter :MonoBehaviour
 
     public void SetInfo(Amplifiers curAmplifier)
     {
-        chosenAmplifier.text = curAmplifier.amplifier.ToString();
+        chosenAmplifierText.text = curAmplifier.amplifier.ToString();
+        chosenAmplifier = curAmplifier;
     }
 
     public void SetAmplifyInfo()
     {
-        chosenAmplifier.DOFade(1f, 0f);
-        LeftButton.interactable = true;
-        RightButton.interactable = true;
-        LeftButton.image.DOFade(1f, 0f);
-        RightButton.image.DOFade(1f, 0f);
+        chosenAmplifierText.DOFade(1f, 0f);
+        LeftBumperImage.DOFade(1f, 0f);
+        RightBumperImage.DOFade(1f, 0f);
     }
     public void ClearAmplifyInfo()
     {
-        LeftButton.interactable = false;
-        RightButton.interactable = false;
-        chosenAmplifier.DOFade(0f, 1.5f);
-        LeftButton.image.DOFade(0f, 1.5f);
-        RightButton.image.DOFade(0f, 1.5f);
+        chosenAmplifierText.DOFade(0f, 1.5f);
+        LeftBumperImage.DOFade(0f, 1.5f);
+        RightBumperImage.DOFade(0f, 1.5f);
     }
 }

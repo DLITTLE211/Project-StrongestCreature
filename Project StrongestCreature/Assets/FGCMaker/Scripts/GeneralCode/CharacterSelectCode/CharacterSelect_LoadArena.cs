@@ -9,6 +9,8 @@ public class CharacterSelect_LoadArena : MonoBehaviour
 {
     [SerializeField] private CharacterSelect_Setup _characterSelectSetup;
     private bool _arenaLoaded;
+    public static Character_Profile leftPlayerChosenProfile, rightPlayerChosenProfile;
+    public static Stage_StageAsset chosenStage;
     private void Awake()
     {
         _arenaLoaded = false;
@@ -29,7 +31,10 @@ public class CharacterSelect_LoadArena : MonoBehaviour
     }
 
     async Task LoadArena()
-    {   
+    {
+        leftPlayerChosenProfile = _characterSelectSetup.GetLeftPlayerProfile();
+        rightPlayerChosenProfile = _characterSelectSetup.GetRightPlayerProfile();
+        chosenStage = _characterSelectSetup.GetChosenStage();
         Task[] tasks = new Task[]
         {
             _characterSelectSetup.ClearCharacterSelectInfo(),
