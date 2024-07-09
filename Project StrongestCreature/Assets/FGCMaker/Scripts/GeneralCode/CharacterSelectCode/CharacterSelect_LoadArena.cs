@@ -33,8 +33,8 @@ public class CharacterSelect_LoadArena : MonoBehaviour
             _characterSelectSetup.ClearRightPlayerInfo(),
         };
         await Task.WhenAll(tasks);
-        SceneManager.LoadScene("MainGame_Arena", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync("MainGame_CharacterSelect");
+        SceneManager.LoadScene("MainGame_Arena", LoadSceneMode.Additive);
     }
 
     private void OnDestroy()

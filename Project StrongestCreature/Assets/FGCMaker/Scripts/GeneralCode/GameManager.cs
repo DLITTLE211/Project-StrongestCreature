@@ -1,11 +1,15 @@
 using Rewired;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private MainGame_Arena_LoadStage stageLoader;
+
+    private Character_Profile leftPlayerProfile, rightPlayerProfile;
+    private Stage_StageAsset _chosenStage;
     public Character_AvailableID players;
-    [SerializeField] private static CharacterSelect_Setup _characterSelectSetup;
     void Start()
     {
         /*
@@ -21,13 +25,33 @@ public class GameManager : MonoBehaviour
         ReInput.ControllerConnectedEvent += SetupPlayers;
         ReInput.ControllerDisconnectedEvent += DesyncPlayers;
         SetTargetFrameRate();
-        SetupPlayers();
+        if (SceneManager.GetActiveScene().name == "MainGame_CharacterSelect") 
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainGame_Arena"));
+        } 
+        if (SceneManager.GetActiveScene().name == "MainGame_Arena") 
+        {
+            LoadStageAsset();
+            LoadPlayerAssets();
+        }
+        //SetupPlayers();
     }
 
     public void SetTargetFrameRate(int frameRate = 60) 
     {
         Application.targetFrameRate = frameRate;
     }
+    public void LoadStageAsset()
+    {
+        _chosenStage = CharacterSelect_LoadArena.chosenStage;
+        stageLoader.LoadStage(_chosenStage);
+    }
+    public void LoadPlayerAssets() 
+    {
+        leftPlayerProfile = CharacterSelect_LoadArena.leftPlayerChosenProfile;
+        rightPlayerProfile = CharacterSelect_LoadArena.rightPlayerChosenProfile;
+    }
+
     public void SetupPlayers(ControllerStatusChangedEventArgs args = null)
     {
         if (args == null)
