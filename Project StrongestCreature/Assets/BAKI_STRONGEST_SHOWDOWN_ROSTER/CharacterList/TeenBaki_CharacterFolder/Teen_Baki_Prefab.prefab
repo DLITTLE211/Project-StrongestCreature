@@ -475,6 +475,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8596617034931560135}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2569374614122903550}
   m_SourcePrefab: {fileID: 100100000, guid: fd8d640d58542c341979d4546d6979fd, type: 3}
 --- !u!1 &6331712145590652518 stripped
 GameObject:
@@ -502,6 +505,109 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2569374614122903550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6331712145590652518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f13076d94263146859b5f5c257b348, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHit: 0
+  myAnim: {fileID: 8596617034931560135}
+  _base: {fileID: 0}
+  _lastMovementState: 0
+  _lastAttackState: 0
+  activatedInput:
+    movementName: 
+    type: 0
+    curInput: 0
+    _movementInputs: []
+    mobilityAnim:
+      playerAnim: {fileID: 0}
+      animClip: []
+      animName: []
+      totalWaitTime: 0
+      animLength: []
+      frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+    cTimer: {fileID: 0}
+    movementPriority: 0
+    isSuperVariant: 0
+    activeMove: 0
+  lastAttack:
+    _attackName: 
+    _cTimer: {fileID: 0}
+    rawAttackDamage: 0
+    counterHitDamageMult: 0
+    hitstopValue: 0
+    hitstunValue: 0
+    hitLevel: 0
+    attackHashes: 
+    _meterRequirement: 0
+    _meterAwardedOnHit: 0
+    attackScalingPercent: 0
+    dashCancelable: 0
+    JumpCancelable: 0
+    _airInfo: 0
+    cancelProperty:
+      cancelFrom: 0
+      cancelTo: 0
+    _moveType: 0
+    AttackAnims:
+      playerAnim: {fileID: 0}
+      animClip: {fileID: 0}
+      animName: 
+      animLength: 0
+      HitBox: {fileID: 0}
+      attackType: 0
+      hb_placement: {x: 0, y: 0, z: 0}
+      hb_orientation: {x: 0, y: 0, z: 0}
+      hb_size: {x: 0, y: 0}
+      extendedHitBox: {fileID: 0}
+      hurtType: 0
+      hu_placement: {x: 0, y: 0, z: 0}
+      hu_orientation: {x: 0, y: 0, z: 0}
+      hu_size: {x: 0, y: 0}
+      _frameData:
+        init: 0
+        startup: 0
+        active: 0
+        inactive: 0
+        recovery: 0
+        lastFrame: 0
+        _extraPoints: []
+      _hitCount:
+        _count: 0
+        _startCount: 0
+        _refreshRate: 0
+        _startRefreshRate: 0
+    lateralKBP:
+      lateralKBP: 0
+      Value: 0
+    verticalKBP:
+      verticalKBP: 0
+      Value: 0
+    KnockDown: 0
+  Shake: 0
+  _model: {fileID: 6671258260722767068}
+  canBlock: 0
+  canTick: 0
+  inputWindowOpen: 0
+  _canRecover: 0
+  FreezeCall: 0
+  mobilityCall: 0
+  attackCall: 0
 --- !u!4 &6671258260722767068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fd8d640d58542c341979d4546d6979fd, type: 3}

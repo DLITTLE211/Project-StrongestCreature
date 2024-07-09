@@ -44,6 +44,7 @@ public class Character_Profile : ScriptableObject
     [Header("Character Animator Information")]
     public GameObject characterModel;
     public Animator characterAnimator;
+    public Character_Animator cAnimatorScript;
     public List<AnimationClip> AllCharacterAnimations = new List<AnimationClip>();
     public List<AnimationLayerInfo> LayerInfo = new List<AnimationLayerInfo>();
     public GameObject CharacterModel;
@@ -66,6 +67,7 @@ public class Character_Profile : ScriptableObject
     public void SetCharacterAnimator()
     {
         characterAnimator = characterModel.GetComponent<Animator>();
+        cAnimatorScript = characterModel.GetComponentInChildren<Character_Animator>();
     }
 }
 

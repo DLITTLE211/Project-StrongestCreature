@@ -15,6 +15,10 @@ public class Character_ComboDetection : MonoBehaviour
         canCheckMovement = false;
         lastInput = "";
     }
+    public void SetAnimator(Character_Animator myAnim) 
+    {
+        _animator = myAnim;
+    }
     public void PrimeCombos()
     {
         PrimeNormal();

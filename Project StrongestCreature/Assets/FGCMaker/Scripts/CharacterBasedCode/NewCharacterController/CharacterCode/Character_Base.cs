@@ -2,9 +2,15 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
+using System.Threading.Tasks;
 
 public class Character_Base : MonoBehaviour
 {
+    #region Rewired Controls
+    [Header("__________Character Profile Data__________")]
+    public Character_Profile characterProfile;
+    [Space(20)]
+    #endregion
     #region Script References
     [Header("________CHARACTER SCRIPT REFERENCES_________")]
     public Character_AttackDetection _cADetection;
@@ -123,11 +129,29 @@ public class Character_Base : MonoBehaviour
     #region Initialization Code
     public void Initialize(Character_SubStates setSubState, int NewID = -1)
     {
-        InitButtons(setSubState, NewID);
-        ResetInputLog();
-        ResetRemoveList();
-        InitCombos();
-        _cComboCounter.SetStartComboCounter();
+        SetPlayerModelInformation();
+        AddCharacterModel();
+        //InitButtons(setSubState, NewID);
+        //ResetInputLog();
+        //ResetRemoveList();
+        //InitCombos();
+        //_cComboCounter.SetStartComboCounter();
+    }
+    void SetPlayerModelInformation() 
+    {
+        characterProfile.SetCharacterAnimator();
+        characterProfile.cAnimatorScript._base = this;
+        _cAnimator = characterProfile.cAnimatorScript;
+        _cComboDetection.SetAnimator(characterProfile.cAnimatorScript);
+        _cHitstun.SetAnimator(characterProfile.cAnimatorScript);
+        _cHitController.SetAnimator(characterProfile.cAnimatorScript);
+    }
+    void AddCharacterModel()
+    {
+        GameObject selectButton = Instantiate(characterProfile.characterModel, this.gameObject.transform);
+        selectButton.gameObject.transform.localPosition = new Vector3(0f, -1f, 00f);
+        selectButton.gameObject.transform.localRotation = Quaternion.identity;
+        selectButton.gameObject.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
     }
     void ResetRemoveList() 
     {

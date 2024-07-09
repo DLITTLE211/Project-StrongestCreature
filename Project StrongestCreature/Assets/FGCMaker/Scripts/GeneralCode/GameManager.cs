@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private MainGame_Arena_LoadStage stageLoader;
 
-    private Character_Profile leftPlayerProfile, rightPlayerProfile;
+    private List<Character_Profile> playerProfiles;
     private Stage_StageAsset _chosenStage;
     public Character_AvailableID players;
     void Start()
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
             LoadStageAsset();
             LoadPlayerAssets();
         }
-        //SetupPlayers();
+        SetupPlayers();
     }
 
     public void SetTargetFrameRate(int frameRate = 60) 
@@ -48,8 +48,10 @@ public class GameManager : MonoBehaviour
     }
     public void LoadPlayerAssets() 
     {
-        leftPlayerProfile = CharacterSelect_LoadArena.leftPlayerChosenProfile;
-        rightPlayerProfile = CharacterSelect_LoadArena.rightPlayerChosenProfile;
+        playerProfiles = new List<Character_Profile>();
+        playerProfiles.Add(CharacterSelect_LoadArena.leftPlayerChosenProfile);
+        playerProfiles.Add(CharacterSelect_LoadArena.rightPlayerChosenProfile);
+
     }
 
     public void SetupPlayers(ControllerStatusChangedEventArgs args = null)
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour
             players.AddToJoystickNames(ReInput.controllers.GetJoystickNames());
             if (ReInput.controllers.GetJoystickNames().Length == 1)
             {
+                players.totalPlayers[0].characterProfile = playerProfiles[0];
                 players.totalPlayers[0].Initialize(Character_SubStates.Controlled, players.availableIds[0]);
                 players.AddUsedID(players.joystickNames[0]);
                 if (players.totalPlayers[1]._subState != Character_SubStates.Dummy)
@@ -92,6 +95,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (players.totalPlayers[i].playerID == -1)
                     {
+                        players.totalPlayers[i].characterProfile = playerProfiles[i];
                         players.totalPlayers[i].Initialize(Character_SubStates.Controlled, players.availableIds[0]);
                         players.AddUsedID(players.joystickNames[i]);
                     }
