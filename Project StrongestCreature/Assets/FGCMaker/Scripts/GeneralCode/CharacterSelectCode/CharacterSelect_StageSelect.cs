@@ -8,6 +8,7 @@ using DG.Tweening;
 public class CharacterSelect_StageSelect : MonoBehaviour
 {
     [SerializeField] private GameObject _mainHolder;
+    public GameObject MainHolder { get { return _mainHolder; } }
     [SerializeField] private Image _leftArrow;
     [SerializeField] private Image _rightArrow;
     [SerializeField] private Image _stageImageSlot;
@@ -16,6 +17,10 @@ public class CharacterSelect_StageSelect : MonoBehaviour
     public bool stageSelectActive;
     List<Stage_StageAsset> totalStages;
     private int _currentStage;
+    private void Start()
+    {
+        _mainHolder.SetActive(false);
+    }
     public void SetArrowsLitState(List<Stage_StageAsset> _totalStages) 
     {
         totalStages = _totalStages;
@@ -36,6 +41,7 @@ public class CharacterSelect_StageSelect : MonoBehaviour
     }
     public void CloseStageSelect()
     {
+        _stageAsset = null;
         _mainHolder.SetActive(false);
         stageSelectActive = false;
     }
