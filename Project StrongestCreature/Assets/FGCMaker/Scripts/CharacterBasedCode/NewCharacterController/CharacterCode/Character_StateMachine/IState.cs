@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public interface IState 
 {
@@ -16,6 +17,7 @@ public abstract class BaseState : IState
     protected readonly Character_Animator _cAnim;
     protected readonly Animator _baseAnim;
     protected readonly Character_Force _baseForce;
+    public List<string> allAnimationNames;
     protected static readonly int groundIdleHash = Animator.StringToHash("Idle");
     protected static readonly int airIdleHash = Animator.StringToHash("AirIdle");
     protected static readonly int crouchHash = Animator.StringToHash("Crouch");
@@ -36,6 +38,15 @@ public abstract class BaseState : IState
         _baseAnim = playerBase._cAnimator.myAnim;
         _cAnim = playerBase._cAnimator;
         _baseForce = playerBase._cForce;
+        SetAnimationNames();
+    }
+    void SetAnimationNames() 
+    {
+        allAnimationNames = new List<string>();
+        for (int i = 0; i < _base.characterProfile.AllCharacterAnimations.Count; i++) 
+        {
+            allAnimationNames.Add(_base.characterProfile.AllCharacterAnimations[i].name);
+        }
     }
     public virtual void OnEnter() {}
     public virtual void OnStay() {}

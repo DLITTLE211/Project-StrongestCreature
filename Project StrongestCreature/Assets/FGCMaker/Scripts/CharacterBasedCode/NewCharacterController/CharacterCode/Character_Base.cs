@@ -154,7 +154,6 @@ public class Character_Base : MonoBehaviour
         _cStateMachine.DefineState();
         _cAttackTimer.ResetTimer();
         _cMobiltyTimer.ResetTimer();
-        characterProfile.SetLayerInfomation(_cAnimator);
     }
     void AddCharacterModel()
     {
@@ -174,7 +173,7 @@ public class Character_Base : MonoBehaviour
     }
     void InitCombos()
     {
-        _extraMoveControls = _extraMoveAsset.MobilityOptions;
+        _extraMoveControls = characterProfile._CharacterMobility.MobilityOptions;
         GetCharacterMoveList();
         _cComboDetection.PrimeCombos();
     }
