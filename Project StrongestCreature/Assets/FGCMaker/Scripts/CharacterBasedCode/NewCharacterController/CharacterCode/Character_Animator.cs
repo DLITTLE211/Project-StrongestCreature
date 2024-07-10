@@ -99,6 +99,14 @@ public class Character_Animator : MonoBehaviour
         {
             StartCoroutine(CallShake());
         }
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            PlayNextAnimation(Animator.StringToHash("Walk_Backward"), 0.25f,false);
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PlayNextAnimation(Animator.StringToHash("Walk_Forward"), 0.25f, false);
+        }
     }
     IEnumerator CallShake()
     {
@@ -132,8 +140,9 @@ public class Character_Animator : MonoBehaviour
         {
             myAnim.Play(animHash, 0, 0);
         }
-        else 
+        else
         {
+            myAnim.gameObject.SetActive(true);
             myAnim.CrossFade(animHash, crossFadeTime, 0, 0);
         }
     }

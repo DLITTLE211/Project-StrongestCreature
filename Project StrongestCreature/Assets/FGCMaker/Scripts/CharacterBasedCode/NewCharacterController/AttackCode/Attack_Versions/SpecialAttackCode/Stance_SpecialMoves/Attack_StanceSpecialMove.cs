@@ -281,8 +281,14 @@ public class Attack_StanceSpecialMove : Attack_Special_Stance, IAttack_StanceFuc
     public void SetComboTimer(Character_InputTimer_Attacks timer)
     {
         stanceStartProperty.InputTimer = timer;
-        stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property.InputTimer = timer;
-        stanceInput.stanceKill._stanceButtonInput._correctInput[0].property.InputTimer = timer;
+        if (stanceInput.stanceAttack._stanceButtonInput._correctInput.Count > 0)
+        {
+            stanceInput.stanceAttack._stanceButtonInput._correctInput[0].property.InputTimer = timer;
+        }
+        if (stanceInput.stanceKill._stanceButtonInput._correctInput.Count > 0) 
+        {
+            stanceInput.stanceKill._stanceButtonInput._correctInput[0].property.InputTimer = timer;
+        }
     }
     #endregion
 }

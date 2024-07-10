@@ -130,37 +130,45 @@ public class Character_Base : MonoBehaviour
     #region Initialization Code
     public void Initialize(Character_SubStates setSubState, Amplifiers choseAmplifiers = null, int NewID = -1)
     {
-        SetPlayerModelInformation(choseAmplifiers);
         AddCharacterModel();
+        SetPlayerModelInformation(choseAmplifiers);
         InitButtons(setSubState, NewID);
         ResetInputLog();
         ResetRemoveList();
         InitCombos();
         _cComboCounter.SetStartComboCounter();
     }
-    void SetPlayerModelInformation(Amplifiers _choseAmplifier) 
+    void SetPlayerModelInformation(Amplifiers _choseAmplifier)
     {
         characterProfile.SetCharacterAnimator();
+        characterProfile.cAnimatorScript._base = this;
+        characterProfile.cAnimatorScript.myAnim.gameObject.SetActive(true);
         _aManager.C_Animator = characterProfile.cAnimatorScript;
         if (_choseAmplifier != null) 
         {
             amplifier = _choseAmplifier;
         }
-        characterProfile.cAnimatorScript._base = this;
         _cAnimator = characterProfile.cAnimatorScript;
+        _cAnimator.gameObject.SetActive(true);
+        _cAnimator.myAnim.gameObject.SetActive(true);
         _cComboDetection.SetAnimator(characterProfile.cAnimatorScript);
         _cHitstun.SetAnimator(characterProfile.cAnimatorScript);
         _cHitController.SetAnimator(characterProfile.cAnimatorScript);
+        _cAnimator.enabled = true;
+        _cAnimator.myAnim.enabled = true;
         _cStateMachine.DefineState();
         _cAttackTimer.ResetTimer();
         _cMobiltyTimer.ResetTimer();
+        _cAnimator.ClearLastAttack();
+        _cAnimator.NullifyMobilityOption();
     }
     void AddCharacterModel()
     {
-        GameObject selectButton = Instantiate(characterProfile.characterModel, this.gameObject.transform);
-        selectButton.gameObject.transform.localPosition = new Vector3(0f, -1f, 0f);
-        selectButton.gameObject.transform.localRotation = Quaternion.identity;
-        selectButton.gameObject.transform.localScale = Vector3.one;
+        GameObject _chosenCharacter = Instantiate(characterProfile.characterModel, this.gameObject.transform);
+        _chosenCharacter.transform.localPosition = new Vector3(0f, -1f, 0f);
+        _chosenCharacter.transform.localRotation = Quaternion.identity;
+        _chosenCharacter.transform.localScale = Vector3.one;
+        _chosenCharacter.SetActive(true);
     }
     void ResetRemoveList() 
     {
@@ -177,8 +185,9 @@ public class Character_Base : MonoBehaviour
         GetCharacterMoveList();
         _cComboDetection.PrimeCombos();
     }
-    void GetCharacterMoveList() 
+    void GetCharacterMoveList()
     {
+        sourceComboList3_0 = characterProfile._characterMoveList;
         Character_MoveList newComboList = Instantiate(sourceComboList3_0, comboInstantiatedSpot.transform);
         comboList3_0 = newComboList;
     }

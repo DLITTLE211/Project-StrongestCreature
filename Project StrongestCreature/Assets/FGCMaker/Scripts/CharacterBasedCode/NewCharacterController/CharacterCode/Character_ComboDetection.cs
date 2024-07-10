@@ -21,10 +21,10 @@ public class Character_ComboDetection : MonoBehaviour
     }
     public void PrimeCombos()
     {
-        PrimeNormal();
+       // PrimeNormal();
         ResetComboList();
         PrimeMobility();
-        PrimeSpecialMoves();
+       // PrimeSpecialMoves();
     }
 
     void PrimeSpecialMoves()
@@ -127,7 +127,7 @@ public class Character_ComboDetection : MonoBehaviour
     }
     public void CheckPossibleCombos(Character_ButtonInput newInput)
     {
-        StoreNewInput(newInput);
+        //StoreNewInput(newInput);
     }
     public void StoreNewInput(Character_ButtonInput input)
     {

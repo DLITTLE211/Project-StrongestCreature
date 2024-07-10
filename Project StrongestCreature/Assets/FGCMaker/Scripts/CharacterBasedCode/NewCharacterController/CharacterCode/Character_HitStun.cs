@@ -59,7 +59,10 @@ public class Character_HitStun : MonoBehaviour
     {
         if (!isFrozen)
         {
-            _cAnimator.myAnim.speed = animSpeed;
+            if (_cAnimator != null)
+            {
+                _cAnimator.myAnim.speed = animSpeed;
+            }
         }
     }
 }

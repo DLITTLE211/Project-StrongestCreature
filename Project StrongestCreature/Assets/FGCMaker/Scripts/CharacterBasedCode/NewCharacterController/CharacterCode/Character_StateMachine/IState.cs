@@ -29,16 +29,20 @@ public abstract class BaseState : IState
     protected static readonly int moveBHash = Animator.StringToHash("Walk_Backward");
     protected static readonly int dashFHash = Animator.StringToHash("Dash_Forward");
     protected static readonly int dashBHash = Animator.StringToHash("Dash_Backward");
-    //protected static readonly int jumpHash = Animator.StringToHash("Jump");
+    protected static readonly int jumpHash = Animator.StringToHash("Jump_Neutral");
     protected const float _crossFade = 0.25f;
 
     protected BaseState(Character_Base playerBase) 
     {
         this._base = playerBase;
+        playerBase.gameObject.SetActive(true);
         _baseAnim = playerBase._cAnimator.myAnim;
+        _baseAnim.gameObject.SetActive(true);
         _cAnim = playerBase._cAnimator;
+        _cAnim.gameObject.SetActive(true);
         _baseForce = playerBase._cForce;
-        SetAnimationNames();
+        _baseForce.gameObject.SetActive(true);
+        //SetAnimationNames();
     }
     void SetAnimationNames() 
     {

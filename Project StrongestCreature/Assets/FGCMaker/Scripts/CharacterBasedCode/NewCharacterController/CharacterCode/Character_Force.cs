@@ -82,7 +82,7 @@ public class Character_Force : MonoBehaviour
     {
         if (_base._cAnimator != null)
         {
-            _base._cAnimator.myAnim.SetFloat("y", _myRB.velocity.y);
+            _base._cAnimator.myAnim.SetFloat("Y_Float", _myRB.velocity.y);
         }
     }
     public void HandleForceFreeze(bool state)
