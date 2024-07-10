@@ -72,6 +72,7 @@ public class Character_Base : MonoBehaviour
     //public NewComboList comboList3_0;
     public GameObject comboInstantiatedSpot;
     [SerializeField] private Character_MoveList sourceComboList3_0;
+    [SerializeField] private Amplifiers amplifier;
     public Character_MoveList comboList3_0;
 
     public List<Attack_NonSpecialAttack> simpleAttackList;
@@ -127,20 +128,24 @@ public class Character_Base : MonoBehaviour
     public int newField;
 
     #region Initialization Code
-    public void Initialize(Character_SubStates setSubState, int NewID = -1)
+    public void Initialize(Character_SubStates setSubState, Amplifiers choseAmplifiers = null, int NewID = -1)
     {
-        SetPlayerModelInformation();
+        SetPlayerModelInformation(choseAmplifiers);
         AddCharacterModel();
-        //InitButtons(setSubState, NewID);
-        //ResetInputLog();
-        //ResetRemoveList();
-        //InitCombos();
-        //_cComboCounter.SetStartComboCounter();
+        InitButtons(setSubState, NewID);
+        ResetInputLog();
+        ResetRemoveList();
+        InitCombos();
+        _cComboCounter.SetStartComboCounter();
     }
-    void SetPlayerModelInformation() 
+    void SetPlayerModelInformation(Amplifiers _choseAmplifier) 
     {
         characterProfile.SetCharacterAnimator();
         _aManager.C_Animator = characterProfile.cAnimatorScript;
+        if (_choseAmplifier != null) 
+        {
+            amplifier = _choseAmplifier;
+        }
         characterProfile.cAnimatorScript._base = this;
         _cAnimator = characterProfile.cAnimatorScript;
         _cComboDetection.SetAnimator(characterProfile.cAnimatorScript);

@@ -9,7 +9,7 @@ public class CharacterSelect_LoadArena : MonoBehaviour
 {
     [SerializeField] private CharacterSelect_Setup _characterSelectSetup;
     private bool _arenaLoaded;
-    public static Character_Profile leftPlayerChosenProfile, rightPlayerChosenProfile;
+    public static ChosenCharacter leftPlayerChosenProfile, rightPlayerChosenProfile;
     public static Stage_StageAsset chosenStage;
     private void Awake()
     {
@@ -36,8 +36,7 @@ public class CharacterSelect_LoadArena : MonoBehaviour
         SceneManager.UnloadSceneAsync("MainGame_CharacterSelect");
         SceneManager.LoadScene("MainGame_Arena", LoadSceneMode.Additive);
     }
-
-    private void OnDestroy()
+    public void OnApplicationQuit()
     {
         SceneManager.LoadScene("MainGame_CharacterSelect", LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync("MainGame_Arena");

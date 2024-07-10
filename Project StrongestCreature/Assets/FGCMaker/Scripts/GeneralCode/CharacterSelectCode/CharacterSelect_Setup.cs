@@ -417,25 +417,45 @@ public class CharacterSelect_Setup : MonoBehaviour
         _stageSelecter.SetArrowsLitState(_activeStages);
     }
     #region Return Character Select Information
-    public Character_Profile GetLeftPlayerProfile() 
+    public ChosenCharacter GetLeftPlayerProfile() 
     {
         if (_leftPlayer.cursorPage.chosenCharacter != null)
         {
-            return _leftPlayer.cursorPage.chosenCharacter;
+            ChosenCharacter leftPlayerCharacter = new ChosenCharacter(_leftPlayer.cursorPage.chosenCharacter, _leftPlayer.cursorPage.chosenAmplifier);
+            return leftPlayerCharacter;
         }
-        return null;
+        return RandomizeChoice();
     }
-    public Character_Profile GetRightPlayerProfile()
+    public ChosenCharacter GetRightPlayerProfile()
     {
-        if(_rightPlayer.cursorPage.chosenCharacter != null) 
+        if(_rightPlayer.cursorPage.chosenCharacter != null)
         {
-            return _rightPlayer.cursorPage.chosenCharacter;
+            ChosenCharacter rightPlayerCharacter = new ChosenCharacter(_rightPlayer.cursorPage.chosenCharacter, _rightPlayer.cursorPage.chosenAmplifier);
+            return rightPlayerCharacter;
         }
-        return null;
+        return RandomizeChoice();
+    }
+    public ChosenCharacter RandomizeChoice()
+    {
+        int randomProfile = UnityEngine.Random.Range(0, _activeProfiles.Count - 1);
+        int randomAmplifier = UnityEngine.Random.Range(0, _activeAmplifiers.Count - 1);
+        ChosenCharacter _randomizedCharacter = new ChosenCharacter(_activeProfiles[randomProfile], _activeAmplifiers[randomAmplifier]);
+        return _randomizedCharacter;
     }
     public Stage_StageAsset GetChosenStage()
     {
         return _chosenStage;
     }
     #endregion
+}
+[Serializable]
+public class ChosenCharacter 
+{
+    public Character_Profile chosenCharacter;
+    public Amplifiers chosenAmplifier;
+    public ChosenCharacter(Character_Profile _chosenCharacter, Amplifiers _chosenAmplifier) 
+    {
+        chosenCharacter = _chosenCharacter;
+        chosenAmplifier = _chosenAmplifier;
+    }
 }

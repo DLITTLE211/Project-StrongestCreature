@@ -266,7 +266,8 @@ public class Character_StateMachine : MonoBehaviour
                 _isBlocking = _CheckBlockButton();
                 _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput == 4 || _base.ReturnMovementInputs().Button_State.directionalInput == 6;
             }
-            return !_isHit && !_isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering;
+            bool canMove = !_isHit && !_isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering;
+            return canMove;
         }
         catch (ArgumentOutOfRangeException)
         {
