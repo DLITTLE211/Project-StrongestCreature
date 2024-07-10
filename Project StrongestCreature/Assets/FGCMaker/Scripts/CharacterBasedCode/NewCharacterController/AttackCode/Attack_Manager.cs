@@ -7,7 +7,8 @@ using System;
 public class Attack_Manager : MonoBehaviour
 {
     public Character_Base _base;
-    public Character_Animator _cAnimator => _base._cAnimator;
+    [SerializeField] private Character_Animator _cAnimator;
+    public Character_Animator C_Animator { set { _cAnimator = value; } }
     public List<HitBox> hitBoxes;
     public List<Attack_BaseProperties> Combo;
     //public Attack_BaseProperties newAttack, lastAttack;

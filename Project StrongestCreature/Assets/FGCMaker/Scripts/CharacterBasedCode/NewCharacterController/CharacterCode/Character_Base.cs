@@ -140,18 +140,22 @@ public class Character_Base : MonoBehaviour
     void SetPlayerModelInformation() 
     {
         characterProfile.SetCharacterAnimator();
+        _aManager.C_Animator = characterProfile.cAnimatorScript;
         characterProfile.cAnimatorScript._base = this;
         _cAnimator = characterProfile.cAnimatorScript;
         _cComboDetection.SetAnimator(characterProfile.cAnimatorScript);
         _cHitstun.SetAnimator(characterProfile.cAnimatorScript);
         _cHitController.SetAnimator(characterProfile.cAnimatorScript);
+        _cStateMachine.DefineState();
+        _cAttackTimer.ResetTimer();
+        _cMobiltyTimer.ResetTimer();
     }
     void AddCharacterModel()
     {
         GameObject selectButton = Instantiate(characterProfile.characterModel, this.gameObject.transform);
-        selectButton.gameObject.transform.localPosition = new Vector3(0f, -1f, 00f);
+        selectButton.gameObject.transform.localPosition = new Vector3(0f, -1f, 0f);
         selectButton.gameObject.transform.localRotation = Quaternion.identity;
-        selectButton.gameObject.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
+        selectButton.gameObject.transform.localScale = Vector3.one;
     }
     void ResetRemoveList() 
     {

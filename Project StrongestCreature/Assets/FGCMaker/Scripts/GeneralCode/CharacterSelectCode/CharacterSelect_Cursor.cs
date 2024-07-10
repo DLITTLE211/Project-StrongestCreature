@@ -32,6 +32,10 @@ public class CharacterSelect_Cursor : MonoBehaviour
     public void UnlockCharacterChoice()
     {
         profile = null;
+        if (canChooseStage) 
+        {
+            canChooseStage = false;
+        }
         cursorPage.characterFrame.color = Color.white;
         cursorPage.characterName.text = "Choose Your Character";
         cursorObject.transform.DOScale(1f, 0.15f);

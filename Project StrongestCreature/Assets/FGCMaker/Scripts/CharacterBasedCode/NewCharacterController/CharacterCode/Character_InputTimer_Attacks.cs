@@ -8,10 +8,6 @@ public class Character_InputTimer_Attacks : Character_InputTimer
     public Character_Base _base;
     public TimerType _type;
     // Start is called before the first frame update
-    void Start()
-    {
-        ResetTimer();
-    }
     public void ResetTimer()
     {
         FrameCountTimer = StartFrameCountTimer;

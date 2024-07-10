@@ -10,6 +10,9 @@ public class Character_StateMachine : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+    }
+    public void DefineState() 
+    {
         _playerState = new Character_State(_base);
         #region Define States
         var IdleState = new State_Idle(_base);
@@ -30,16 +33,16 @@ public class Character_StateMachine : MonoBehaviour
         At(S_BlockState, IdleState, new Predicate(() => At_2Idle()));
         At(Hitstate, IdleState, new Predicate(() => At_2Idle()));
 
-        At(AttackState, MoveState, new Predicate(() => At_2Move() ));
+        At(AttackState, MoveState, new Predicate(() => At_2Move()));
         At(IdleState, MoveState, new Predicate(() => At_2Move()));
         At(JumpState, MoveState, new Predicate(() => At_Jump2Move()));
         At(S_BlockState, MoveState, new Predicate(() => At_2Move()));
 
-        At(AttackState, JumpState, new Predicate(() => At_2Jump() ));
+        At(AttackState, JumpState, new Predicate(() => At_2Jump()));
         At(IdleState, JumpState, new Predicate(() => At_2Jump()));
-        At(MoveState, JumpState, new Predicate(() => At_2Jump() ));
+        At(MoveState, JumpState, new Predicate(() => At_2Jump()));
 
-        At(IdleState, CrouchState, new Predicate(() => At_2Crouch() ));
+        At(IdleState, CrouchState, new Predicate(() => At_2Crouch()));
         At(JumpState, CrouchState, new Predicate(() => At_2Crouch()));
         At(MoveState, CrouchState, new Predicate(() => At_2Crouch()));
         At(C_BlockState, CrouchState, new Predicate(() => At_2Crouch()));
@@ -74,6 +77,7 @@ public class Character_StateMachine : MonoBehaviour
 
 
         #endregion
+
         _playerState.SetState(IdleState);
     }
     #region Referencing PlayerState At/Any Functions
@@ -81,7 +85,6 @@ public class Character_StateMachine : MonoBehaviour
     void Any(IState to, IPredicate condition) => _playerState.AddAnyTransition(to, condition);
     #endregion
 
-   
     private void Update()
     {
         _playerState.Update();
