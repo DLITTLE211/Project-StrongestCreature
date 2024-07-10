@@ -33,6 +33,12 @@ public enum HitBoxType
     Throw,
     nullified,
 }
+[Serializable]
+public enum ColliderType
+{
+    Trigger,
+    Collision,
+}
 public class CollisionDetection : MonoBehaviour
 {
     public float xSize, ySize;
@@ -43,11 +49,6 @@ public class CollisionDetection : MonoBehaviour
     private HitBox lastHitbox;
     public CollisionType collisionType;
 
-    public enum ColliderType 
-    {
-        Trigger,
-        Collision,
-    }
     public void SetHurtBoxSize(float sizeX = 0, float sizeY = 0, ColliderType collisionType = ColliderType.Trigger)
     {
         if (currentCollider == null)

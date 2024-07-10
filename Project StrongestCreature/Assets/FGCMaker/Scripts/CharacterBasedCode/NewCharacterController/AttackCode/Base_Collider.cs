@@ -8,10 +8,6 @@ public class Base_Collider : CollisionDetection
     public PhysicMaterial physicsMat;
     public Collider headCollider;
     public Transform modelRotation;
-    void Start()
-    {
-        SetBaseCollider(0.5f,1.75f,ColliderType.Collision);
-    }
     public void SetBaseCollider(float sizeX = 0, float sizeY = 0, ColliderType collisionType = ColliderType.Trigger)
     {
         if (currentCollider == null)

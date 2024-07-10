@@ -26,8 +26,12 @@ public class Character_HurtboxController : MonoBehaviour
     private void Start()
     {
         SetupVectorInfo();
+        SetHurtboxStartSize();
     }
-
+    void SetHurtboxStartSize() 
+    {
+        collisionBox.SetBaseCollider(0.5f, _base.characterProfile.Height / 100f, ColliderType.Collision);
+    }
     private void FixedUpdate()
     {
         IsGrounded();

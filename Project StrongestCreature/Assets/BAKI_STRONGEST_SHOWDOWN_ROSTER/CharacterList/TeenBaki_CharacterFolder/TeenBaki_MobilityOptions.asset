@@ -18,7 +18,7 @@ MonoBehaviour:
     curInput: 0
     _movementInputs:
     - movementString: 8
-      stringCharArray: 
+      stringCharArray: 3800
       canCheckInput: 0
       completedString: 0
     mobilityAnim:
@@ -36,8 +36,8 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
+        recovery: 25
+        lastFrame: 25
         _extraPoints:
         - hitFramePoints: 7
           call: 1024
@@ -62,7 +62,7 @@ MonoBehaviour:
     curInput: 0
     _movementInputs:
     - movementString: 7
-      stringCharArray: 
+      stringCharArray: 3700
       canCheckInput: 0
       completedString: 0
     mobilityAnim:
@@ -78,8 +78,8 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
+        recovery: 25
+        lastFrame: 25
         _extraPoints:
         - hitFramePoints: 7
           call: 1024
@@ -104,7 +104,7 @@ MonoBehaviour:
     curInput: 0
     _movementInputs:
     - movementString: 9
-      stringCharArray: 
+      stringCharArray: 3900
       canCheckInput: 0
       completedString: 0
     mobilityAnim:
@@ -120,8 +120,8 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
+        recovery: 25
+        lastFrame: 25
         _extraPoints:
         - hitFramePoints: 7
           call: 1024
@@ -146,7 +146,7 @@ MonoBehaviour:
     curInput: 0
     _movementInputs:
     - movementString: 9
-      stringCharArray: 
+      stringCharArray: 3900
       canCheckInput: 0
       completedString: 0
     mobilityAnim:
@@ -162,8 +162,8 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
+        recovery: 25
+        lastFrame: 25
         _extraPoints:
         - hitFramePoints: 7
           call: 1024
@@ -188,7 +188,7 @@ MonoBehaviour:
     curInput: 0
     _movementInputs:
     - movementString: 7
-      stringCharArray: 
+      stringCharArray: 3700
       canCheckInput: 0
       completedString: 0
     mobilityAnim:
@@ -204,8 +204,8 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
+        recovery: 25
+        lastFrame: 25
         _extraPoints:
         - hitFramePoints: 7
           call: 1024
@@ -230,7 +230,7 @@ MonoBehaviour:
     curInput: 0
     _movementInputs:
     - movementString: 8
-      stringCharArray: 
+      stringCharArray: 3800
       canCheckInput: 0
       completedString: 0
     mobilityAnim:
@@ -246,8 +246,8 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
+        recovery: 25
+        lastFrame: 25
         _extraPoints:
         - hitFramePoints: 7
           call: 1024
@@ -272,7 +272,7 @@ MonoBehaviour:
     curInput: 0
     _movementInputs:
     - movementString: 656
-      stringCharArray: 
+      stringCharArray: 360035003600
       canCheckInput: 0
       completedString: 0
     mobilityAnim:
@@ -287,8 +287,8 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
+        recovery: 25
+        lastFrame: 25
         _extraPoints:
         - hitFramePoints: 7
           call: 1024
@@ -324,8 +324,8 @@ MonoBehaviour:
         startup: 0
         active: 0
         inactive: 0
-        recovery: 0
-        lastFrame: 0
+        recovery: 25
+        lastFrame: 25
         _extraPoints:
         - hitFramePoints: 7
           call: 1024
