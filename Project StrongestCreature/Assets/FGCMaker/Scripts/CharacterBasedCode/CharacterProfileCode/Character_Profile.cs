@@ -46,7 +46,7 @@ public class Character_Profile : ScriptableObject
     public Animator characterAnimator;
     public Character_Animator cAnimatorScript;
     public List<AnimationClip> AllCharacterAnimations = new List<AnimationClip>();
-    public List<AnimationLayerInfo> LayerInfo = new List<AnimationLayerInfo>();
+    public List<AnimationLayerInfo> LayerInfo;
     public GameObject CharacterModel;
     #endregion
 
@@ -68,22 +68,29 @@ public class Character_Profile : ScriptableObject
     {
         characterAnimator = characterModel.GetComponent<Animator>();
         cAnimatorScript = characterModel.GetComponentInChildren<Character_Animator>();
+        LayerInfo = new List<AnimationLayerInfo>();
+     
+    }
+    public void SetLayerInfomation(Character_Animator animator) 
+    {
+        for (int i = 0; i < animator.myAnim.layerCount; i++)
+        {
+            AnimationLayerInfo newLayerInfo = new AnimationLayerInfo(characterAnimator.GetLayerName(i), i);
+            LayerInfo.Add(newLayerInfo);
+        }
     }
 }
 
 [Serializable]
 public class AnimationLayerInfo 
 {
-    public AnimatorLayerType Type;
+    public string layerName;
     public int LayerIndex;
-}
-[Serializable]
-public enum AnimatorLayerType 
-{
-    Neutral_IdleAnimLayer,
-    MovementAnimLayer,
-    AttackAnimLayer,
-    HitResponseAnimLayer,
+    public AnimationLayerInfo(string _layerName, int _layerIndex) 
+    {
+        layerName = _layerName;
+        LayerIndex = _layerIndex;
+    }
 }
 
 [Serializable]

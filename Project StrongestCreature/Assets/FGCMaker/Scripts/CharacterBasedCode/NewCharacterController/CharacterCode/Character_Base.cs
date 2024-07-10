@@ -154,6 +154,7 @@ public class Character_Base : MonoBehaviour
         _cStateMachine.DefineState();
         _cAttackTimer.ResetTimer();
         _cMobiltyTimer.ResetTimer();
+        characterProfile.SetLayerInfomation(_cAnimator);
     }
     void AddCharacterModel()
     {

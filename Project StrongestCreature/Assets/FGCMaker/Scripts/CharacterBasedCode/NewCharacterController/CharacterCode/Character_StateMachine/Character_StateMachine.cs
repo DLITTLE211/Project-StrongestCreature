@@ -267,6 +267,10 @@ public class Character_StateMachine : MonoBehaviour
                 _currentInput = _base.ReturnMovementInputs().Button_State.directionalInput == 4 || _base.ReturnMovementInputs().Button_State.directionalInput == 6;
             }
             bool canMove = !_isHit && !_isBlocking && _currentInput && _isGrounded && !_canRecover && notRecovering;
+            if (canMove) 
+            {
+                Debug.Log("hit");
+            }
             return canMove;
         }
         catch (ArgumentOutOfRangeException)
