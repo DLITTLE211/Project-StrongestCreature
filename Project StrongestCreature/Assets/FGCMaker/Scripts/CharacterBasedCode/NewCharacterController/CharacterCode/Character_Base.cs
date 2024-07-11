@@ -130,30 +130,26 @@ public class Character_Base : MonoBehaviour
     #region Initialization Code
     public void Initialize(Character_SubStates setSubState, Amplifiers choseAmplifiers = null, int NewID = -1)
     {
-        AddCharacterModel();
-        SetPlayerModelInformation(choseAmplifiers);
+        AddCharacterModel(choseAmplifiers);
         InitButtons(setSubState, NewID);
         ResetInputLog();
         ResetRemoveList();
         InitCombos();
         _cComboCounter.SetStartComboCounter();
     }
-    void SetPlayerModelInformation(Amplifiers _choseAmplifier)
+    void SetPlayerModelInformation(Character_Animator chosenAnimator,Amplifiers _chosenAmplifier)
     {
-        characterProfile.SetCharacterAnimator();
-        characterProfile.cAnimatorScript._base = this;
-        characterProfile.cAnimatorScript.myAnim.gameObject.SetActive(true);
-        _aManager.C_Animator = characterProfile.cAnimatorScript;
-        if (_choseAmplifier != null) 
+        characterProfile.SetCharacterAnimator(chosenAnimator);
+        chosenAnimator._base = this;
+        _aManager.C_Animator = chosenAnimator;
+        if (_chosenAmplifier != null) 
         {
-            amplifier = _choseAmplifier;
+            amplifier = _chosenAmplifier;
         }
-        _cAnimator = characterProfile.cAnimatorScript;
-        _cAnimator.gameObject.SetActive(true);
-        _cAnimator.myAnim.gameObject.SetActive(true);
-        _cComboDetection.SetAnimator(characterProfile.cAnimatorScript);
-        _cHitstun.SetAnimator(characterProfile.cAnimatorScript);
-        _cHitController.SetAnimator(characterProfile.cAnimatorScript);
+        _cAnimator = chosenAnimator;
+        _cComboDetection.SetAnimator(chosenAnimator);
+        _cHitstun.SetAnimator(chosenAnimator);
+        _cHitController.SetAnimator(chosenAnimator);
         _cAnimator.enabled = true;
         _cAnimator.myAnim.enabled = true;
         _cStateMachine.DefineState();
@@ -162,13 +158,15 @@ public class Character_Base : MonoBehaviour
         _cAnimator.ClearLastAttack();
         _cAnimator.NullifyMobilityOption();
     }
-    void AddCharacterModel()
+    void AddCharacterModel(Amplifiers _chosenAmplifier)
     {
         GameObject _chosenCharacter = Instantiate(characterProfile.characterModel, this.gameObject.transform);
         _chosenCharacter.transform.localPosition = new Vector3(0f, -1f, 0f);
         _chosenCharacter.transform.localRotation = Quaternion.identity;
         _chosenCharacter.transform.localScale = Vector3.one;
         _chosenCharacter.SetActive(true);
+        Character_Animator _chosneCharacter_Animator = _chosenCharacter.GetComponentInChildren<Character_Animator>();
+        SetPlayerModelInformation(_chosneCharacter_Animator, _chosenAmplifier);
     }
     void ResetRemoveList() 
     {

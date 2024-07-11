@@ -13,7 +13,7 @@ public class State_Crouch : BaseState
         _base._cHurtBox.SetHurboxState(HurtBoxType.NoBlock);
         if (_base.ReturnMovementInputs().Button_State.directionalInput <= 3)
         {
-            _cAnim.PlayNextAnimation(crouchHash, _crossFade);
+            _cAnim.PlayNextAnimation(0, 0,false, I2CHash);
         }
         await WaitToChargeSuperMobility();
     }
@@ -45,5 +45,11 @@ public class State_Crouch : BaseState
     {
         _base._cHurtBox.SetHitboxSize(HurtBoxSize.Standing);
         base.OnExit();
+        ITransition nextTransition = _base._cStateMachine._playerState.GetTransition();
+
+        if (nextTransition.To == _base._cStateMachine.idleStateRef) 
+        {
+            _cAnim.PlayNextAnimation(C2IHash, 0);
+        }
     }
 }

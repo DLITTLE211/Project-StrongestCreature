@@ -63,10 +63,10 @@ public class Character_Profile : ScriptableObject
     public List<CharacterIntro> BasicCharacterInteractions = new List<CharacterIntro>();
     public List<CharacterIntro> SpecialCharacterInteractions = new List<CharacterIntro>();
     #endregion
-    public void SetCharacterAnimator()
+    public void SetCharacterAnimator(Character_Animator animator)
     {
         characterAnimator = characterModel.GetComponent<Animator>();
-        cAnimatorScript = characterModel.GetComponentInChildren<Character_Animator>();
+        cAnimatorScript = animator;
      
     }
 }

@@ -134,8 +134,13 @@ public class Character_Animator : MonoBehaviour
     }
     #endregion
 
-    public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false)
+    public void PlayNextAnimation(int animHash, float crossFadeTime, bool attackOverride = false, string triggerSet = "")
     {
+        if (triggerSet != "") 
+        {
+            myAnim.SetTrigger(triggerSet);
+            return;
+        }
         if (attackOverride)
         {
             myAnim.Play(animHash, 0, 0);

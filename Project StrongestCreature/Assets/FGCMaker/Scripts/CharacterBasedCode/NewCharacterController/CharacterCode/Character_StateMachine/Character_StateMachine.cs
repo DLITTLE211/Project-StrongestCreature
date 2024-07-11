@@ -7,6 +7,7 @@ public class Character_StateMachine : MonoBehaviour
     [SerializeField] private Character_Base _base;
     [SerializeField] public string curState;
     public Character_ComboCounter opponentComboCounter;
+    [HideInInspector]public State_Idle idleStateRef;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -16,7 +17,7 @@ public class Character_StateMachine : MonoBehaviour
         _playerState = new Character_State(_base);
         #region Define States
         var IdleState = new State_Idle(_base);
-
+        idleStateRef = IdleState;
         var MoveState = new State_Move(_base);
         var JumpState = new State_Jump(_base);
         var AttackState = new State_Attacking(_base);
