@@ -30,7 +30,7 @@ public class Player_SideManager : MonoBehaviour
     }
     public void ForceSideSwitch() 
     {
-
+        SetStartingFaceState();
     }
     private void Update()
     {
